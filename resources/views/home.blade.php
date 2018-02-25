@@ -5,6 +5,6 @@
 
 @section('content')
 
-    Vlug, aan het werk!
+    <bitcoin-lottery initial-seed="{{ $seed }}"></bitcoin-lottery>
 
 @endsection

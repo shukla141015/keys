@@ -68,3 +68,19 @@ a {
  * Here you would add any custom utilities you need that don't come out of the
  * box with Tailwind.
  */
+
+.wallet {
+    @apply .border-l-4;
+}
+
+.wallet.loading {
+    @apply .border-grey;
+}
+
+.wallet.empty {
+    @apply .border-red-light;
+}
+
+.wallet.used {
+    @apply .border-green-light;
+}

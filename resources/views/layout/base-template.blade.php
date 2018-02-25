@@ -24,6 +24,11 @@
 </head>
 <body class="bg-grey-lighter">
 
+    {{-- purgeCss hack --}}
+    @if(false)
+    <div class="hidden wallet loading empty used"></div>
+    @endif
+
     @include('layout.header')
 
     <div id="app" class="container mx-auto p-2">

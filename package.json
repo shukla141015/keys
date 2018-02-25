@@ -21,5 +21,10 @@
         "purgecss-webpack-plugin": "^0.20.0",
         "tailwindcss": "^0.4.0",
         "vue": "^2.5.7"
+    },
+    "dependencies": {
+        "bigi": "^1.4.2",
+        "bitcoinjs-lib": "^3.3.2",
+        "random-bytes": "^1.0.0"
     }
 }
