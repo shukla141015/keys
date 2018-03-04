@@ -9,7 +9,7 @@
 
     <link rel="canonical" href="{{ URL::current() }}" />
 
-    <title>{{ $title }}</title>
+    <title>{{ trim($title).' | Keys.lol' }}</title>
 
     @stack('head')
 
@@ -24,10 +24,9 @@
 </head>
 <body class="bg-grey-lighter">
 
-    {{-- purgeCss hack --}}
-    @if(false)
-    <div class="hidden wallet loading empty used"></div>
-    @endif
+    {{-- Purge css hack --}}
+    {{-- <div class="hidden wallet loading empty used"></div> --}}
+
 
     @include('layout.header')
 
