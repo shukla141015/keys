@@ -10,7 +10,8 @@ class BitcoinPageNumber
 
     public function __construct($pageNumber)
     {
-        $this->pageNumber = $pageNumber;
+        // 256 bit numbers don't fit in a php integer. Page numbers should always be strings.
+        $this->pageNumber = is_string($pageNumber) ? $pageNumber : null;
 
         $this->redirectTo = $this->validatePageNumber($pageNumber);
     }
@@ -45,6 +46,11 @@ class BitcoinPageNumber
     public function shouldRedirect()
     {
         return $this->redirectTo !== null;
+    }
+
+    public function isValid()
+    {
+        return ! $this->shouldRedirect();
     }
 
     public function redirect()

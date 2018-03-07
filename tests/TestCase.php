@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Snapshots\MatchesSnapshots;
@@ -19,6 +20,8 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
 
+        Carbon::setTestNow('7 March 2018 12:00:00');
+
         $this->testFilePath = base_path('tests/Files/');
 
         $this->tempFilePath = $this->testFilePath.'Temp/';
@@ -29,6 +32,15 @@ abstract class TestCase extends BaseTestCase
         $this->emptyTempFilesDirectory();
 
         parent::tearDown();
+    }
+
+    public function progressTime($minutes = 1)
+    {
+        $newTime = now()->addMinutes($minutes);
+
+        Carbon::setTestNow($newTime);
+
+        return $this;
     }
 
     protected function emptyTempFilesDirectory()

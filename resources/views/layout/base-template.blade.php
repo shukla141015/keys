@@ -13,7 +13,7 @@
 
     @stack('head')
 
-    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
 
     <link rel="stylesheet" type="text/css" href="{{ mix('css/main.css') }}" />
 

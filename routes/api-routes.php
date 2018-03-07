@@ -17,3 +17,5 @@ if (app()->environment('local')) {
         }, array_flip($publicKeys));
     });
 }
+
+Route::put('btc/page', ['uses' => 'BitcoinPagesController@put', 'as' => 'btc.page.put']);
