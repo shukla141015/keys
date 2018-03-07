@@ -9,22 +9,23 @@
         </div>
 
         <div v-for="wallet in wallets"
-             class="wallet flex font-mono text-sm pl-4 mb-4"
+             class="wallet flex font-mono text-sm pl-2"
              :class="{
                 loading: ! wallet.loaded,
                 empty:   wallet.loaded && ! wallet.balance,
                 used:    wallet.loaded && wallet.transactionCount,
+                filled:  wallet.loaded && wallet.balance,
              }"
         >
 
-            <span>
-                Public key:&nbsp; <a :href="'https://blockchain.info/address/'+wallet.publicKey" rel="nofollow" target="_blank">{{ wallet.publicKey }}</a>
+            <span class="mr-4">
+                <strong>{{ wallet.balance }} btc</strong> ({{ wallet.transactionCount }} tx)
+            </span>
+            <span class="mr-4">
+                {{ wallet.privateKey }}
             </span>
             <span>
-                Private key: {{ wallet.privateKey }}
-            </span>
-            <span>
-                <strong class="w-16">Balance:</strong> {{ wallet.balance }} btc ({{ wallet.transactionCount }} tx)
+                <a :href="'https://blockchain.info/address/'+wallet.publicKey" rel="nofollow" target="_blank">{{ wallet.publicKey }}</a>
             </span>
 
         </div>

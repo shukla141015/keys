@@ -25,7 +25,7 @@
 <body class="bg-grey-lighter">
 
     {{-- Purge css hack --}}
-    {{-- <div class="hidden wallet loading empty used"></div> --}}
+    {{-- <div class="hidden wallet loading empty used filled"></div> --}}
 
 
     @include('layout.header')

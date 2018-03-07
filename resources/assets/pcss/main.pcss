@@ -70,7 +70,7 @@ a {
  */
 
 .wallet {
-    @apply .border-l-4;
+    border-left-width: 6px;
 }
 
 .wallet.loading {
@@ -82,5 +82,9 @@ a {
 }
 
 .wallet.used {
+    @apply .border-yellow;
+}
+
+.wallet.filled {
     @apply .border-green-light;
 }
