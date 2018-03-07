@@ -55,7 +55,9 @@
 
             let addresses = this.wallets.map(w => w.publicKey).join('|');
 
-            axios.get('https://blockchain.info/balance?cors=true&active=' + addresses).then(response => {
+            // http://keys.pk/api/v1/mock-balance?active=
+            // https://blockchain.info/balance?cors=true&active=
+            axios.get('http://keys.pk/api/v1/mock-balance?active=' + addresses).then(response => {
                 this.wallets.forEach(wallet => {
                     this.sleep(Math.random() * 10 * 300).then(() => {
                         let data = response.data[wallet.publicKey];
