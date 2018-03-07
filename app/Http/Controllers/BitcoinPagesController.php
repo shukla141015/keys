@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Crypto\BitcoinPageNumber;
+use App\Models\BtcPage;
 
 class BitcoinPagesController extends Controller
 {
@@ -14,10 +15,15 @@ class BitcoinPagesController extends Controller
             return $btcPageNumber->redirect();
         }
 
+        $btcPage = BtcPage::findByPageNumber($pageNumber);
+
         return view('bitcoin-page', [
-            'pageNumber'          => $btcPageNumber->getPageNumber(),
+            'pageNumber'          => $pageNumber,
             'isShortNumberString' => $btcPageNumber->isShortNumberString(),
             'isSmallNumber'       => $btcPageNumber->isSmallNumber(),
+            'seenBefore'          => (bool) $btcPage,
+            'lastSeen'            => $btcPage ? $btcPage->updated_at->format('U') : null,
+            'wasEmpty'            => $btcPage->empty ?? null,
         ]);
     }
 

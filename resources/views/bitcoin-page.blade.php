@@ -5,6 +5,10 @@
 
 @section('content')
 
-    <bitcoin-page page="{{ $pageNumber }}"></bitcoin-page>
+    <bitcoin-page
+            page="{{ $pageNumber }}"
+            last-seen="{{ $lastSeen }}"
+            :was-empty="{{ $wasEmpty ? 1 : 0 }}"
+    ></bitcoin-page>
 
 @endsection
