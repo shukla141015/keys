@@ -1,13 +1,6 @@
 <template>
     <div>
 
-        <div class="mb-4" v-if="this.lastSeenUnix">
-            Page last checked on: {{ new Date(this.lastSeenUnix * 1000).toISOString().slice(0, -5).replace('T', ' - ') }}
-        </div>
-        <div class="mb-4" v-else>
-            This page has never been checked before
-        </div>
-
         <div v-for="wallet in wallets"
              class="wallet flex font-mono text-sm pl-2"
              :class="{
@@ -35,32 +28,27 @@
 <script>
     export default {
 
-        props: ['page', 'lastSeen', 'wasEmpty'],
+        props: ['page'],
 
         data: () => ({
             wallets: [],
-            lastSeenUnix: false
         }),
 
         mounted() {
-            this.lastSeenUnix = this.lastSeen;
-
             let keyPairs = this.generateKeyPairs(128);
 
             keyPairs.forEach(keyPair => {
                 this.wallets.push({
                     publicKey: keyPair.getAddress(),
                     privateKey: keyPair.toWIF(),
-                    loaded:           !! this.wasEmpty,
-                    balance:          this.wasEmpty ? 0 : '?',
-                    transactionCount: this.wasEmpty ? 0 : '?',
-                    totalReceived:    this.wasEmpty ? 0 : '?',
+                    loaded:           false,
+                    balance:          '?',
+                    transactionCount: '?',
+                    totalReceived:    '?',
                 })
             });
 
-            if (! this.wasEmpty) {
-                this.loadBalances();
-            }
+            this.loadBalances();
         },
 
         methods: {
@@ -95,26 +83,11 @@
                             wallet.transactionCount = data.n_tx;
                             wallet.totalReceived    = data.total_received / 100000000;
                             wallet.loaded           = true;
-
-                            if (this.wallets.every(w => w.loaded)) {
-                                this.putPageStatus();
-                            }
                         });
                     });
                 });
             },
 
-            putPageStatus: function () {
-                let isEmptyPage = this.wallets.every(w => w.transactionCount === 0);
-
-                axios.put('/api/v1/btc/page', {
-                    'page_number': this.page,
-                    'empty': isEmptyPage,
-                });
-
-                this.lastSeenUnix = new Date() / 1000;
-            },
-            
             sleepRandom: function (maxMs) {
                 return new Promise(resolve => setTimeout(resolve, Math.random() * maxMs));
             },
