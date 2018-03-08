@@ -41,10 +41,10 @@
                 this.wallets.push({
                     publicKey: keyPair.getAddress(),
                     privateKey: keyPair.toWIF(),
-                    loaded:           false,
-                    balance:          '?',
+                    loaded: false,
+                    balance: '?',
                     transactionCount: '?',
-                    totalReceived:    '?',
+                    totalReceived: '?',
                 })
             });
 
@@ -54,16 +54,22 @@
         methods: {
             generateKeyPairs: function (amount) {
                 // Calculate the first seed for this page.
-                let bigInt = bigi(this.page).subtract(bigi.ONE).multiply(bigi(''+amount)).add(bigi.ONE);
+                let bigInt = bigi(this.page).subtract(bigi.ONE).multiply(bigi(''+amount));
+
+                let isOnLastPage = this.page === '904625697166532776746648320380374280100293470930272690489102837043110636675';
 
                 let keyPairs = [];
 
                 for (let i = 0; i < amount; i++) {
+                    bigInt = bigInt.add(bigi.ONE);
+
                     keyPairs.push(
                         new bitcoin.ECPair(bigInt, null, {compressed: false})
                     );
 
-                    bigInt = bigInt.add(bigi.ONE);
+                    if (isOnLastPage && bigInt.toString() === '115792089237316195423570985008687907852837564279074904382605163141518161494336') {
+                        break;
+                    }
                 }
 
                 return keyPairs;

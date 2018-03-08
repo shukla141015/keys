@@ -21,6 +21,13 @@ class BitcoinPagesController extends Controller
         ]);
     }
 
+    public function randomPage()
+    {
+        $randomPageNumber = BitcoinPageNumber::random();
+
+        return redirect()->route('btcPages', $randomPageNumber);
+    }
+
     public function invalidPage()
     {
         return 'invalid page yo';
