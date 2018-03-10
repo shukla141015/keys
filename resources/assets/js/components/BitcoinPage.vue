@@ -11,7 +11,7 @@
              }"
         >
 
-            <span class="mr-4">
+            <span class="mr-4 inline-block" :style="txStyle">
                 <strong>{{ wallet.balance }} btc</strong> ({{ wallet.transactionCount }} tx)
             </span>
             <span class="mr-4">
@@ -34,11 +34,16 @@
             wallets: [],
             isOnFirstPage: false,
             isOnLastPage: false,
+            txStyle: {minWidth: ''},
         }),
 
         mounted() {
             this.isOnFirstPage = this.page === '1';
             this.isOnLastPage  = this.page === '904625697166532776746648320380374280100293470930272690489102837043110636675';
+
+            // The first, third and last page are the only ones that
+            // have double digit transaction counts.
+            this.txStyle.minWidth = this.isOnFirstPage ? '108px' : (this.isOnLastPage || this.page === '3' ? '100px' : '');
 
             let keyPairs = this.generateKeyPairs(128);
 
