@@ -7,10 +7,10 @@
 
     <div>
         @if ($isShortNumberString)
-            <h1 class="text-base mb-4">Page {{ $pageNumber }} of {{ $lastPage }}</h1>
+            <h1 class="text-base mb-4">Bitcoin page {{ $pageNumber }} of {{ $lastPage }}</h1>
         @else
             <div class="flex flex-col text-base font-bold">
-                <span>Page</span>
+                <span>Bitcoin page</span>
                 <span>{{ $pageNumber }} of</span>
                 <span>{{ config('keys.bitcoin-max-page') }}</span>
             </div>
