@@ -16,6 +16,8 @@ class BitcoinPagesController extends Controller
 
         return view('bitcoin-page', [
             'pageNumber'          => $pageNumber,
+            'nextPage'            => increment_string($pageNumber),
+            'previousPage'        => decrement_string($pageNumber),
             'isShortNumberString' => $btcPageNumber->isShortNumberString(),
             'isSmallNumber'       => $btcPageNumber->isSmallNumber(),
         ]);
