@@ -18,6 +18,9 @@ class BitcoinPagesController extends Controller
             'pageNumber'          => $pageNumber,
             'nextPage'            => increment_string($pageNumber),
             'previousPage'        => decrement_string($pageNumber),
+            'lastPage'            => config('keys.bitcoin-max-page'),
+            'isOnFirstPage'       => $pageNumber === '1',
+            'isOnLastPage'        => $pageNumber === config('keys.bitcoin-max-page'),
             'isShortNumberString' => $btcPageNumber->isShortNumberString(),
             'isSmallNumber'       => $btcPageNumber->isSmallNumber(),
         ]);

@@ -9,7 +9,7 @@ class RedirectServiceProvider extends ServiceProvider
 {
     protected $redirects = [
         // (old) url     destination route name
-        // '/manage' => 'admin.dashboard',
+        '/btc' => 'btcPages',
     ];
 
     public function boot()

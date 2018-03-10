@@ -1,5 +1,5 @@
 @extends('layout.base-template', [
-    'title'       => 'SEO title',
+    'title'       => 'Cryptocurrency private keys with balance checker',
     'description' => 'SEO description',
 ])
 
