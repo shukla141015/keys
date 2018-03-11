@@ -4,10 +4,10 @@
         <div v-for="wallet in wallets"
              class="wallet flex font-mono text-sm pl-2"
              :class="{
-                loading: ! wallet.loaded,
-                empty:   wallet.loaded && ! wallet.balance,
-                used:    wallet.loaded && wallet.transactionCount,
-                filled:  wallet.loaded && wallet.balance,
+                loading: wallet.loaded !== 2,
+                empty:   wallet.loaded === 2 && ! wallet.balance,
+                used:    wallet.loaded === 2 && wallet.transactionCount,
+                filled:  wallet.loaded === 2 && wallet.balance,
              }"
         >
 
@@ -15,10 +15,13 @@
                 <strong>{{ wallet.balance }} btc</strong> ({{ wallet.transactionCount }} tx)
             </span>
             <span class="mr-4">
-                {{ wallet.privateKey }}
+                {{ wallet.wif }}
+            </span>
+            <span class="mr-4">
+                <a :href="'https://blockchain.info/address/'+wallet.publicKey" rel="nofollow" target="_blank">{{ wallet.publicKey }}</a>
             </span>
             <span>
-                <a :href="'https://blockchain.info/address/'+wallet.publicKey" rel="nofollow" target="_blank">{{ wallet.publicKey }}</a>
+                <a :href="'https://blockchain.info/address/'+wallet.compressedPublicKey" rel="nofollow" target="_blank">{{ wallet.compressedPublicKey }}</a>
             </span>
 
         </div>
@@ -28,62 +31,37 @@
 <script>
     export default {
 
-        props: ['page'],
+        props: ['keys', 'isOnFirstPage', 'isOnLastPage'],
 
         data: () => ({
             wallets: [],
-            isOnFirstPage: false,
-            isOnLastPage: false,
             txStyle: {minWidth: ''},
         }),
 
         mounted() {
-            this.isOnFirstPage = this.page === '1';
-            this.isOnLastPage  = this.page === '904625697166532776746648320380374280100293470930272690489102837043110636675';
-
             // The first, third and last page are the only ones that
             // have double digit transaction counts.
             this.txStyle.minWidth = this.isOnFirstPage ? '108px' : (this.isOnLastPage || this.page === '3' ? '100px' : '');
 
-            let keyPairs = this.generateKeyPairs(128);
-
-            keyPairs.forEach(keyPair => {
+            this.keys.forEach(keySet => {
                 this.wallets.push({
-                    publicKey: keyPair.getAddress(),
-                    privateKey: keyPair.toWIF(),
-                    loaded: false,
-                    balance: '?',
-                    transactionCount: '?',
-                    totalReceived: '?',
+                    publicKey: keySet.pub,
+                    compressedPublicKey: keySet.cpub,
+                    wif: keySet.wif,
+                    loaded: 0,
+                    balance: 0,
+                    transactionCount: 0,
+                    totalReceived: 0,
                 })
             });
 
-            this.loadBalances();
+            this.loadUncompressedBalances();
+
+            this.loadCompressedBalances();
         },
 
         methods: {
-            generateKeyPairs: function (amount) {
-                // Calculate the first seed for this page.
-                let bigInt = bigi(this.page).subtract(bigi.ONE).multiply(bigi(''+amount));
-
-                let keyPairs = [];
-
-                for (let i = 0; i < amount; i++) {
-                    bigInt = bigInt.add(bigi.ONE);
-
-                    keyPairs.push(
-                        new bitcoin.ECPair(bigInt, null, {compressed: false})
-                    );
-
-                    if (this.isOnLastPage && bigInt.toString() === '115792089237316195423570985008687907852837564279074904382605163141518161494336') {
-                        break;
-                    }
-                }
-
-                return keyPairs;
-            },
-
-            loadBalances: function () {
+            loadUncompressedBalances: function () {
                 let addresses;
 
                 // Checking the balance of the first or last wallet on blockchain.info returns an error.
@@ -92,19 +70,19 @@
 
                     let firstWallet = this.wallets.find(w => w.publicKey === '1EHNa6Q4Jz2uvNExL497mE43ikXhwF6kZm');
 
-                    firstWallet.balance = 0;
-                    firstWallet.transactionCount = '99+';
-                    firstWallet.totalReceived = 4.86537461;
-                    firstWallet.loaded = true;
+                    firstWallet.balance += 0;
+                    firstWallet.transactionCount += 1201;
+                    firstWallet.totalReceived += 4.86537461;
+                    firstWallet.loaded += 1;
                 } else if (this.isOnLastPage) {
                     addresses = this.wallets.slice(0, -1).map(w => w.publicKey).join('|');
 
                     let lastWallet = this.wallets.find(w => w.publicKey === '1JPbzbsAx1HyaDQoLMapWGoqf9pD5uha5m');
 
-                    lastWallet.balance = 0;
-                    lastWallet.transactionCount = 11;
-                    lastWallet.totalReceived = 2.32500983;
-                    lastWallet.loaded = true;
+                    lastWallet.balance += 0;
+                    lastWallet.transactionCount += 11;
+                    lastWallet.totalReceived += 2.32500983;
+                    lastWallet.loaded += 1;
                 } else {
                     addresses = this.wallets.map(w => w.publicKey).join('|');
                 }
@@ -120,10 +98,47 @@
                                 return;
                             }
 
-                            wallet.balance          = data.final_balance / 100000000;
-                            wallet.transactionCount = data.n_tx ? (data.n_tx > 99 ? '99+' : data.n_tx) : 0;
-                            wallet.totalReceived    = data.total_received / 100000000;
-                            wallet.loaded           = true;
+                            wallet.balance          += data.final_balance / 100000000;
+                            wallet.transactionCount += data.n_tx;
+                            wallet.totalReceived    += data.total_received / 100000000;
+                            wallet.loaded           += 1;
+                        });
+                    });
+                });
+            },
+
+            loadCompressedBalances: function () {
+                let addresses;
+
+                if (this.isOnFirstPage) {
+                    addresses = this.wallets.slice(1).map(w => w.compressedPublicKey).join('|');
+
+                    let firstWallet = this.wallets.find(w => w.compressedPublicKey === '1BgGZ9tcN4rm9KBzDn7KprQz87SZ26SAMH');
+
+                    firstWallet.balance += 0;
+                    firstWallet.transactionCount += 24;
+                    firstWallet.totalReceived += 0.14592834;
+                    firstWallet.loaded += 1;
+                } else {
+                    addresses = this.wallets.map(w => w.compressedPublicKey).join('|');
+                }
+                
+
+                // http://keys.pk/api/v1/mock-balance?active=
+                // https://blockchain.info/balance?cors=true&active=
+                axios.get('https://blockchain.info/balance?cors=true&active='+addresses).then(response => {
+                    this.wallets.forEach(wallet => {
+                        this.sleepRandom(3000).then(() => {
+                            let data = response.data[wallet.compressedPublicKey];
+
+                            if (data === undefined) {
+                                return;
+                            }
+
+                            wallet.balance          += data.final_balance / 100000000;
+                            wallet.transactionCount += data.n_tx;
+                            wallet.totalReceived    += data.total_received / 100000000;
+                            wallet.loaded           += 1;
                         });
                     });
                 });

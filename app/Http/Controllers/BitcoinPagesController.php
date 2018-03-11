@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Crypto\BitcoinPageKeys;
 use App\Crypto\BitcoinPageNumber;
 
 class BitcoinPagesController extends Controller
@@ -14,6 +15,8 @@ class BitcoinPagesController extends Controller
             return $btcPageNumber->redirect();
         }
 
+        $keys = BitcoinPageKeys::generate($pageNumber);
+
         return view('bitcoin-page', [
             'pageNumber'          => $pageNumber,
             'nextPage'            => increment_string($pageNumber),
@@ -23,6 +26,7 @@ class BitcoinPagesController extends Controller
             'isOnLastPage'        => $pageNumber === config('keys.bitcoin-max-page'),
             'isShortNumberString' => $btcPageNumber->isShortNumberString(),
             'isSmallNumber'       => $btcPageNumber->isSmallNumber(),
+            'keys'                => json_encode($keys),
         ]);
     }
 

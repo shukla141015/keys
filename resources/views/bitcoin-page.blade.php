@@ -34,7 +34,14 @@
         Every bitcoin private key is on this website.
     </p>
 
-    <bitcoin-page page="{{ $pageNumber }}"></bitcoin-page>
+
+    <bitcoin-page
+            :keys="{{ $keys }}"
+            page="{{ $pageNumber }}"
+            :is-on-first-page="{{ (int) $isOnFirstPage }}"
+            :is-on-last-page="{{ (int) $isOnLastPage }}"
+    ></bitcoin-page>
+
 
     <div>
         @include('components.bitcoin-page-pagination', ['includeFirstAndLast' => false])

@@ -6,6 +6,8 @@
     "type": "project",
     "require": {
         "php": ">=7.1.3",
+        "bitcoin-php/bitcoin-ecdsa": "^1.3",
+        "bitwasp/bitcoin": "v0.0.34.3",
         "doctrine/dbal": "^2.6",
         "fideloper/proxy": "~4.0",
         "laravel/framework": "5.6.*",
