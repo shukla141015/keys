@@ -2,22 +2,13 @@
 Cryptocurrency private keys
 
 ## Installation
-GMP (GNU Multiple Precision Arithmetic Library) is required for bitcoin math:
+GMP (GNU Multiple Precision Arithmetic Library) and some other math extension are required for bitcoin math:
 ```bash
 sudo apt-get install php7.1-gmp
- 
+
 sudo phpenmod gmp
-```
 
-Rename `.env.example` to `.env` and fill in the arrows
-```bash
-composer update
-
-php artisan key:generate
+sudo apt-get install php7.1-bcmath
  
-php artisan migrate
- 
-npm install (--no-bin-links)
- 
-npm run dev
+sudo phpenmod bcmath
 ```
