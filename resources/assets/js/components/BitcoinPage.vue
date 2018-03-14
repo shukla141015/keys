@@ -2,7 +2,7 @@
     <div>
 
         <div v-for="wallet in wallets"
-             class="wallet flex font-mono text-sm pl-2"
+             class="wallet flex flex-col lg:flex-row font-mono text-sm md:text-sm pl-2 lg:py-0 py-2"
              :class="{
                 loading: wallet.loaded !== 2,
                 empty:   wallet.loaded === 2 && ! wallet.balance,
@@ -12,17 +12,27 @@
         >
 
             <span class="mr-4 inline-block" :style="txStyle">
-                <strong>{{ wallet.balance }} btc</strong> ({{ wallet.transactionCount }} tx)
+                <strong>{{ wallet.balance }} btc</strong> ({{ wallet.transactionCount | tx }} tx)
             </span>
-            <span class="mr-4">
+
+
+            <span class="lg:mr-4 text-xs sm:text-sm break-words">
                 {{ wallet.wif }}
             </span>
-            <span class="mr-4">
-                <a :href="'https://blockchain.info/address/'+wallet.publicKey" rel="nofollow" target="_blank">{{ wallet.publicKey }}</a>
-            </span>
-            <span>
-                <a :href="'https://blockchain.info/address/'+wallet.compressedPublicKey" rel="nofollow" target="_blank">{{ wallet.compressedPublicKey }}</a>
-            </span>
+            <div class="lg:block flex">
+                <span class="mr-8 lg:mr-4">
+                    <a :href="'https://blockchain.info/address/'+wallet.publicKey" rel="nofollow" target="_blank">
+                        <span class="hidden xl:inline-block">{{ wallet.publicKey }}</span>
+                        <span class="xl:hidden inline-block">public key</span>
+                    </a>
+                </span>
+                <span>
+                    <a :href="'https://blockchain.info/address/'+wallet.compressedPublicKey" rel="nofollow" target="_blank">
+                        <span class="hidden xl:inline-block">{{ wallet.compressedPublicKey }}</span>
+                        <span class="xl:hidden inline-block">compressed public key</span>
+                    </a>
+                </span>
+            </div>
 
         </div>
     </div>
@@ -50,7 +60,7 @@
                     wif: keySet.wif,
                     loaded: 0,
                     balance: 0,
-                    transactionCount: 0,
+                    transactionCount: false,
                     totalReceived: 0,
                 })
             });
@@ -147,7 +157,17 @@
             sleepRandom: function (maxMs) {
                 return new Promise(resolve => setTimeout(resolve, Math.random() * maxMs));
             },
-        }
+        },
+
+        filters: {
+            tx: function (value) {
+                if (value === false) {
+                    return '?';
+                }
+
+                return value > 99 ? '99+' : value;
+            }
+        },
 
     }
 </script>

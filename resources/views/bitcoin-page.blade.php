@@ -7,11 +7,12 @@
 
     <div>
         @if ($isShortNumberString)
-            <h1 class="text-base mb-4">Bitcoin page {{ $pageNumber }} of {{ $lastPage }}</h1>
+            <h1 class="text-base mb-4 break-words">Bitcoin page {{ $pageNumber }} of {{ $lastPage }}</h1>
         @else
-            <div class="flex flex-col text-base font-bold">
+            <div class="flex flex-col text-base font-bold break-words text-center xs:text-left">
                 <span>Bitcoin page</span>
-                <span>{{ $pageNumber }} of</span>
+                <span>{{ $pageNumber }}</span>
+                <span>of</span>
                 <span>{{ config('keys.bitcoin-max-page') }}</span>
             </div>
         @endif
