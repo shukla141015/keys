@@ -33,10 +33,27 @@ class BitcoinPageKeys
     public function getKeys()
     {
         if ($this->keys === null) {
-            $this->keys = $this->generateKeys();
+            $this->keys = $this->isPageCached()
+                ? $this->retrieveKeysFromCache()
+                : $this->generateKeys();
         }
 
         return $this->keys;
+    }
+
+    protected function isPageCached()
+    {
+        return file_exists($this->getCacheFilePath());
+    }
+
+    protected function getCacheFilePath()
+    {
+        return app_path('Crypto/Cache/BitcoinPages/'.$this->pageNumber.'.php');
+    }
+
+    protected function retrieveKeysFromCache(): array
+    {
+        return include($this->getCacheFilePath());
     }
 
     protected function generateKeys()

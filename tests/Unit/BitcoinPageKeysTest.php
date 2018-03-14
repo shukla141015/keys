@@ -37,4 +37,17 @@ class BitcoinPageKeysTest extends TestCase
 
         $this->assertMatchesSnapshot($keys);
     }
+
+    /** @test */
+    function it_retrieves_cached_pages_from_cache()
+    {
+        $mock = new class (BitcoinPageNumber::LAST_PAGE_NUMBER) extends BitcoinPageKeys{
+            protected function retrieveKeysFromCache(): array
+            {
+                return ['came from cache'];
+            }
+        };
+
+        $this->assertSame(['came from cache'], $mock->getKeys());
+    }
 }
