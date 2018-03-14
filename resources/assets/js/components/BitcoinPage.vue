@@ -12,7 +12,8 @@
         >
 
             <span class="mr-4 inline-block" :style="txStyle">
-                <strong>{{ wallet.balance }} btc</strong> ({{ wallet.transactionCount | tx }} tx)
+                <strong>{{ wallet.balance }} btc</strong>
+                <span v-html="presentTx(wallet.transactionCount)"></span>
             </span>
 
 
@@ -22,7 +23,7 @@
             <div class="lg:block flex">
                 <span class="mr-8 lg:mr-4">
                     <a :href="'https://blockchain.info/address/'+wallet.publicKey" rel="nofollow" target="_blank">
-                        <span class="hidden xl:inline-block">{{ wallet.publicKey }}</span>
+                        <span class="hidden xl:inline-block" v-html="rpad(wallet.publicKey, 34)"></span>
                         <span class="xl:hidden inline-block">public key</span>
                     </a>
                 </span>
@@ -132,7 +133,7 @@
                 } else {
                     addresses = this.wallets.map(w => w.compressedPublicKey).join('|');
                 }
-                
+
 
                 // http://keys.pk/api/v1/mock-balance?active=
                 // https://blockchain.info/balance?cors=true&active=
@@ -157,16 +158,47 @@
             sleepRandom: function (maxMs) {
                 return new Promise(resolve => setTimeout(resolve, Math.random() * maxMs));
             },
-        },
 
-        filters: {
-            tx: function (value) {
-                if (value === false) {
-                    return '?';
+            rpad: function (value, length) {
+                let extraSpaces = 0;
+
+                while (value.length + extraSpaces < length) {
+                    extraSpaces++;
                 }
 
-                return value > 99 ? '99+' : value;
-            }
+                return value + '&nbsp;'.repeat(extraSpaces);
+            },
+
+            presentTx: function (value) {
+                let text = value === false ? '?' : (value > 99 ? '99+' : value);
+
+                let extraSpaces = 0;
+
+                let longestTxString = this.longestTxString;
+
+                while (text.length + extraSpaces < longestTxString) {
+                    extraSpaces++;
+                }
+
+                return '('+text+' tx)' + '&nbsp;'.repeat(extraSpaces);
+            },
+        },
+
+
+        computed: {
+            longestTxString: function () {
+
+                return Math.max.apply(Math, this.wallets.map(function (wallet) {
+                    if (wallet.transactionCount === false) {
+                        return 1;
+                    }
+
+                    let length = wallet.transactionCount.toString().length;
+
+                    return length > 3 ? 3 : length;
+                }));
+
+            },
         },
 
     }

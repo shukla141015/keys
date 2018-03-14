@@ -1,7 +1,7 @@
 <nav class="flex items-center p-2 mb-4 max-w-3xl mx-auto">
 
     <a href="/" class="flex items-center text-black mr-4 sm:mr-16">
-        <img class="h-6 mr-2 hidden xs:inline-block" src="/favicon.png" alt="Keys.lol">
+        <img class="h-6 mr-2 hidden sm:inline-block" src="/favicon.png" alt="Keys.lol">
         Keys.lol
     </a>
 
