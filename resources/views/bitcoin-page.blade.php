@@ -9,7 +9,7 @@
         @if ($isShortNumberString)
             <h1 class="text-base mb-4 break-words">Bitcoin page {{ $pageNumber }} of {{ $lastPage }}</h1>
         @else
-            <div class="flex flex-col text-base font-bold break-words text-center xs:text-left">
+            <div class="flex flex-col text-base font-bold break-words text-center sm:text-left">
                 <span>Bitcoin page</span>
                 <span>{{ $pageNumber }}</span>
                 <span>of</span>
