@@ -34,14 +34,14 @@ class RouteServiceProvider extends ServiceProvider
              ->group(base_path('routes/web-routes.php'));
     }
 
-    protected function mapAdminWebRoutes()
-    {
-        Route::prefix('admin')
-             ->name('admin.')
-             ->middleware(['web', 'auth'])
-             ->namespace($this->namespace.'\\Admin')
-             ->group(base_path('routes/web-admin-routes.php'));
-    }
+//    protected function mapAdminWebRoutes()
+//    {
+//        Route::prefix('admin')
+//             ->name('admin.')
+//             ->middleware(['web', 'auth'])
+//             ->namespace($this->namespace.'\\Admin')
+//             ->group(base_path('routes/web-admin-routes.php'));
+//    }
 
     protected function mapApiRoutes()
     {
