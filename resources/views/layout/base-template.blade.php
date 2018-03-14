@@ -18,7 +18,15 @@
     <link rel="stylesheet" type="text/css" href="{{ mix('css/main.css') }}" />
 
     @if(App::environment('production'))
-        {{-- google analytics goes here --}}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-85344990-4"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-85344990-4');
+        </script>
+
     @endif
 
 </head>
