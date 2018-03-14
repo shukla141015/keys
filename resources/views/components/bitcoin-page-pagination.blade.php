@@ -12,13 +12,13 @@
             <span class="md:hidden inline-block">&laquo;</span>
         </span>
     @else
-        <a title="previous page" href="{{ route('btcPages', $previousPage) }}">
+        <a title="previous page" rel="nofollow" href="{{ route('btcPages', $previousPage) }}">
             <span class="hidden md:inline-block">previous page</span>
             <span class="md:hidden inline-block">&laquo;</span>
         </a>
     @endif
 
-    <a title="random page" href="{{ route('btcPages.random') }}">
+    <a title="random page" rel="nofollow" href="{{ route('btcPages.random') }}">
         <span class="hidden md:inline-block">random page</span>
         <span class="md:hidden inline-block w-4">@include('components.svg.random')</span>
     </a>
@@ -29,7 +29,7 @@
             <span class="md:hidden inline-block">&raquo;</span>
         </span>
     @else
-        <a title="next page" href="{{ route('btcPages', $nextPage) }}">
+        <a title="next page" rel="nofollow" href="{{ route('btcPages', $nextPage) }}">
             <span class="hidden md:inline-block">next page</span>
             <span class="md:hidden inline-block">&raquo;</span>
         </a>

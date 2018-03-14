@@ -3,6 +3,12 @@
     'description' => 'SEO description',
 ])
 
+@if(! $isOnFirstPage && ! $isOnLastPage)
+    @push('head')
+        <meta name="robots" content="noindex">
+    @endpush
+@endif
+
 @section('content')
 
     <div>
