@@ -26,7 +26,6 @@
 
             gtag('config', 'UA-85344990-4');
         </script>
-
     @endif
 
 </head>
