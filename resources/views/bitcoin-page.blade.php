@@ -1,6 +1,6 @@
 @extends('layout.base-template', [
-    'title'       => 'Bitcoin Private Key Page '.($isShortNumberString ? $pageNumber : ''),
-    'description' => 'SEO description',
+    'title'       => 'All Bitcoin Private Keys'.($isShortNumberString ? ' - Page '.$pageNumber : ''),
+    'description' => '128 bitcoin private keys with automatic balance checker. Find a fortune on these pages filled with all bitcoin private keys.',
 ])
 
 @if(! $isOnFirstPage && ! $isOnLastPage)

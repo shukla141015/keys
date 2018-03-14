@@ -1,6 +1,6 @@
 <?php
 
-Route::get('/', ['uses' => 'HomeController@index', 'as' => 'home']);
+Route::view('/', 'home')->name('home');
 
 Route::get('/bitcoin/random',        ['uses' => 'BitcoinPagesController@randomPage',  'as' => 'btcPages.random']);
 Route::get('/bitcoin/invalid',       ['uses' => 'BitcoinPagesController@invalidPage', 'as' => 'btcPages.invalid']);
