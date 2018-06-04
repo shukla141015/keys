@@ -29,15 +29,15 @@
         ],
         "psr-4": {
             "App\\": "app/"
-        }
+        },        
+        "files": [
+            "app/Support/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
-        },
-        "files": [
-            "app/Support/helpers.php"
-        ]
+        }
     },
     "extra": {
         "laravel": {
