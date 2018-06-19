@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Crypto;
+namespace App\Keys;
 
 use BitcoinPHP\BitcoinECDSA\BitcoinECDSA;
 use BitWasp\Bitcoin\Key\PrivateKeyFactory;
@@ -48,7 +48,7 @@ class BitcoinPageKeys
 
     protected function getCacheFilePath()
     {
-        return app_path('Crypto/Cache/BitcoinPages/'.$this->pageNumber.'.php');
+        return app_path('Keys/Cache/BitcoinPages/'.$this->pageNumber.'.php');
     }
 
     protected function retrieveKeysFromCache(): array

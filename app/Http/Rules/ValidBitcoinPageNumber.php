@@ -2,7 +2,7 @@
 
 namespace App\Http\Rules;
 
-use App\Crypto\BitcoinPageNumber;
+use App\Keys\BitcoinPageNumber;
 use Illuminate\Contracts\Validation\Rule;
 
 class ValidBitcoinPageNumber implements Rule

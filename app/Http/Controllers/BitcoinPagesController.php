@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Crypto\BitcoinPageKeys;
-use App\Crypto\BitcoinPageNumber;
+use App\Keys\BitcoinPageKeys;
+use App\Keys\BitcoinPageNumber;
 
 class BitcoinPagesController extends Controller
 {

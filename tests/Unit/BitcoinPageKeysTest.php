@@ -2,8 +2,8 @@
 
 namespace Tests\Unit;
 
-use App\Crypto\BitcoinPageKeys;
-use App\Crypto\BitcoinPageNumber;
+use App\Keys\BitcoinPageKeys;
+use App\Keys\BitcoinPageNumber;
 use Tests\TestCase;
 
 class BitcoinPageKeysTest extends TestCase
@@ -39,9 +39,9 @@ class BitcoinPageKeysTest extends TestCase
     }
 
     /** @test */
-    function it_retrieves_cached_pages_from_cache()
+    function it_calls_the_retrieve_from_cache_method()
     {
-        $mock = new class (BitcoinPageNumber::LAST_PAGE_NUMBER) extends BitcoinPageKeys{
+        $mock = new class (BitcoinPageNumber::LAST_PAGE_NUMBER) extends BitcoinPageKeys {
             protected function retrieveKeysFromCache(): array
             {
                 return ['came from cache'];

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Crypto;
+namespace App\Keys;
 
 class BitcoinPageNumber
 {
