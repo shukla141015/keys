@@ -12,53 +12,16 @@ abstract class TestCase extends BaseTestCase
 {
     use MatchesSnapshots;
 
-    protected $testFilePath;
-
-    protected $tempFilePath;
-
     public function setUp()
     {
         parent::setUp();
 
-        Carbon::setTestNow('7 March 2018 12:00:00');
-
-        $this->testFilePath = base_path('tests/Files/');
-
-        $this->tempFilePath = $this->testFilePath.'Temp/';
-    }
-
-    public function tearDown()
-    {
-        $this->emptyTempFilesDirectory();
-
-        parent::tearDown();
-    }
-
-    public function progressTime($minutes = 1)
-    {
-        $newTime = now()->addMinutes($minutes);
-
-        Carbon::setTestNow($newTime);
-
-        return $this;
-    }
-
-    protected function emptyTempFilesDirectory()
-    {
-        $fileNames = scandir($this->tempFilePath);
-
-        $fileNames = array_filter($fileNames, function ($name) {
-            return substr($name, 0, 1) !== '.';
-        });
-
-        foreach ($fileNames as $name) {
-            unlink($this->tempFilePath.$name);
-        }
+        Carbon::setTestNow('7 March 2018 12:00:15');
     }
 
     protected function getSnapshotDirectory(): string
     {
-        return $this->testFilePath.'_snapshots_';
+        return base_path('tests/_snapshots_');
     }
 
     public function createApplication()

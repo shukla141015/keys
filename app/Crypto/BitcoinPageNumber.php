@@ -123,6 +123,6 @@ class BitcoinPageNumber
             $btcPage = new static(ltrim($randomPageNumber, '0'));
         } while (! $btcPage->isValid());
 
-        return $randomPageNumber;
+        return ltrim($randomPageNumber, '0');
     }
 }
