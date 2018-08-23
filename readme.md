@@ -14,3 +14,6 @@ php artisan key:generate
  
 npm install && npm run dev
 ```
+
+## Generating keys
+Build the executable from the [keys generator repo](https://github.com/SjorsO/keys-generator)
