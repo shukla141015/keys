@@ -10,35 +10,61 @@ class ValidBitcoinPageNumberTest extends TestCase
     /** @test */
     function it_fails_on_invalid_page_numbers()
     {
-        $this->assertFalse(
-            // "null" is never a valid page number.
-            (new ValidBitcoinPageNumber)->passes('page', null)
-        );
-
-        $this->assertFalse(
-            // Negative numbers are invalid.
-            (new ValidBitcoinPageNumber)->passes('page', '-1')
-        );
-
-        $this->assertFalse(
-            // Zero padded numbers are invalid.
-            (new ValidBitcoinPageNumber)->passes('page', '001')
-        );
+        $this->assertInvalidPageNumber([
+            null,
+            '0',
+            '-1',
+            '001',
+        ]);
     }
 
     /** @test */
     function it_rejects_integers()
     {
-        $this->assertFalse(
-            (new ValidBitcoinPageNumber)->passes('page', 100)
-        );
+        $this->assertInvalidPageNumber([
+            -1,
+            0,
+            1,
+            100,
+        ]);
     }
 
     /** @test */
     function valid_page_numbers_pass()
     {
+        $this->assertValidPageNumber([
+            '1',
+            '100',
+        ]);
+    }
+
+    private function assertInvalidPageNumber($number)
+    {
+        if (is_array($number)) {
+            foreach ($number as $value) {
+                $this->assertInvalidPageNumber($value);
+            }
+
+            return;
+        }
+
+        $this->assertFalse(
+            (new ValidBitcoinPageNumber)->passes('page', $number)
+        );
+    }
+
+    private function assertValidPageNumber($number)
+    {
+        if (is_array($number)) {
+            foreach ($number as $value) {
+                $this->assertValidPageNumber($value);
+            }
+
+            return;
+        }
+
         $this->assertTrue(
-            (new ValidBitcoinPageNumber)->passes('page', '100')
+            (new ValidBitcoinPageNumber)->passes('page', $number)
         );
     }
 }

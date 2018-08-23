@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Unit\Keys;
 
 use App\Keys\BitcoinPageKeys;
 use App\Keys\BitcoinPageNumber;

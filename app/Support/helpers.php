@@ -1,20 +1,5 @@
 <?php
 
-/**
- * @param $path
- * @param null|string $disk
- *
- * @return string Absolute path to a file from the storage facade
- */
-function storage_disk_file_path($path, $disk = null)
-{
-    $disk = $disk ?: env('FILESYSTEM_DRIVER');
-
-    $storagePath = \Storage::disk($disk)->getDriver()->getAdapter()->getPathPrefix();
-
-    return str_finish($storagePath, '/').ltrim($path, '/');
-}
-
 function increment_string(string $number)
 {
     if (! preg_match('/^\d+$/', $number)) {

@@ -1,14 +1,16 @@
 # Keys.lol
 Cryptocurrency private keys
 
+## Laravel version
+[compare to laravel master](https://github.com/laravel/laravel/compare/289b1457317a08813b8998a9a225535926bd90ee...master)
+
 ## Installation
-GMP (GNU Multiple Precision Arithmetic Library) and some other math extension are required for bitcoin math:
 ```bash
-sudo apt-get install php7.1-gmp
+cp .env.examle .env
 
-sudo phpenmod gmp
+composer update
 
-sudo apt-get install php7.1-bcmath
+php artisan key:generate
  
-sudo phpenmod bcmath
+npm install && npm run dev
 ```

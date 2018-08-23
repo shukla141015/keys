@@ -11,11 +11,4 @@ class EventServiceProvider extends ServiceProvider
        //     Listener::class,
        // ],
     ];
-
-    public function boot()
-    {
-        parent::boot();
-
-
-    }
 }

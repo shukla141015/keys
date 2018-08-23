@@ -2,18 +2,11 @@
 
 namespace App\Keys;
 
-use BitcoinPHP\BitcoinECDSA\BitcoinECDSA;
-use BitWasp\Bitcoin\Key\PrivateKeyFactory;
 use RuntimeException;
 
 class BitcoinPageKeys
 {
     const KEYS_PER_PAGE = 128;
-
-    /**
-     * This is the largest possible seed.
-     */
-    const LAST_KEY_SEED = '115792089237316195423570985008687907852837564279074904382605163141518161494336';
 
     protected $pageNumber;
 
@@ -58,30 +51,20 @@ class BitcoinPageKeys
 
     protected function generateKeys()
     {
+        $output = shell_exec('keys-lol-generator '.$this->pageNumber);
+
+        $lines = array_filter(explode("\n", $output));
+
         $keys = [];
 
-        $seed = (string) gmp_mul(decrement_string($this->pageNumber), static::KEYS_PER_PAGE);
-
-        for ($i = 0; $i < static::KEYS_PER_PAGE; $i++) {
-            $seed = increment_string($seed);
-
-            $keyPair = PrivateKeyFactory::fromInt($seed);
-
-            $bec = new BitcoinECDSA();
-
-            $wif = $keyPair->toWif();
-
-            $bec->setPrivateKeyWithWif($wif);
+        foreach ($lines as $line) {
+            [$wif, $seed, $pub, $cpub] = explode(' ', $line);
 
             $keys[] = [
                 'wif'  => $wif,
-                'pub'  => $bec->getUncompressedAddress(),
-                'cpub' => $bec->getAddress(),
+                'pub'  => $pub,
+                'cpub' => $cpub,
             ];
-
-            if ($seed === static::LAST_KEY_SEED) {
-                break;
-            }
         }
 
         return $keys;

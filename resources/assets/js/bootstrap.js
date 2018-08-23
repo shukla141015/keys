@@ -32,9 +32,3 @@ window.axios = require('axios');
 //     cluster: Laravel.pusherCluster, // since 5.6: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: Laravel.pusherEncrypted,
 // });
-
-window.bitcoin = require('bitcoinjs-lib');
-
-window.randomBytes = require('random-bytes');
-
-window.bigi = require('bigi');
