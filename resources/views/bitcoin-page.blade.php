@@ -19,7 +19,7 @@
                 <span>Bitcoin page</span>
                 <span>{{ $pageNumber }}</span>
                 <span>of</span>
-                <span>{{ config('keys.bitcoin-max-page') }}</span>
+                <span>{{ $lastPage }}</span>
             </div>
         @endif
 

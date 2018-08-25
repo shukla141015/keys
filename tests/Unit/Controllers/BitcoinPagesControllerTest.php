@@ -5,6 +5,7 @@ namespace Tests\Unit\Controllers;
 use App\Events\RandomPageGenerated;
 use App\Keys\PageNumbers\BitcoinPageNumber;
 use App\Models\BiggestRandomPage;
+use App\Models\CoinStats;
 use App\Models\SmallestRandomPage;
 use App\Support\Enums\CoinType;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -25,10 +26,31 @@ class HelpersTest extends TestCase
     {
         $this->expectsEvents(RandomPageGenerated::class);
 
+        $this->assertSame(0, CoinStats::today(CoinType::BITCOIN)->random_pages_generated);
+
         $this->followingRedirects()
             ->getRandomPage()
             ->assertStatus(200)
             ->assertViewIs('bitcoin-page');
+
+        $this->assertSame(1, CoinStats::today(CoinType::BITCOIN)->random_pages_generated);
+    }
+
+    /** @test */
+    function it_keeps_track_of_page_views_stats()
+    {
+        $this->assertSame(0, CoinStats::today(CoinType::BITCOIN)->pages_viewed);
+        $this->assertSame(0, CoinStats::today(CoinType::BITCOIN)->keys_generated);
+
+        $this->getPage('1')->assertStatus(200);
+
+        $this->assertSame(1, CoinStats::today(CoinType::BITCOIN)->pages_viewed);
+        $this->assertSame(128, CoinStats::today(CoinType::BITCOIN)->keys_generated);
+
+        $this->getPage(BitcoinPageNumber::lastPageNumber())->assertStatus(200);
+
+        $this->assertSame(2, CoinStats::today(CoinType::BITCOIN)->pages_viewed);
+        $this->assertSame(192, CoinStats::today(CoinType::BITCOIN)->keys_generated);
     }
 
     /** @test */

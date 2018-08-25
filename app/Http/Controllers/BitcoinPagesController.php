@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Events\RandomPageGenerated;
 use App\Keys\BitcoinPageKeys;
 use App\Keys\PageNumbers\BitcoinPageNumber;
+use App\Models\CoinStats;
+use App\Support\Enums\CoinType;
 
 class BitcoinPagesController extends Controller
 {
@@ -18,13 +20,15 @@ class BitcoinPagesController extends Controller
 
         $keys = BitcoinPageKeys::generate($pageNumber);
 
+        CoinStats::coinPageViewed(CoinType::BITCOIN, count($keys));
+
         return view('bitcoin-page', [
             'pageNumber'          => $pageNumber,
             'nextPage'            => increment_string($pageNumber),
             'previousPage'        => decrement_string($pageNumber),
-            'lastPage'            => $btcPageNumber->lastPageNumber(),
+            'lastPage'            => BitcoinPageNumber::lastPageNumber(),
             'isOnFirstPage'       => $pageNumber === '1',
-            'isOnLastPage'        => $pageNumber === $btcPageNumber->lastPageNumber(),
+            'isOnLastPage'        => $pageNumber === BitcoinPageNumber::lastPageNumber(),
             'isShortNumberString' => $btcPageNumber->isShortNumberString(),
             'isSmallNumber'       => $btcPageNumber->isSmallNumber(),
             'keys'                => json_encode($keys),
@@ -36,6 +40,8 @@ class BitcoinPagesController extends Controller
         $randomPage = BitcoinPageNumber::random();
 
         RandomPageGenerated::dispatch($randomPage);
+
+        CoinStats::randomPageGenerated(CoinType::BITCOIN);
 
         return redirect()->route('btcPages', $randomPage->getPageNumber());
     }

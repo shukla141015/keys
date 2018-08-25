@@ -36,7 +36,7 @@
     @endif
 
     @if($includeFirstAndLast ?? true)
-        <a title="last page" href="{{ route('btcPages', config('keys.bitcoin-max-page')) }}">
+        <a title="last page" href="{{ route('btcPages', $lastPage) }}">
             <span class="hidden md:inline-block">last page</span>
             <span class="md:hidden inline-block">&#8677;</span>
         </a>
