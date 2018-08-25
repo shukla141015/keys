@@ -34,8 +34,9 @@
     {{-- Purge css hack --}}
     {{-- <div class="hidden wallet loading empty used filled"></div> --}}
 
-
-    @include('layout.header')
+    @if($showHeader ?? true)
+        @include('layout.header')
+    @endif
 
     <div id="app" class="container mx-auto p-2">
         @yield('content')
