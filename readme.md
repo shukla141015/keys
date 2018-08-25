@@ -10,9 +10,11 @@ Make sure the [keys generator executable](https://github.com/SjorsO/keys-generat
 ```bash
 cp .env.examle .env
 
-composer update
+composer install
 
 php artisan key:generate
+
+artisan migrate:fresh
  
 npm install && npm run dev
 ```
