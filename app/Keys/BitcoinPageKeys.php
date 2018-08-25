@@ -2,6 +2,7 @@
 
 namespace App\Keys;
 
+use App\Keys\PageNumbers\BitcoinPageNumber;
 use RuntimeException;
 
 class BitcoinPageKeys

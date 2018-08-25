@@ -51,7 +51,5 @@ function decrement_string(string $number)
 
     $newNumber = implode('', $numbers);
 
-    return ltrim($newNumber, '0')
-        ? ltrim($newNumber, '0')
-        : '0';
+    return ltrim($newNumber, '0') ?: '0';
 }

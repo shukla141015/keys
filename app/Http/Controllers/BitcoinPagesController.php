@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\RandomPageGenerated;
 use App\Keys\BitcoinPageKeys;
-use App\Keys\BitcoinPageNumber;
+use App\Keys\PageNumbers\BitcoinPageNumber;
 
 class BitcoinPagesController extends Controller
 {
@@ -21,9 +22,9 @@ class BitcoinPagesController extends Controller
             'pageNumber'          => $pageNumber,
             'nextPage'            => increment_string($pageNumber),
             'previousPage'        => decrement_string($pageNumber),
-            'lastPage'            => config('keys.bitcoin-max-page'),
+            'lastPage'            => $btcPageNumber->lastPageNumber(),
             'isOnFirstPage'       => $pageNumber === '1',
-            'isOnLastPage'        => $pageNumber === config('keys.bitcoin-max-page'),
+            'isOnLastPage'        => $pageNumber === $btcPageNumber->lastPageNumber(),
             'isShortNumberString' => $btcPageNumber->isShortNumberString(),
             'isSmallNumber'       => $btcPageNumber->isSmallNumber(),
             'keys'                => json_encode($keys),
@@ -32,9 +33,11 @@ class BitcoinPagesController extends Controller
 
     public function randomPage()
     {
-        $randomPageNumber = BitcoinPageNumber::random();
+        $randomPage = BitcoinPageNumber::random();
 
-        return redirect()->route('btcPages', $randomPageNumber);
+        RandomPageGenerated::dispatch($randomPage);
+
+        return redirect()->route('btcPages', $randomPage->getPageNumber());
     }
 
     public function invalidPage()

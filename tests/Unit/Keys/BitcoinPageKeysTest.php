@@ -3,7 +3,7 @@
 namespace Tests\Unit\Keys;
 
 use App\Keys\BitcoinPageKeys;
-use App\Keys\BitcoinPageNumber;
+use App\Keys\PageNumbers\BitcoinPageNumber;
 use Tests\TestCase;
 
 class BitcoinPageKeysTest extends TestCase
@@ -22,7 +22,7 @@ class BitcoinPageKeysTest extends TestCase
     function it_can_generate_keys_for_the_last_page()
     {
         $bitcoinPageKeys = new BitcoinPageKeys(
-            BitcoinPageNumber::LAST_PAGE_NUMBER
+            BitcoinPageNumber::lastPageNumber()
         );
 
         $this->assertMatchesSnapshot(
@@ -41,7 +41,7 @@ class BitcoinPageKeysTest extends TestCase
     /** @test */
     function it_calls_the_retrieve_from_cache_method()
     {
-        $mock = new class (BitcoinPageNumber::LAST_PAGE_NUMBER) extends BitcoinPageKeys {
+        $mock = new class ('1') extends BitcoinPageKeys {
             protected function retrieveKeysFromCache(): array
             {
                 return ['came from cache'];

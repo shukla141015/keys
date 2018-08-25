@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a1ce5327b83d0a93c9a527fbfc0b1f1f",
+    "content-hash": "44b791d5c9639b1f40459a57219ea842",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1891,6 +1891,53 @@
                 "uuid"
             ],
             "time": "2018-07-19T23:38:55+00:00"
+        },
+        {
+            "name": "sjorso/enum",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SjorsO/enum.git",
+                "reference": "d29a275e79652115be30c9d57d8a6d8a04b8c8a2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SjorsO/enum/zipball/d29a275e79652115be30c9d57d8a6d8a04b8c8a2",
+                "reference": "d29a275e79652115be30c9d57d8a6d8a04b8c8a2",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/http": "^5.2",
+                "illuminate/support": "^5.2",
+                "php": "^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.0|^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SjorsO\\Enum\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sjors Ottjes",
+                    "email": "sjorsottjes@gmail.com"
+                }
+            ],
+            "description": "A useful abstract class for making enums in Laravel",
+            "homepage": "https://github.com/SjorsO/enum",
+            "keywords": [
+                "abstract",
+                "enum",
+                "laravel"
+            ],
+            "time": "2018-07-27T17:52:14+00:00"
         },
         {
             "name": "spatie/browsershot",
