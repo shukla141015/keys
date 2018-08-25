@@ -31,7 +31,7 @@ class BitcoinPagesController extends Controller
             'isOnLastPage'        => $pageNumber === BitcoinPageNumber::lastPageNumber(),
             'isShortNumberString' => $btcPageNumber->isShortNumberString(),
             'isSmallNumber'       => $btcPageNumber->isSmallNumber(),
-            'keys'                => json_encode($keys),
+            'keys'                => $keys,
         ]);
     }
 

@@ -41,17 +41,46 @@
         Every bitcoin private key is on this website.
     </p>
 
+    @foreach($keys as $key)
+        <div id="{{ $key['wif'] }}" data-loaded="0" class="wallet loading flex flex-col lg:flex-row font-mono text-sm md:text-sm pl-2 lg:py-0 py-2">
 
-    <bitcoin-page
-            :keys="{{ $keys }}"
-            page="{{ $pageNumber }}"
-            :is-on-first-page="{{ (int) $isOnFirstPage }}"
-            :is-on-last-page="{{ (int) $isOnLastPage }}"
-    ></bitcoin-page>
+            <span class="mr-4 inline-block" style="min-width: {{ $isOnFirstPage ? '108px' : ($isOnLastPage || $pageNumber === '3' ? '100px' : '') }}">
+                <strong data-balance="0" class="wallet-balance">0 btc</strong>
+                <span data-tx="0" class="wallet-tx">(? tx)</span>
+            </span>
 
+            <span class="lg:mr-4 text-xs sm:text-sm break-words">{{ $key['wif'] }}</span>
+
+            <div class="lg:block flex">
+                <span class="mr-8 lg:mr-4">
+                    <a href="https://blockchain.info/address/{{ $key['pub'] }}" rel="nofollow" target="_blank">
+                        <span class="hidden xl:inline-block">{!! str_repeat('&nbsp;', 34 - strlen($key['pub'])) !!}{{ $key['pub'] }}</span>                           {{-- TODO: NEEDS EXTRA PADDING!! --}}
+                        <span class="xl:hidden inline-block">public key</span>
+                    </a>
+                </span>
+                <span>
+                    <a href="https://blockchain.info/address/{{ $key['cpub'] }}" rel="nofollow" target="_blank">
+                        <span class="hidden xl:inline-block">{{ $key['cpub'] }}</span>
+                        <span class="xl:hidden inline-block">compressed public key</span>
+                    </a>
+                </span>
+            </div>
+
+        </div>
+    @endforeach
 
     <div>
         @include('components.bitcoin-page-pagination', ['includeFirstAndLast' => false])
     </div>
 
 @endsection
+
+@push('footer')
+    <script>
+        const keys = @json($keys);
+        const isOnFirstPage = @json($isOnFirstPage);
+        const isOnLastPage = @json($isOnLastPage);
+    </script>
+
+    <script type="text/javascript" src="{{ mix('js/bitcoin-page.js') }}"></script>
+@endpush
