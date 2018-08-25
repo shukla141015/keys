@@ -37,17 +37,4 @@ class BitcoinPageKeysTest extends TestCase
 
         $this->assertMatchesSnapshot($keys);
     }
-
-    /** @test */
-    function it_calls_the_retrieve_from_cache_method()
-    {
-        $mock = new class ('1') extends BitcoinPageKeys {
-            protected function retrieveKeysFromCache(): array
-            {
-                return ['came from cache'];
-            }
-        };
-
-        $this->assertSame(['came from cache'], $mock->getKeys());
-    }
 }

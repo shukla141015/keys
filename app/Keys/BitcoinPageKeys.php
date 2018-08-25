@@ -27,27 +27,10 @@ class BitcoinPageKeys
     public function getKeys()
     {
         if ($this->keys === null) {
-            $this->keys = $this->isPageCached()
-                ? $this->retrieveKeysFromCache()
-                : $this->generateKeys();
+            $this->keys = $this->generateKeys();
         }
 
         return $this->keys;
-    }
-
-    protected function isPageCached()
-    {
-        return file_exists($this->getCacheFilePath());
-    }
-
-    protected function getCacheFilePath()
-    {
-        return app_path('Keys/Cache/BitcoinPages/'.$this->pageNumber.'.php');
-    }
-
-    protected function retrieveKeysFromCache(): array
-    {
-        return include($this->getCacheFilePath());
     }
 
     protected function generateKeys()
@@ -56,19 +39,15 @@ class BitcoinPageKeys
 
         $lines = array_filter(explode("\n", $output));
 
-        $keys = [];
-
-        foreach ($lines as $line) {
+        return array_map(function ($line) {
             [$wif, $seed, $pub, $cpub] = explode(' ', $line);
 
-            $keys[] = [
+            return [
                 'wif'  => $wif,
                 'pub'  => $pub,
                 'cpub' => $cpub,
             ];
-        }
-
-        return $keys;
+        }, $lines);
     }
 
     public static function generate($pageNumber)
