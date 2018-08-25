@@ -65,10 +65,12 @@ abstract class PageNumber
 
     public static function random(): PageNumber
     {
+        $maxPageLength = strlen(static::lastPageNumber());
+
         do {
             $randomPageNumber = '';
 
-            for ($i = 0; $i < strlen(static::lastPageNumber()); $i++) {
+            for ($i = 0; $i < $maxPageLength; $i++) {
                 $randomPageNumber .= rand(0, 9);
             }
 
