@@ -47,11 +47,6 @@ abstract class PageNumber
         return strlen($this->pageNumber) <= 10;
     }
 
-    public function isSmallNumber()
-    {
-        return $this->isShortNumberString() && (int) $this->pageNumber <= 10;
-    }
-
     public static function lastPageNumber()
     {
         static $lastPageNumber = null;

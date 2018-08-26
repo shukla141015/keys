@@ -1,5 +1,10 @@
 @extends('layout.base-template', [
-    'title'       => 'Bitcoin private keys'.($isShortNumberString ? ' - page '.$pageNumber : ''),
+    'title' => ($isOnFirstPage || $isOnLastPage)
+                  ? ($isOnFirstPage
+                      ? 'First page of bitcoin private keys'
+                      : 'Last page of bitcoin private keys')
+                  : 'Bitcoin private keys'.($isShortNumberString ? ' - page '.$pageNumber : ''),
+
     'description' => '128 bitcoin private keys with automatic balance checker. Find a fortune on these pages filled with all bitcoin private keys.',
 ])
 
@@ -24,18 +29,19 @@
         </div>
     </div>
 
-
-    <p class="mb-4 max-w-md mx-auto leading-normal text-center">
-        @if ($isOnFirstPage)
-            This is the first page of bitcoin private keys
-            <br>
-            This page has 128 wallets on it
-        @elseif($isOnLastPage)
-            This is the last page of bitcoin private keys
-            <br>
-            This page only has 64 wallets on it
-        @endif
-    </p>
+    @if($isOnFirstPage || $isOnLastPage)
+        <p class="mb-4 max-w-md mx-auto leading-normal text-center">
+            @if ($isOnFirstPage)
+                This is the first page of bitcoin private keys
+                <br>
+                This page has 128 wallets on it
+            @elseif($isOnLastPage)
+                This is the last page of bitcoin private keys
+                <br>
+                This page only has 64 wallets on it
+            @endif
+        </p>
+    @endif
 
     <div class="max-w-2xl mx-auto">
     @foreach($keys as $key)

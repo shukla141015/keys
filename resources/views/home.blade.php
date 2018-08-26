@@ -21,7 +21,7 @@
             <br>
             Page numbers are used to generate private keys <a class="text-black italic" href="https://en.bitcoin.it/wiki/Wallet_import_format" rel="nofollow" target="_blank">(wallet import formats)</a>.
             Every page, except the last one, contains 128 keys.
-            The first wallet of the first page is generated using the seed <code>0x1</code>, the second wallet with the seed <code>0x2</code>, and so on.
+            The first wallet of the first page is generated using the seed "1", the second wallet with the seed "2", and so on.
             The last wallet on the last page is generated using the largest possible bitcoin wallet seed.
             The keys are procedurally generated on the fly every time a page is opened.
             <br><br>
