@@ -41,14 +41,4 @@ module.exports = {
         '64': '16rem',
     }),
 
-    negativeMargin: Object.assign(defaultConfig.negativeMargin, {
-        '10': '2.5rem',
-        '12': '3rem',
-        '16': '4rem',
-        '24': '6rem',
-        '32': '8rem',
-        '48': '12rem',
-        '64': '16rem',
-    }),
-
 };
