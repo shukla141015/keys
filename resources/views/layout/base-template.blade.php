@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ app()->getLocale() }}">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,7 +9,7 @@
 
     <link rel="canonical" href="{{ URL::current() }}" />
 
-    <title>{{ trim($title).' | Keys.lol' }}</title>
+    <title>{{ stripos($title, 'Keys.lol') === false ? (trim($title).' | Keys.lol') : $title }}</title>
 
     @stack('head')
 
@@ -29,20 +29,20 @@
     @endif
 
 </head>
-<body class="bg-grey-lightest">
-
-    {{-- Purge css hack --}}
-    {{-- <div class="hidden wallet loading empty used filled"></div> --}}
+<body class="flex flex-col bg-grey-lightest min-h-screen">
 
     @if($showHeader ?? true)
         @include('layout.header')
     @endif
 
-    <div id="app" class="container mx-auto p-2">
+
+    <div id="app" class="container mx-auto p-2 flex-1">
         @yield('content')
     </div>
 
+
     @include('layout.footer')
+
 
     <script type="text/javascript" src="{{ mix('js/scripts.js') }}"></script>
 
