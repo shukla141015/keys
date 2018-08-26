@@ -1,5 +1,5 @@
 @extends('layout.base-template', [
-    'title'       => 'Bitcoin Private Keys'.($isShortNumberString ? ' - Page '.$pageNumber : ''),
+    'title'       => 'Bitcoin private keys'.($isShortNumberString ? ' - page '.$pageNumber : ''),
     'description' => '128 bitcoin private keys with automatic balance checker. Find a fortune on these pages filled with all bitcoin private keys.',
 ])
 
@@ -11,7 +11,7 @@
 
 @section('content')
 
-    <div class="max-w-md mx-auto">
+    <div class="max-w-md mx-auto mt-4">
         <h1 class="flex flex-col text-base break-words text-center">
             <span>Bitcoin page</span>
             <span class="text-sm my-1">{{ $pageNumber }}</span>
@@ -27,13 +27,13 @@
 
     <p class="mb-4 max-w-md mx-auto leading-normal text-center">
         @if ($isOnFirstPage)
-            This is the first page of bitcoin private keys.
+            This is the first page of bitcoin private keys
             <br>
-            The 128 keys on this page are generated based on the current page number.
+            This page has 128 wallets on it
         @elseif($isOnLastPage)
-            This is the last page of bitcoin private keys.
+            This is the last page of bitcoin private keys
             <br>
-            This page only has 64 wallets on it.
+            This page only has 64 wallets on it
         @endif
     </p>
 

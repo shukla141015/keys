@@ -31,9 +31,8 @@ class BitcoinPageNumber extends PageNumber
             return redirect()->route('btcPages', $actualNumber);
         }
 
-        // TODO: redirect numbers that are too large to a special error page.
         if ($pageNumber > static::lastPageNumber()) {
-            return redirect()->route('btcPages', 1);
+            return redirect()->route('btcPages.pageTooBig');
         }
 
         return null;

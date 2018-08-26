@@ -48,6 +48,15 @@ class HelpersTest extends TestCase
     }
 
     /** @test */
+    function you_get_redirected_when_exceeding_the_max_page_number()
+    {
+        $this->followingRedirects()
+            ->getPage(BitcoinPageNumber::lastPageNumber().'1234')
+            ->assertStatus(200)
+            ->assertViewIs('bitcoin-page-too-big');
+    }
+
+    /** @test */
     function it_keeps_track_of_page_views_stats()
     {
         $this->assertSame(0, CoinStats::today(CoinType::BITCOIN)->pages_viewed);

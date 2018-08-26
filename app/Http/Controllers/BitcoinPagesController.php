@@ -46,8 +46,8 @@ class BitcoinPagesController extends Controller
         return redirect()->route('btcPages', $randomPage->getPageNumber());
     }
 
-    public function invalidPage()
+    public function pageTooBig()
     {
-        return 'invalid page yo';
+        return view('bitcoin-page-too-big');
     }
 }
