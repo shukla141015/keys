@@ -19,7 +19,9 @@
             <span class="text-sm my-1">{{ $lastPage }}</span>
         </h1>
 
-        @include('components.bitcoin-page-pagination')
+        <div class="my-4">
+            @include('components.bitcoin-page-pagination')
+        </div>
     </div>
 
 
@@ -37,7 +39,7 @@
 
     <div class="max-w-2xl mx-auto">
     @foreach($keys as $key)
-        <div id="{{ $key['wif'] }}" data-loaded="0" class="wallet loading flex flex-col lg:flex-row font-mono text-sm pl-2 lg:py-0 py-2">
+        <div id="{{ $key['wif'] }}" data-loaded="0" class="wallet loading flex flex-col lg:flex-row font-mono text-sm pl-2">
 
             <span class="mr-4 inline-block" style="min-width: {{ $isOnFirstPage ? '108px' : ($isOnLastPage || $pageNumber === '3' ? '100px' : '') }}">
                 <strong data-balance="0" class="wallet-balance">0 btc</strong>
@@ -65,7 +67,7 @@
     @endforeach
     </div>
 
-    <div>
+    <div class="mt-8 mb-6">
         @include('components.bitcoin-page-pagination', ['includeFirstAndLast' => false])
     </div>
 

@@ -36,7 +36,7 @@
     @endif
 
 
-    <div id="app" class="container mx-auto p-2 flex-1">
+    <div id="app" class="container mx-auto px-2 flex-1">
         @yield('content')
     </div>
 

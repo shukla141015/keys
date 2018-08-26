@@ -1,4 +1,4 @@
-<div class="flex justify-between items-center my-4 max-w-sm mx-auto">
+<div class="flex justify-between items-center max-w-sm mx-auto">
     @if($includeFirstAndLast ?? true)
         <a title="{{ $isOnFirstPage ? 'You are on the first page' : 'First page' }}" class="text-black {{ $isOnFirstPage ? 'cursor-not-allowed' : '' }}" href="{{ $isOnFirstPage ? 'javascript:' : route('btcPages', 1) }}">
             <span class="inline-block w-6 rotate-180">@include('components.svg.angle-double-right')</span>
