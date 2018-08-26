@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Jobs\GenerateSitemapJob;
 use App\Models\CoinStats;
 use App\Support\Enums\CoinType;
 use Illuminate\Console\Scheduling\Schedule;
@@ -15,6 +16,8 @@ class Kernel extends ConsoleKernel
             $schedule->call([CoinStats::class, 'today'], [$coin])->twiceDaily();
         }
 
-        // $schedule->command('sitemap:generate')->dailyAt('2:00');
+        $schedule->job(GenerateSitemapJob::class)->dailyAt('1:03');
+
+        // $schedule->command('backup:run-configless --disable-notifications --only-db --set-destination-disks=dropbox')->dailyAt('2:10');
     }
 }

@@ -5,7 +5,7 @@
 
 @if(! $isOnFirstPage && ! $isOnLastPage)
     @push('head')
-        <meta name="robots" content="noindex">
+        <meta name="robots" content="noindex, nofollow">
     @endpush
 @endif
 

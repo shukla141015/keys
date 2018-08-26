@@ -16,9 +16,19 @@ class HelpersTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    function it_can_show_a_page()
+    function it_can_show_the_first_page()
     {
-        $this->getPage('8457934857349')->assertStatus(200);
+        $this->getPage('1')
+            ->assertStatus(200)
+            ->assertDontSee('noindex'); // first page should be indexed by robots.
+    }
+
+    /** @test */
+    function it_can_show_the_last_page()
+    {
+        $this->getPage(BitcoinPageNumber::lastPageNumber())
+            ->assertStatus(200)
+            ->assertDontSee('noindex'); // first page should be indexed by robots.
     }
 
     /** @test */
@@ -31,7 +41,8 @@ class HelpersTest extends TestCase
         $this->followingRedirects()
             ->getRandomPage()
             ->assertStatus(200)
-            ->assertViewIs('bitcoin-page');
+            ->assertViewIs('bitcoin-page')
+            ->assertSee('<meta name="robots" content="noindex, nofollow">');
 
         $this->assertSame(1, CoinStats::today(CoinType::BITCOIN)->random_pages_generated);
     }
@@ -42,7 +53,7 @@ class HelpersTest extends TestCase
         $this->assertSame(0, CoinStats::today(CoinType::BITCOIN)->pages_viewed);
         $this->assertSame(0, CoinStats::today(CoinType::BITCOIN)->keys_generated);
 
-        $this->getPage('1')->assertStatus(200);
+        $this->getPage('123456')->assertStatus(200);
 
         $this->assertSame(1, CoinStats::today(CoinType::BITCOIN)->pages_viewed);
         $this->assertSame(128, CoinStats::today(CoinType::BITCOIN)->keys_generated);

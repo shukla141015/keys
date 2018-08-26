@@ -1,5 +1,5 @@
 @extends('layout.base-template', [
-    'title' => 'Too many requests',
+    'title' => 'Page not found',
 ])
 
 @section('content')
@@ -10,11 +10,9 @@
             <img src="/favicon.png" alt="Keys.lol">
         </div>
 
-        <h1 class="my-4">Too many requests</h1>
+        <h1 class="my-4">Page not found</h1>
         <p class="mb-8 leading-normal">
-            You are looking up a lot of keys, if keep this up you'll literally crash bitcoin
-            <br><br>
-            You can look up more keys in a minute
+            This page could not be found, just like that hard drive in that landfill
         </p>
 
     </div>

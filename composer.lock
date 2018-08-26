@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "44b791d5c9639b1f40459a57219ea842",
+    "content-hash": "058553290a79fad4b8c692cff916b640",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1997,16 +1997,16 @@
         },
         {
             "name": "spatie/crawler",
-            "version": "3.2.1",
+            "version": "4.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/crawler.git",
-                "reference": "f40aacc5f3c444bad74235c908a79400b4461a6b"
+                "reference": "a9fddcbd9deb3cc8a319426f32ee490d6db0c4d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/crawler/zipball/f40aacc5f3c444bad74235c908a79400b4461a6b",
-                "reference": "f40aacc5f3c444bad74235c908a79400b4461a6b",
+                "url": "https://api.github.com/repos/spatie/crawler/zipball/a9fddcbd9deb3cc8a319426f32ee490d6db0c4d3",
+                "reference": "a9fddcbd9deb3cc8a319426f32ee490d6db0c4d3",
                 "shasum": ""
             },
             "require": {
@@ -2015,12 +2015,13 @@
                 "nicmart/tree": "^0.2.7",
                 "php": "^7.1",
                 "spatie/browsershot": "^3.14",
+                "spatie/robots-txt": "^1.0.1",
                 "symfony/dom-crawler": "^4.0",
-                "tightenco/collect": "^5.3"
+                "tightenco/collect": "^5.6"
             },
             "require-dev": {
                 "larapack/dd": "^1.1",
-                "phpunit/phpunit": "^6.4"
+                "phpunit/phpunit": "^7.0"
             },
             "type": "library",
             "extra": {
@@ -2051,7 +2052,7 @@
                 "spatie",
                 "website"
             ],
-            "time": "2018-02-21T21:11:50+00:00"
+            "time": "2018-07-27T11:22:55+00:00"
         },
         {
             "name": "spatie/image",
@@ -2156,23 +2157,23 @@
         },
         {
             "name": "spatie/laravel-sitemap",
-            "version": "4.0",
+            "version": "5.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-sitemap.git",
-                "reference": "a6300ab9fc36ccb59e5637e0d0cf88e179981c2f"
+                "reference": "ec3172f6ea74de5cac663f1ef1657706d470fe37"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-sitemap/zipball/a6300ab9fc36ccb59e5637e0d0cf88e179981c2f",
-                "reference": "a6300ab9fc36ccb59e5637e0d0cf88e179981c2f",
+                "url": "https://api.github.com/repos/spatie/laravel-sitemap/zipball/ec3172f6ea74de5cac663f1ef1657706d470fe37",
+                "reference": "ec3172f6ea74de5cac663f1ef1657706d470fe37",
                 "shasum": ""
             },
             "require": {
                 "illuminate/support": "~5.5.0|~5.6.0",
                 "nesbot/carbon": "^1.21",
                 "php": "^7.1",
-                "spatie/crawler": "^3.0",
+                "spatie/crawler": "^4.1.0",
                 "spatie/temporary-directory": "^1.1"
             },
             "require-dev": {
@@ -2212,7 +2213,54 @@
                 "laravel-sitemap",
                 "spatie"
             ],
-            "time": "2018-02-08T09:16:23+00:00"
+            "time": "2018-07-23T13:13:45+00:00"
+        },
+        {
+            "name": "spatie/robots-txt",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/robots-txt.git",
+                "reference": "bb52e87bcc838e6ba8eb015675e62a72a2260fd7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/robots-txt/zipball/bb52e87bcc838e6ba8eb015675e62a72a2260fd7",
+                "reference": "bb52e87bcc838e6ba8eb015675e62a72a2260fd7",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1"
+            },
+            "require-dev": {
+                "larapack/dd": "^1.0",
+                "phpunit/phpunit": "^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Robots\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Brent Roose",
+                    "email": "brent@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Determine if a page may be crawled from robots.txt and robots meta tags",
+            "homepage": "https://github.com/spatie/robots-txt",
+            "keywords": [
+                "robots-txt",
+                "spatie"
+            ],
+            "time": "2018-05-08T19:32:54+00:00"
         },
         {
             "name": "spatie/temporary-directory",
