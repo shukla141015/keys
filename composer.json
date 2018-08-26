@@ -10,7 +10,9 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.6.*",
         "laravel/tinker": "^1.0",
+        "sjorso/configless-laravel-backup": "^0.0.1",
         "sjorso/enum": "^1.0",
+        "spatie/flysystem-dropbox": "^1.0",
         "spatie/laravel-sitemap": "^5.0"
     },
     "require-dev": {

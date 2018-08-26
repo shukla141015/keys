@@ -18,6 +18,6 @@ class Kernel extends ConsoleKernel
 
         $schedule->job(GenerateSitemapJob::class)->dailyAt('1:03');
 
-        // $schedule->command('backup:run-configless --disable-notifications --only-db --set-destination-disks=dropbox')->dailyAt('2:10');
+        $schedule->command('backup:run-configless --disable-notifications --only-db --set-destination-disks=dropbox')->weeklyOn(2, '2:11');
     }
 }
