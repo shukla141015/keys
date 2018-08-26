@@ -29,7 +29,7 @@
     @endif
 
 </head>
-<body class="bg-grey-lighter">
+<body class="bg-grey-lightest">
 
     {{-- Purge css hack --}}
     {{-- <div class="hidden wallet loading empty used filled"></div> --}}

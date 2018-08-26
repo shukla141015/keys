@@ -1,8 +1,6 @@
-const fakeApi = false;
-
-const apiBaseUrl = fakeApi
-    ? 'http://keys.pk/api/v1/mock-balance?active='
-    : 'https://blockchain.info/balance?cors=true&active=';
+const apiBaseUrl = 'http://keys.pk/api/v1/realistic-balance?active=';
+//const apiBaseUrl = 'http://keys.pk/api/v1/mock-balance?active=';
+// const apiBaseUrl = 'https://blockchain.info/balance?cors=true&active=';
 
 const showResultDelay = 3000;
 

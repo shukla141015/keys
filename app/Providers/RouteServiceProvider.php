@@ -29,9 +29,17 @@ class RouteServiceProvider extends ServiceProvider
             return;
         }
 
-        Route::middleware('api')->get('api/v1/mock-balance', function () {
-            $publicKeys = explode('|', request()->query('active'));
+        $publicKeys = explode('|', request()->query('active'));
 
+        $keys = array_flip($publicKeys);
+
+        Route::middleware('api')->get('api/v1/realistic-balance', function () use ($keys) {
+            return array_map(function ($index) {
+                return ['final_balance' => 0, 'n_tx' => 0, 'total_received' => 0];
+            }, $keys);
+        });
+
+        Route::middleware('api')->get('api/v1/mock-balance', function () use ($keys) {
             return array_map(function ($index) {
                 $usedBefore = random_int(0, 100) > 80;
 
@@ -42,7 +50,7 @@ class RouteServiceProvider extends ServiceProvider
                     'n_tx'           => $usedBefore ? random_int(5, 150) : 0,
                     'total_received' => $usedBefore ? random_int($finalBalance, 2204568646) : 0,
                 ];
-            }, array_flip($publicKeys));
+            }, $keys);
         });
     }
 }

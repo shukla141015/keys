@@ -7,3 +7,5 @@ Route::get('/bitcoin/invalid',       ['uses' => 'BitcoinPagesController@invalidP
 Route::get('/bitcoin/{pageNumber?}', ['uses' => 'BitcoinPagesController@index',       'as' => 'btcPages']);
 
 Route::redirect('/btc', '/bitcoin/1');
+
+Route::get('/ethereum/{pageNumber?}', ['uses' => 'BitcoinPagesController@index',       'as' => 'ethPages']);

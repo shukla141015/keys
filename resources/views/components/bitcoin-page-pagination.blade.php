@@ -1,44 +1,29 @@
-<div class="flex justify-between my-4 max-w-md">
+<div class="flex justify-between items-center my-4 max-w-sm mx-auto">
     @if($includeFirstAndLast ?? true)
-        <a title="first page" href="{{ route('btcPages', 1) }}">
-            <span class="hidden md:inline-block">first page</span>
-            <span class="md:hidden inline-block text-base">&#8676;</span>
+        <a title="{{ $isOnFirstPage ? 'You are on the first page' : 'First page' }}" class="text-black {{ $isOnFirstPage ? 'cursor-not-allowed' : '' }}" href="{{ $isOnFirstPage ? 'javascript:' : route('btcPages', 1) }}">
+            <span class="inline-block w-6 rotate-180">@include('components.svg.angle-double-right')</span>
         </a>
     @endif
 
-    @if ($isOnFirstPage)
-        <span title="previous page" class="cursor-not-allowed">
-            <span class="hidden md:inline-block">previous page</span>
-            <span class="md:hidden inline-block">&laquo;</span>
-        </span>
-    @else
-        <a title="previous page" rel="nofollow" href="{{ route('btcPages', $previousPage) }}">
-            <span class="hidden md:inline-block">previous page</span>
-            <span class="md:hidden inline-block">&laquo;</span>
-        </a>
-    @endif
 
-    <a title="random page" rel="nofollow" href="{{ route('btcPages.random') }}">
-        <span class="hidden md:inline-block">random page</span>
-        <span class="md:hidden inline-block w-4">@include('components.svg.random')</span>
+    <a title="{{ $isOnFirstPage ? 'You are on the first page' : 'Previous page' }}" class="text-black {{ $isOnFirstPage ? 'cursor-not-allowed' : '' }}" rel="nofollow" href="{{ $isOnFirstPage ? 'javascript:' : route('btcPages', $previousPage) }}">
+        <span class="inline-block w-4 rotate-180">@include('components.svg.angle-right')</span>
     </a>
 
-    @if ($isOnLastPage)
-        <span title="next page" class="cursor-not-allowed">
-            <span class="hidden md:inline-block">next page</span>
-            <span class="md:hidden inline-block">&raquo;</span>
-        </span>
-    @else
-        <a title="next page" rel="nofollow" href="{{ route('btcPages', $nextPage) }}">
-            <span class="hidden md:inline-block">next page</span>
-            <span class="md:hidden inline-block">&raquo;</span>
-        </a>
-    @endif
+
+    <a title="Random page" class="text-black " rel="nofollow" href="{{ route('btcPages.random') }}">
+        <span class="inline-block w-8">@include('components.svg.random')</span>
+    </a>
+
+
+    <a title="{{ $isOnLastPage ? 'You are on the last page' : 'Next page' }}" class="text-black {{ $isOnLastPage ? 'cursor-not-allowed' : '' }}" rel="nofollow" href="{{ $isOnLastPage ? 'javascript:' : route('btcPages', $nextPage) }}">
+        <span class="inline-block w-4">@include('components.svg.angle-right')</span>
+    </a>
+
 
     @if($includeFirstAndLast ?? true)
-        <a title="last page" href="{{ route('btcPages', $lastPage) }}">
-            <span class="hidden md:inline-block">last page</span>
-            <span class="md:hidden inline-block">&#8677;</span>
+        <a title="{{ $isOnLastPage ? 'You are on the last page' : 'Last page' }}" class="text-black {{ $isOnLastPage ? 'cursor-not-allowed' : '' }}" href="{{ $isOnLastPage ? 'javascript:' : route('btcPages', $lastPage) }}">
+            <span class="inline-block w-6">@include('components.svg.angle-double-right')</span>
         </a>
     @endif
 </div>

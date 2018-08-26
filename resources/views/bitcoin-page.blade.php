@@ -11,38 +11,33 @@
 
 @section('content')
 
-    <div>
-        @if ($isShortNumberString)
-            <h1 class="text-base mb-4 break-words">Bitcoin page {{ $pageNumber }} of {{ $lastPage }}</h1>
-        @else
-            <div class="flex flex-col text-base font-bold break-words text-center sm:text-left">
-                <span>Bitcoin page</span>
-                <span>{{ $pageNumber }}</span>
-                <span>of</span>
-                <span>{{ $lastPage }}</span>
-            </div>
-        @endif
+    <div class="max-w-md mx-auto">
+        <h1 class="flex flex-col text-base break-words text-center">
+            <span>Bitcoin page</span>
+            <span class="text-sm my-1">{{ $pageNumber }}</span>
+            <span>of</span>
+            <span class="text-sm my-1">{{ $lastPage }}</span>
+        </h1>
 
         @include('components.bitcoin-page-pagination')
     </div>
 
 
-    <p class="mb-4 max-w-md">
+    <p class="mb-4 max-w-md mx-auto">
         @if ($isOnFirstPage)
             This is the first page of bitcoin private keys.
             There are 128 wallets on this page.
             Wallets are seeded based on page number, this page contains wallets with seeds from 1 to 128.
+
+            Every bitcoin private key is on this website.
         @elseif($isOnLastPage)
             This is the last page, this page only has 64 wallets on it.
-        @else
-            This page contains 128 bitcoin private keys.
         @endif
-
-        Every bitcoin private key is on this website.
     </p>
 
+    <div class="max-w-2xl mx-auto">
     @foreach($keys as $key)
-        <div id="{{ $key['wif'] }}" data-loaded="0" class="wallet loading flex flex-col lg:flex-row font-mono text-sm md:text-sm pl-2 lg:py-0 py-2">
+        <div id="{{ $key['wif'] }}" data-loaded="0" class="wallet loading flex flex-col lg:flex-row font-mono text-sm pl-2 lg:py-0 py-2">
 
             <span class="mr-4 inline-block" style="min-width: {{ $isOnFirstPage ? '108px' : ($isOnLastPage || $pageNumber === '3' ? '100px' : '') }}">
                 <strong data-balance="0" class="wallet-balance">0 btc</strong>
@@ -68,6 +63,7 @@
 
         </div>
     @endforeach
+    </div>
 
     <div>
         @include('components.bitcoin-page-pagination', ['includeFirstAndLast' => false])
