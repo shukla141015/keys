@@ -8,4 +8,4 @@ Route::get('/bitcoin/{pageNumber?}',         ['uses' => 'BitcoinPagesController@
 
 Route::redirect('/btc', '/bitcoin/1');
 
-Route::get('/ethereum/{pageNumber?}', ['uses' => 'BitcoinPagesController@index',       'as' => 'ethPages']);
+// Route::get('/ethereum/{pageNumber?}', ['uses' => 'BitcoinPagesController@index',       'as' => 'ethPages']);
