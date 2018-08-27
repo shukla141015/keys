@@ -7,7 +7,7 @@
 
     <div class="max-w-md mx-auto">
 
-        <h1 class="mb-4 max-w-sm">
+        <h1 class="my-4 max-w-sm">
             Every Bitcoin private key is on this website
         </h1>
 
