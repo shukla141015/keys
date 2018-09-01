@@ -3,7 +3,7 @@
     <div>
         <a href="/" class="flex items-center text-black font-mono font-bold text-xl">
             <img class="h-6 mr-2 hidden sm:inline-block" src="/favicon.png" alt="Keys.lol">
-            KEYS.LOL
+            Keys.lol
         </a>
     </div>
 
@@ -12,7 +12,7 @@
             <span class="h-6 w-6 mr-2">@include('components.svg.bitcoin')</span>
         </a>
 
-        <a class="flex items-center text-black p-1 ml-4 sm:ml-6" href="/" title="Ethereum keys">
+        <a class="flex items-center text-black p-1 ml-4 sm:ml-6" href="{{ route('ethPages', 1) }}" title="Ethereum keys">
             <span class="h-4 w-4 mr-2 -mt-2">@include('components.svg.ethereum')</span>
         </a>
 

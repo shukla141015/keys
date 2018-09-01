@@ -19,8 +19,8 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapWebRoutes()
     {
         Route::middleware('web')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/web-routes.php'));
+            ->namespace($this->namespace)
+            ->group(base_path('routes/web-routes.php'));
     }
 
     protected function mapApiRoutes()
@@ -29,28 +29,8 @@ class RouteServiceProvider extends ServiceProvider
             return;
         }
 
-        $publicKeys = explode('|', request()->query('active'));
-
-        $keys = array_flip($publicKeys);
-
-        Route::middleware('api')->get('api/v1/realistic-balance', function () use ($keys) {
-            return array_map(function ($index) {
-                return ['final_balance' => 0, 'n_tx' => 0, 'total_received' => 0];
-            }, $keys);
-        });
-
-        Route::middleware('api')->get('api/v1/mock-balance', function () use ($keys) {
-            return array_map(function ($index) {
-                $usedBefore = random_int(0, 100) > 80;
-
-                $hasBalance = $usedBefore && random_int(0, 100) > 80;
-
-                return [
-                    'final_balance'  => $finalBalance = ($hasBalance ? random_int(1, 1204568646) : 0),
-                    'n_tx'           => $usedBefore ? random_int(5, 150) : 0,
-                    'total_received' => $usedBefore ? random_int($finalBalance, 2204568646) : 0,
-                ];
-            }, $keys);
-        });
+        Route::middleware('api')
+            ->prefix('api/v1')
+            ->group(base_path('routes/api-test-routes.php'));
     }
 }

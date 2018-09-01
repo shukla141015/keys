@@ -9,25 +9,12 @@
 ])
 
 @if(! $isOnFirstPage && ! $isOnLastPage)
-    @push('head')
-        <meta name="robots" content="noindex, nofollow">
-    @endpush
+    @include('helpers.robots-noindex')
 @endif
 
 @section('content')
 
-    <div class="max-w-md mx-auto mt-4">
-        <h1 class="flex flex-col text-base break-words text-center">
-            <span>Bitcoin page</span>
-            <span class="text-sm my-1">{{ $pageNumber }}</span>
-            <span>of</span>
-            <span class="text-sm my-1">{{ $lastPage }}</span>
-        </h1>
-
-        <div class="my-4">
-            @include('components.bitcoin-page-pagination')
-        </div>
-    </div>
+    @include('components.key-page-header', ['routeBase' => 'btcPages', 'coinName' => 'Bitcoin'])
 
     @if($isOnFirstPage || $isOnLastPage)
         <p class="mb-4 max-w-md mx-auto leading-normal text-center">
@@ -57,7 +44,7 @@
             <div class="lg:block flex">
                 <span class="mr-8 lg:mr-4">
                     <a href="https://blockchain.info/address/{{ $key['pub'] }}" rel="nofollow" target="_blank">
-                        <span class="hidden xl:inline-block">{!! str_repeat('&nbsp;', 34 - strlen($key['pub'])) !!}{{ $key['pub'] }}</span>                           {{-- TODO: NEEDS EXTRA PADDING!! --}}
+                        <span class="hidden xl:inline-block">{!! str_repeat('&nbsp;', 34 - strlen($key['pub'])) !!}{{ $key['pub'] }}</span>
                         <span class="xl:hidden inline-block">public key</span>
                     </a>
                 </span>
@@ -74,7 +61,7 @@
     </div>
 
     <div class="mt-8 mb-6">
-        @include('components.bitcoin-page-pagination', ['includeFirstAndLast' => false])
+        @include('components.key-page-pagination', ['routeBase' => 'btcPages', 'includeFirstAndLast' => false])
     </div>
 
 @endsection

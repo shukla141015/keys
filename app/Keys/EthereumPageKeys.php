@@ -2,10 +2,10 @@
 
 namespace App\Keys;
 
-use App\Keys\PageNumbers\BitcoinPageNumber;
+use App\Keys\PageNumbers\EthereumPageNumber;
 use RuntimeException;
 
-class BitcoinPageKeys extends PageKeys
+class EthereumPageKeys extends PageKeys
 {
     protected $pageNumber;
 
@@ -13,7 +13,7 @@ class BitcoinPageKeys extends PageKeys
 
     public function __construct(string $pageNumber)
     {
-        $btcPageNumber = new BitcoinPageNumber($pageNumber);
+        $btcPageNumber = new EthereumPageNumber($pageNumber);
 
         if (! $btcPageNumber->isValid()) {
             throw new RuntimeException('Invalid page number');
@@ -33,17 +33,16 @@ class BitcoinPageKeys extends PageKeys
 
     protected function generateKeys()
     {
-        $output = shell_exec('keys-generator btc '.$this->pageNumber);
+        $output = shell_exec('keys-generator eth '.$this->pageNumber);
 
         $lines = explode("\n", $output);
 
         return array_map(function ($line) {
-            [$wif, $cpub, $pub] = explode(' ', trim($line, '{}'));
+            [$privateKey, $publicKey] = explode(' ', trim($line, '{}'));
 
             return [
-                'wif'  => $wif,
-                'pub'  => $pub,
-                'cpub' => $cpub,
+                'privateKey' => $privateKey,
+                'publicKey' => $publicKey,
             ];
         }, $lines);
     }

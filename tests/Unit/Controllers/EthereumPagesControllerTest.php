@@ -3,7 +3,7 @@
 namespace Tests\Unit\Controllers;
 
 use App\Events\RandomPageGenerated;
-use App\Keys\PageNumbers\BitcoinPageNumber;
+use App\Keys\PageNumbers\EthereumPageNumber;
 use App\Models\BiggestRandomPage;
 use App\Models\CoinStats;
 use App\Models\SmallestRandomPage;
@@ -11,7 +11,7 @@ use App\Support\Enums\CoinType;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class BitcoinPagesControllerTest extends TestCase
+class EthereumPagesControllerTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -26,7 +26,7 @@ class BitcoinPagesControllerTest extends TestCase
     /** @test */
     function it_can_show_the_last_page()
     {
-        $this->getPage(BitcoinPageNumber::lastPageNumber())
+        $this->getPage(EthereumPageNumber::lastPageNumber())
             ->assertStatus(200)
             ->assertDontSee('noindex'); // first page should be indexed by robots.
     }
@@ -36,41 +36,41 @@ class BitcoinPagesControllerTest extends TestCase
     {
         $this->expectsEvents(RandomPageGenerated::class);
 
-        $this->assertSame(0, CoinStats::today(CoinType::BITCOIN)->random_pages_generated);
+        $this->assertSame(0, CoinStats::today(CoinType::ETHEREUM)->random_pages_generated);
 
         $this->followingRedirects()
             ->getRandomPage()
             ->assertStatus(200)
-            ->assertViewIs('btc-page')
+            ->assertViewIs('eth-page')
             ->assertSee('<meta name="robots" content="noindex, nofollow">');
 
-        $this->assertSame(1, CoinStats::today(CoinType::BITCOIN)->random_pages_generated);
+        $this->assertSame(1, CoinStats::today(CoinType::ETHEREUM)->random_pages_generated);
     }
 
     /** @test */
     function you_get_redirected_when_exceeding_the_max_page_number()
     {
         $this->followingRedirects()
-            ->getPage(BitcoinPageNumber::lastPageNumber().'1234')
+            ->getPage(EthereumPageNumber::lastPageNumber().'1234')
             ->assertStatus(200)
-            ->assertViewIs('btc-page-too-big');
+            ->assertViewIs('eth-page-too-big');
     }
 
     /** @test */
     function it_keeps_track_of_page_views_stats()
     {
-        $this->assertSame(0, CoinStats::today(CoinType::BITCOIN)->pages_viewed);
-        $this->assertSame(0, CoinStats::today(CoinType::BITCOIN)->keys_generated);
+        $this->assertSame(0, CoinStats::today(CoinType::ETHEREUM)->pages_viewed);
+        $this->assertSame(0, CoinStats::today(CoinType::ETHEREUM)->keys_generated);
 
         $this->getPage('123456')->assertStatus(200);
 
-        $this->assertSame(1, CoinStats::today(CoinType::BITCOIN)->pages_viewed);
-        $this->assertSame(128, CoinStats::today(CoinType::BITCOIN)->keys_generated);
+        $this->assertSame(1, CoinStats::today(CoinType::ETHEREUM)->pages_viewed);
+        $this->assertSame(128, CoinStats::today(CoinType::ETHEREUM)->keys_generated);
 
-        $this->getPage(BitcoinPageNumber::lastPageNumber())->assertStatus(200);
+        $this->getPage(EthereumPageNumber::lastPageNumber())->assertStatus(200);
 
-        $this->assertSame(2, CoinStats::today(CoinType::BITCOIN)->pages_viewed);
-        $this->assertSame(192, CoinStats::today(CoinType::BITCOIN)->keys_generated);
+        $this->assertSame(2, CoinStats::today(CoinType::ETHEREUM)->pages_viewed);
+        $this->assertSame(224, CoinStats::today(CoinType::ETHEREUM)->keys_generated);
     }
 
     /** @test */
@@ -86,65 +86,65 @@ class BitcoinPagesControllerTest extends TestCase
         $this->assertTrue(strlen($randomNumber) > 10);
 
         $this->assertSame(1, SmallestRandomPage::count());
-        $this->assertSame($randomNumber, SmallestRandomPage::smallest(CoinType::BITCOIN));
+        $this->assertSame($randomNumber, SmallestRandomPage::smallest(CoinType::ETHEREUM));
 
         $this->assertSame(1, BiggestRandomPage::count());
-        $this->assertSame($randomNumber, BiggestRandomPage::biggest(CoinType::BITCOIN));
+        $this->assertSame($randomNumber, BiggestRandomPage::biggest(CoinType::ETHEREUM));
     }
 
     /** @test */
     function it_stores_the_new_smallest_number()
     {
         SmallestRandomPage::create([
-            'coin' => CoinType::BITCOIN,
+            'coin' => CoinType::ETHEREUM,
             'page_number' => '519480938980827735392876',
         ]);
 
         RandomPageGenerated::dispatch(
-            new BitcoinPageNumber('519480938980827735392877')
+            new EthereumPageNumber('519480938980827735392877')
         );
 
         $this->assertSame(1, SmallestRandomPage::count());
 
         RandomPageGenerated::dispatch(
-            new BitcoinPageNumber('99948093898')
+            new EthereumPageNumber('99948093898')
         );
 
         $this->assertSame(2, SmallestRandomPage::count());
 
-        $this->assertSame('99948093898', SmallestRandomPage::smallest(CoinType::BITCOIN));
+        $this->assertSame('99948093898', SmallestRandomPage::smallest(CoinType::ETHEREUM));
     }
 
     /** @test */
     function it_stores_the_new_biggest_number()
     {
         SmallestRandomPage::create([
-            'coin' => CoinType::BITCOIN,
+            'coin' => CoinType::ETHEREUM,
             'page_number' => '519480938980827735392876',
         ]);
 
         RandomPageGenerated::dispatch(
-            new BitcoinPageNumber('519480938980827735392875')
+            new EthereumPageNumber('519480938980827735392875')
         );
 
         $this->assertSame(1, BiggestRandomPage::count());
 
         RandomPageGenerated::dispatch(
-            new BitcoinPageNumber('519480938980827735392877')
+            new EthereumPageNumber('519480938980827735392877')
         );
 
         $this->assertSame(2, BiggestRandomPage::count());
 
-        $this->assertSame('519480938980827735392877', BiggestRandomPage::biggest(CoinType::BITCOIN));
+        $this->assertSame('519480938980827735392877', BiggestRandomPage::biggest(CoinType::ETHEREUM));
     }
 
     private function getPage($number)
     {
-        return $this->get(route('btcPages', $number));
+        return $this->get(route('ethPages', $number));
     }
 
     private function getRandomPage()
     {
-        return $this->get(route('btcPages.random'));
+        return $this->get(route('ethPages.random'));
     }
 }

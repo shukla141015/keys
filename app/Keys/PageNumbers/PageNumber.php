@@ -20,7 +20,34 @@ abstract class PageNumber
         $this->redirectTo = $this->validatePageNumber($pageNumber);
     }
 
-    abstract protected function validatePageNumber($pageNumber): ?RedirectResponse;
+    protected function validatePageNumber($pageNumber): ?RedirectResponse
+    {
+        if ($pageNumber === null) {
+            return redirect()->route(static::$coin.'Pages', 1);
+        }
+
+        if (! preg_match('/^\d+$/', $pageNumber)) {
+            return redirect()->route(static::$coin.'Pages', 1);
+        }
+
+        $actualNumber = ltrim($pageNumber, '0');
+
+        // Redirect if the "pageNumber" was all zeroes
+        if ($actualNumber === '') {
+            return redirect()->route(static::$coin.'Pages', 1);
+        }
+
+        // Redirect zero padded page numbers to non-padded page numbers.
+        if ($actualNumber !== $pageNumber) {
+            return redirect()->route(static::$coin.'Pages', $actualNumber);
+        }
+
+        if ($pageNumber > static::lastPageNumber()) {
+            return redirect()->route(static::$coin.'Pages.pageTooBig');
+        }
+
+        return null;
+    }
 
     public function shouldRedirect()
     {
