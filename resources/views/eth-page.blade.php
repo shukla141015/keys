@@ -31,25 +31,26 @@
     @endif
 
 
-    <div class="max-w-2xl mx-auto">
-    @foreach($keys as $key)
-        <div id="{{ $key['publicKey'] }}" class="wallet loading flex flex-col lg:flex-row font-mono text-sm pl-2">
+    <div class="md:flex justify-center">
+        <div>
+        @foreach($keys as $key)
+            <div id="{{ $key['publicKey'] }}" class="wallet loading flex flex-col lg:flex-row font-mono text-sm pl-2 py-1 lg:py-0">
 
-            <span class="mr-4 inline-block">
-                <strong class="wallet-balance">0 eth</strong>
-                <span class="wallet-tx">(? tx)</span>
-            </span>
+                <span class="mr-0 md:mr-4 inline-block">
+                    <strong class="wallet-balance">0 eth</strong>
 
-            <span class="lg:mr-4 text-xs sm:text-sm break-words">{{ $key['privateKey'] }}</span>
+                    <span class="text-xs sm:text-sm break-words">{{ $key['privateKey'] }}</span>
+                </span>
 
-            <span class="mr-8 lg:mr-4">
-                <a href="https://etherscan.io/address/{{ $key['publicKey'] }}" rel="nofollow" target="_blank">
-                    <span class="hidden xl:inline-block">{{ $key['publicKey'] }}</span>
-                    <span class="xl:hidden inline-block">public key</span>
-                </a>
-            </span>
+                <span class="inline-block">
+                    <a class="break-words text-xs sm:text-sm" href="https://etherscan.io/address/{{ $key['publicKey'] }}" rel="nofollow" target="_blank">
+                        {{ $key['publicKey'] }}
+                    </a>
+                </span>
+
+            </div>
+        @endforeach
         </div>
-    @endforeach
     </div>
 
 
