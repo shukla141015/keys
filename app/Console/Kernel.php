@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Jobs\Diagnostic\SendAdminAlertJob;
 use App\Jobs\GenerateSitemapJob;
 use App\Models\CoinStats;
 use App\Support\Enums\CoinType;
@@ -17,6 +18,8 @@ class Kernel extends ConsoleKernel
         }
 
         $schedule->job(GenerateSitemapJob::class)->dailyAt('1:03');
+
+        $schedule->job(SendAdminAlertJob::class )->dailyAt('17:30');
 
         $schedule->command('backup:run-configless --disable-notifications --only-db --set-destination-disks=dropbox')->weeklyOn(2, '2:11');
     }
