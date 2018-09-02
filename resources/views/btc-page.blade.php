@@ -63,7 +63,7 @@
         </div>
     </div>
 
-    
+
     <div class="mt-8 mb-6">
         @include('components.key-page-pagination', ['routeBase' => 'btcPages', 'includeFirstAndLast' => false])
     </div>
