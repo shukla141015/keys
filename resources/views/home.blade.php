@@ -18,7 +18,7 @@
             <br>
             For most cryptocurrencies, there are (only) 2^256 different private keys.
             The chance of finding a used wallet is small, but it is not impossible.
-            If you have enough time, you can find the private key to any wallet you want, and of course, finders keepers
+            If you have enough time, you can find the private key to any wallet you want, and of course, finders keepers.
             <br>
             <br>
             Page numbers are used to generate private keys.
