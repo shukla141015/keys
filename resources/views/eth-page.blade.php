@@ -58,6 +58,11 @@
         @include('components.key-page-pagination', ['routeBase' => 'ethPages', 'includeFirstAndLast' => false])
     </div>
 
+
+    <div class="mt-8 text-xs text-center">
+        Ethereum balance checker is powered by <a href="https://etherscan.io/" rel="nofollow" target="_blank">Etherscan.io</a>
+    </div>
+
 @endsection
 
 
