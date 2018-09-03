@@ -15,13 +15,13 @@
     @if($isOnFirstPage || $isOnLastPage)
         <p class="mb-4 max-w-md mx-auto leading-normal text-center">
             @if ($isOnFirstPage)
-                This is the first page of ethereum private keys
+                This is the first page of ethereum private keys. There are 128 wallets on this page.
                 <br>
-                This page has 128 private and public keys on it
+                Every row shows a private key and a public key.
             @elseif($isOnLastPage)
-                This is the last page of ethereum private keys
+                This is the last page of ethereum private keys. There are 96 wallets on this page.
                 <br>
-                This page only has 96 private and public keys on it
+                Every row shows a private key and a public key.
             @endif
         </p>
     @endif

@@ -15,13 +15,13 @@
     @if($isOnFirstPage || $isOnLastPage)
         <p class="mb-4 max-w-md mx-auto leading-normal text-center">
             @if ($isOnFirstPage)
-                This is the first page of bitcoin private keys
+                This is the first page of bitcoin private keys. There are 128 wallets on this page.
                 <br>
-                This page has 128 wallets on it
+                Each row shows a private key (WIF), public key and compressed public key.
             @elseif($isOnLastPage)
-                This is the last page of bitcoin private keys
+                This is the last page of bitcoin private keys. There are only 64 wallets on this page.
                 <br>
-                This page only has 64 wallets on it
+                Each row shows a private key (WIF), public key and compressed public key.
             @endif
         </p>
     @endif
