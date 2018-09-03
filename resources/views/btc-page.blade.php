@@ -1,11 +1,7 @@
 @extends('layout.base-template', [
-    'title' => ($isOnFirstPage || $isOnLastPage)
-                  ? ($isOnFirstPage
-                      ? 'First page of bitcoin private keys'
-                      : 'Last page of bitcoin private keys')
-                  : 'Bitcoin private keys'.($isShortNumberString ? ' - page '.$pageNumber : ''),
-
-    'description' => '128 bitcoin private keys with automatic balance checker. Find a fortune on these pages filled with all bitcoin private keys.',
+    'title'       => __($isOnFirstPage ? 'seo.title.btc-first-page'       : ($isOnLastPage ? 'seo.title.btc-last-page'       : 'seo.title.btc-page')),
+    'description' => __($isOnFirstPage ? 'seo.description.btc-first-page' : ($isOnLastPage ? 'seo.description.btc-last-page' : 'seo.description.btc-page')),
+    'keywords'    => __('seo.keywords.btc-page'),
 ])
 
 @if(! $isOnFirstPage && ! $isOnLastPage)

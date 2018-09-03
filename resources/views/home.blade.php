@@ -1,6 +1,7 @@
 @extends('layout.base-template', [
-    'title'       => 'Keys.lol | All cryptocurrency private keys with balance checker',
-    'description' => 'All bitcoin and ethereum private keys. Pages have wallets generated from page numbers with automatic balance checker.',
+    'title'       => __('seo.title.home'),
+    'description' => __('seo.description.home'),
+    'keywords'    => __('seo.keywords.home'),
 ])
 
 @section('content')
@@ -32,7 +33,7 @@
         </p>
 
         <p class="mb-8 text-xl">
-            Try your luck with a <a class="text-black underline" href="{{ route('btcPages.random') }}">page of random Bitcoin private keys</a>
+            Try your luck with a <a class="text-black underline" rel="nofollow" href="{{ route('btcPages.random') }}">page of random Bitcoin private keys</a>
         </p>
 
     </div>

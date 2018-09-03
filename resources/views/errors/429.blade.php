@@ -1,5 +1,5 @@
 @extends('layout.base-template', [
-    'title' => 'Too many requests',
+    'title' => 'Too many requests | Keys.lol',
 ])
 
 @section('content')

@@ -1,5 +1,5 @@
 @extends('layout.base-template', [
-    'title'       => 'You have gone too far',
+    'title'       => 'You have gone too far | Keys.lol',
     'description' => 'There are a lot of bitcoin pages, but not THIS many.',
 ])
 

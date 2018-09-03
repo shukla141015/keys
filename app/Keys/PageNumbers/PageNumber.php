@@ -69,11 +69,6 @@ abstract class PageNumber
         return $this->pageNumber;
     }
 
-    public function isShortNumberString()
-    {
-        return strlen($this->pageNumber) <= 10;
-    }
-
     public static function lastPageNumber()
     {
         static $lastPageNumber = null;

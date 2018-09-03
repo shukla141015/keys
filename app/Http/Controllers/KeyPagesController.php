@@ -32,14 +32,13 @@ abstract class KeyPagesController extends BaseController
         CoinStats::coinPageViewed($this->coinType, count($keys));
 
         return view($this->coinType.'-page', [
-            'pageNumber'          => $pageNumber,
-            'nextPage'            => increment_string($pageNumber),
-            'previousPage'        => decrement_string($pageNumber),
-            'lastPage'            => $this->pageNumber::lastPageNumber(),
-            'isOnFirstPage'       => $pageNumber === '1',
-            'isOnLastPage'        => $pageNumber === $this->pageNumber::lastPageNumber(),
-            'isShortNumberString' => $page->isShortNumberString(),
-            'keys'                => $keys,
+            'pageNumber'    => $pageNumber,
+            'nextPage'      => increment_string($pageNumber),
+            'previousPage'  => decrement_string($pageNumber),
+            'lastPage'      => $this->pageNumber::lastPageNumber(),
+            'isOnFirstPage' => $pageNumber === '1',
+            'isOnLastPage'  => $pageNumber === $this->pageNumber::lastPageNumber(),
+            'keys'          => $keys,
         ]);
     }
 

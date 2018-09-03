@@ -1,5 +1,5 @@
 @extends('layout.base-template', [
-    'title' => 'Page not found',
+    'title' => 'Page not found | Keys.lol',
 ])
 
 @section('content')

@@ -1,11 +1,7 @@
 @extends('layout.base-template', [
-    'title' => ($isOnFirstPage || $isOnLastPage)
-                  ? ($isOnFirstPage
-                      ? 'First page of ethereum private keys'
-                      : 'Last page of ethereum private keys')
-                  : 'Ethereum private keys'.($isShortNumberString ? ' - page '.$pageNumber : ''),
-
-    'description' => '128 ethereum private keys with automatic balance checker. A database of all ethereum private keys.',
+    'title'       => __($isOnFirstPage ? 'seo.title.eth-first-page'       : ($isOnLastPage ? 'seo.title.eth-last-page'       : 'seo.title.eth-page')),
+    'description' => __($isOnFirstPage ? 'seo.description.eth-first-page' : ($isOnLastPage ? 'seo.description.eth-last-page' : 'seo.description.eth-page')),
+    'keywords'    => __('seo.keywords.eth-page'),
 ])
 
 @if(! $isOnFirstPage && ! $isOnLastPage)
