@@ -30,10 +30,7 @@ function loadBalanceForKeys(keys) {
 
     axios.get(apiBaseUrl + addresses).then(response => {
         response.data.result.forEach(account => {
-            addValuesToWallet(
-                account.account,
-                account.balance / 1000000000000000000
-            );
+            addValuesToWallet(account.account, account.balance);
         });
     });
 }
@@ -44,7 +41,7 @@ function addValuesToWallet(publicKey, balance) {
 
     const balanceEl = el.querySelector('.wallet-balance');
 
-    balanceEl.innerHTML = balance.toString().substr(0, 5) + ' eth';
+    balanceEl.innerHTML = (balance / 1000000000000000000).toString().substr(0, 5) + ' eth';
 
     el.classList.remove('loading');
 
