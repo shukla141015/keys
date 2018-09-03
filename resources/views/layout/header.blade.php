@@ -16,13 +16,13 @@
             <span class="h-4 w-4 mr-2 -mt-2">@include('components.svg.ethereum')</span>
         </a>
 
-        <a class="flex items-center text-black p-1 ml-4 sm:ml-6" href="/" title="Litecoin keys">
-            <span class="h-6 w-6 mr-2">@include('components.svg.litecoin')</span>
-        </a>
+        {{--<a class="flex items-center text-black p-1 ml-4 sm:ml-6" href="/" title="Litecoin keys">--}}
+            {{--<span class="h-6 w-6 mr-2">@include('components.svg.litecoin')</span>--}}
+        {{--</a>--}}
 
-        <a class="flex items-center text-black p-1 ml-4 sm:ml-6" href="/" title="Neo keys">
-            <span class="h-6 w-6 mr-2">@include('components.svg.neo')</span>
-        </a>
+        {{--<a class="flex items-center text-black p-1 ml-4 sm:ml-6" href="/" title="Neo keys">--}}
+            {{--<span class="h-6 w-6 mr-2">@include('components.svg.neo')</span>--}}
+        {{--</a>--}}
     </div>
 
 </nav>
