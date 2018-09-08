@@ -2,7 +2,7 @@
 
     <div>
         <a href="/" class="flex items-center text-black font-mono font-bold text-xl">
-            <img class="h-6 mr-2 hidden sm:inline-block" src="/favicon.png" alt="Keys.lol">
+            <img class="h-6 mr-2 inline-block" src="/favicon.png" alt="Keys.lol">
             Keys.lol
         </a>
     </div>
