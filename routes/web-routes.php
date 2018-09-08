@@ -2,6 +2,8 @@
 
 Route::view('/', 'home')->name('home');
 
+Route::view('/about', 'about')->name('about');
+
 Route::get('/bitcoin',                       ['uses' => 'BitcoinPagesController@index',      'as' => 'btcPages.index']);
 Route::get('/bitcoin/random',                ['uses' => 'BitcoinPagesController@randomPage', 'as' => 'btcPages.random']);
 Route::get('/bitcoin/you-have-gone-too-far', ['uses' => 'BitcoinPagesController@pageTooBig', 'as' => 'btcPages.pageTooBig']);
