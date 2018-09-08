@@ -6,6 +6,9 @@ class DatabaseSeeder extends Seeder
 {
     public function run()
     {
-        //
+        $this->call([
+            CoinStatsSeeder::class,
+            RandomPagesSeeder::class,
+        ]);
     }
 }

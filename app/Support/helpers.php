@@ -53,3 +53,57 @@ function decrement_string(string $number)
 
     return ltrim($newNumber, '0') ?: '0';
 }
+
+function string_add(string $a, string $b)
+{
+    if (! preg_match('/^\d+$/', $a) || ! preg_match('/^\d+$/', $b)) {
+        throw new RuntimeException('Can only add two fully numeric strings');
+    }
+
+    $length = max(strlen($a), strlen($b));
+
+    $a = str_split(str_pad($a, $length, '0', STR_PAD_LEFT));
+    $b = str_split(str_pad($b, $length, '0', STR_PAD_LEFT));
+
+    $carry = 0;
+
+    for ($i = $length - 1; $i >= 0; $i--) {
+        $sum = $a[$i] + $b[$i] + $carry;
+
+        $a[$i] = $sum % 10;
+
+        $carry = $sum > 9 ? 1 : 0;
+    }
+
+    return ($carry ? '1' : '').implode('', $a);
+}
+
+function string_subtract(string $a, string $b)
+{
+    if (!preg_match('/^\d+$/', $a) || !preg_match('/^\d+$/', $b)) {
+        throw new \RuntimeException('Can only subtract two fully numeric strings');
+    }
+
+    if ($a === $b) {
+        return '0';
+    }
+
+    if ($a < $b) {
+        throw new \RuntimeException('"$a" should be bigger or equal to "$b"');
+    }
+
+    $a = str_split($a);
+    $b = str_split(str_pad($b, count($a), '0', STR_PAD_LEFT));
+
+    $carry = 0;
+
+    for ($i = count($a) - 1; $i >= 0; $i--) {
+        $sub = $a[$i] - $b[$i] - $carry;
+
+        $a[$i] = ($sub >= 0) ? $sub : 10 - abs($sub);
+
+        $carry = $a[$i] !== $sub ? 1 : 0;
+    }
+
+    return ltrim(implode('', $a), '0');
+}
