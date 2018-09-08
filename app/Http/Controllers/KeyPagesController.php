@@ -18,7 +18,14 @@ abstract class KeyPagesController extends BaseController
     /** @var PageKeys */
     protected $pageKeys;
 
-    public function index($pageNumber = null)
+    public function index()
+    {
+        return view($this->coinType.'-index', [
+            'keysToday' => CoinStats::today($this->coinType)->keys_generated,
+        ]);
+    }
+
+    public function keysPage($pageNumber = null)
     {
         /** @var PageNumber $page */
         $page = new $this->pageNumber($pageNumber);

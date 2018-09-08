@@ -8,11 +8,11 @@
     </div>
 
     <div class="flex items-center justify-between" title="Bitcoin keys">
-        <a class="flex items-center text-black p-1 ml-4 sm:ml-6" href="{{ route('btcPages', 1) }}">
+        <a class="flex items-center text-black p-1 ml-4 sm:ml-6" href="{{ route('btcPages.index') }}">
             <span class="h-6 w-6 mr-2">@include('components.svg.bitcoin')</span>
         </a>
 
-        <a class="flex items-center text-black p-1 ml-4 sm:ml-6" href="{{ route('ethPages', 1) }}" title="Ethereum keys">
+        <a class="flex items-center text-black p-1 ml-4 sm:ml-6" href="{{ route('ethPages.index') }}" title="Ethereum keys">
             <span class="h-4 w-4 mr-2 -mt-2">@include('components.svg.ethereum')</span>
         </a>
 

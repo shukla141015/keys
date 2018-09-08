@@ -16,6 +16,13 @@ class BitcoinPagesControllerTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
+    function it_can_show_the_index()
+    {
+        $this->get(route('btcPages.index'))
+            ->assertStatus(200);
+    }
+
+    /** @test */
     function it_can_show_the_first_page()
     {
         $this->getPage('1')

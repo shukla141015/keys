@@ -15,6 +15,14 @@ class EthereumPagesControllerTest extends TestCase
 {
     use RefreshDatabase;
 
+
+    /** @test */
+    function it_can_show_the_index()
+    {
+        $this->get(route('ethPages.index'))
+            ->assertStatus(200);
+    }
+
     /** @test */
     function it_can_show_the_first_page()
     {
