@@ -22,9 +22,7 @@ function increment_string(string $number)
         }
     }
 
-    return $carry === 1
-        ? '1'.implode('', $numbers)
-        : implode('', $numbers);
+    return ($carry ? '1' : '').implode('', $numbers);
 }
 
 function decrement_string(string $number)
