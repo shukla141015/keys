@@ -1,6 +1,7 @@
 <?php
 
 use Monolog\Handler\StreamHandler;
+use Monolog\Handler\SyslogUdpHandler;
 
 return [
 
@@ -58,6 +59,16 @@ return [
             'emoji' => ':boom:',
             'level' => 'critical',
         ],
+
+//        'papertrail' => [
+//            'driver'  => 'monolog',
+//            'level' => 'debug',
+//            'handler' => SyslogUdpHandler::class,
+//            'handler_with' => [
+//                'host' => env('PAPERTRAIL_URL'),
+//                'port' => env('PAPERTRAIL_PORT'),
+//            ],
+//        ],
 
         'stderr' => [
             'driver' => 'monolog',

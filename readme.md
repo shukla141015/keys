@@ -2,7 +2,7 @@
 Cryptocurrency private keys
 
 ## Laravel version
-[compare to laravel master](https://github.com/laravel/laravel/compare/289b1457317a08813b8998a9a225535926bd90ee...master)
+[compare to laravel master](https://github.com/laravel/laravel/compare/9838f79d2c07c6196afec0363dbabe369e95cc75...master)
 
 ## Installation
 Make sure the [keys generator executable](https://github.com/SjorsO/keys-generator) is available from $PATH.
