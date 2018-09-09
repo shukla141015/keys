@@ -41,13 +41,13 @@
 
                 <div class="lg:block flex">
                     <span class="mr-8 lg:mr-4">
-                        <a href="https://blockchain.info/address/{{ $key['pub'] }}" rel="nofollow" target="_blank">
+                        <a href="https://blockchain.com/address/{{ $key['pub'] }}" rel="nofollow" target="_blank">
                             <span class="hidden xl:inline-block">{!! str_repeat('&nbsp;', 34 - strlen($key['pub'])) !!}{{ $key['pub'] }}</span>
                             <span class="xl:hidden inline-block">public key</span>
                         </a>
                     </span>
                     <span>
-                        <a href="https://blockchain.info/address/{{ $key['cpub'] }}" rel="nofollow" target="_blank">
+                        <a href="https://blockchain.com/address/{{ $key['cpub'] }}" rel="nofollow" target="_blank">
                             <span class="hidden xl:inline-block">{{ $key['cpub'] }}</span>
                             <span class="xl:hidden inline-block">compressed public key</span>
                         </a>
@@ -62,6 +62,11 @@
 
     <div class="mt-8 mb-6">
         @include('components.key-page-pagination', ['routeBase' => 'btcPages', 'includeFirstAndLast' => false])
+    </div>
+
+
+    <div class="mt-8 text-xs text-center">
+        Bitcoin balance checker is powered by <a href="https://blockchain.com/" rel="nofollow" target="_blank">blockchain.com</a>
     </div>
 
 @endsection
