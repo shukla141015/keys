@@ -90,6 +90,24 @@ class HelpersTest extends TestCase
         );
     }
 
+    /** @test */
+    function it_formats_string_numbers()
+    {
+        $this->assertSame(number_format('1'), string_number_format('1'));
+        $this->assertSame(number_format('10'), string_number_format('10'));
+        $this->assertSame(number_format('100'), string_number_format('100'));
+        $this->assertSame(number_format('1000'), string_number_format('1000'));
+        $this->assertSame(number_format('10000'), string_number_format('10000'));
+        $this->assertSame(number_format('100000'), string_number_format('100000'));
+        $this->assertSame(number_format('1000000'), string_number_format('1000000'));
+        $this->assertSame(number_format('10000000'), string_number_format('10000000'));
+        $this->assertSame(number_format('100000000'), string_number_format('100000000'));
+        $this->assertSame(number_format('1000000000'), string_number_format('1000000000'));
+        $this->assertSame(number_format('10000000000'), string_number_format('10000000000'));
+        $this->assertSame(number_format('100000000000'), string_number_format('100000000000'));
+        $this->assertSame('1,000,000,000,000,000,000,000,000,000,000', string_number_format('1000000000000000000000000000000'));
+    }
+
     private function assertStringSum($expected, $a, $b)
     {
         $this->assertSame(

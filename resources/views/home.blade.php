@@ -8,9 +8,7 @@
 
     <div class="max-w-md mx-auto">
 
-        <h1 class="my-4 max-w-md">
-            Every Bitcoin and Ethereum private key is on this website
-        </h1>
+        <h1 class="my-4">Every Bitcoin and Ethereum private key is on this website</h1>
 
         <p class="mb-8 leading-normal">
             <span class="text-xl">Yes, your private keys are somewhere on here too</span>

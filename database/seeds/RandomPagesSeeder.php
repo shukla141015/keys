@@ -12,7 +12,7 @@ class RandomPagesSeeder extends Seeder
 {
     public function run()
     {
-        for ($i = 0; $i < 100000; $i++) {
+        for ($i = 0; $i < 5000; $i++) {
             if ($i % 100 === 0) {
                 $currentSmallestEth = SmallestRandomPage::smallest(CoinType::ETHEREUM);
                 $currentSmallestBtc = SmallestRandomPage::smallest(CoinType::BITCOIN);

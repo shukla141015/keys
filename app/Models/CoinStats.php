@@ -45,4 +45,47 @@ class CoinStats extends Model
                 'keys_generated' => DB::raw("keys_generated + $keysGenerated"),
             ]);
     }
+
+    public static function combine($stats)
+    {
+        $object = new class implements \ArrayAccess {
+            public $random_pages_generated = 0;
+            public $pages_viewed = 0;
+            public $keys_generated = '0';
+
+            public function offsetExists($offset)
+            {
+                return in_array($offset, ['random_pages_generated', 'pages_viewed', 'keys_generated']);
+            }
+
+            public function offsetGet($offset)
+            {
+                if (! $this->offsetExists($offset)) {
+                    throw new \RuntimeException();
+                }
+
+                return $this->{$offset};
+            }
+
+            public function offsetSet($offset, $value)
+            {
+                throw new \RuntimeException();
+            }
+
+            public function offsetUnset($offset)
+            {
+                throw new \RuntimeException();
+            }
+        };
+
+        foreach ($stats as $stat) {
+            $object->random_pages_generated += $stat->random_pages_generated;
+
+            $object->keys_generated += $stat->keys_generated;
+
+            $object->keys_generated = string_add($object->keys_generated, (string) $stat->keys_generated);
+        }
+
+        return $object;
+    }
 }

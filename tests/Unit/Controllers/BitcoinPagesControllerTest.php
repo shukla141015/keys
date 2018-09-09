@@ -23,6 +23,13 @@ class BitcoinPagesControllerTest extends TestCase
     }
 
     /** @test */
+    function it_can_show_stats()
+    {
+        $this->get(route('btcPages.stats'))
+            ->assertStatus(200);
+    }
+
+    /** @test */
     function it_can_show_the_first_page()
     {
         $this->getPage('1')

@@ -80,8 +80,8 @@ function string_add(string $a, string $b)
 
 function string_subtract(string $a, string $b)
 {
-    if (!preg_match('/^\d+$/', $a) || !preg_match('/^\d+$/', $b)) {
-        throw new \RuntimeException('Can only subtract two fully numeric strings');
+    if (! preg_match('/^\d+$/', $a) || ! preg_match('/^\d+$/', $b)) {
+        throw new RuntimeException('Can only subtract two fully numeric strings');
     }
 
     if ($a === $b) {
@@ -89,7 +89,7 @@ function string_subtract(string $a, string $b)
     }
 
     if ($a < $b) {
-        throw new \RuntimeException('"$a" should be bigger or equal to "$b"');
+        throw new RuntimeException('"$a" should be bigger or equal to "$b"');
     }
 
     $a = str_split($a);
@@ -106,4 +106,21 @@ function string_subtract(string $a, string $b)
     }
 
     return ltrim(implode('', $a), '0');
+}
+
+function string_number_format($string)
+{
+    $chars = array_reverse(str_split($string));
+
+    $string = '';
+
+    for ($i = 0; $i < count($chars); $i++) {
+        if ($i && $i % 3 === 0) {
+            $string .= ',';
+        }
+
+        $string .= $chars[$i];
+    }
+
+    return strrev($string);
 }

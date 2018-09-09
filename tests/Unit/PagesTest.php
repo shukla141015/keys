@@ -12,8 +12,9 @@ class PagesTest extends TestCase
     /** @test */
     function pages_work()
     {
+        $this->seed();
+
         $this->get(route('about'))->assertStatus(200);
-        $this->get(route('btcPages.index'))->assertStatus(200);
-        $this->get(route('ethPages.index'))->assertStatus(200);
+        $this->get(route('stats'))->assertStatus(200);
     }
 }

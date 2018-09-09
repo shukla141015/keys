@@ -7,9 +7,7 @@
 
     <div class="max-w-md mx-auto">
 
-        <h1 class="my-4 max-w-md">
-            Ethereum keys
-        </h1>
+        <h1 class="my-4">Ethereum keys</h1>
 
         <p class="text-lg leading-normal mb-4">
             This website contains a sequential database of all 2^256 ethereum private keys, spread out on pages of 128 keys each.
@@ -18,6 +16,10 @@
 
         <p class="mb-8 text-lg">
             Ethereum keys generated today: <span class="text-2xl font-bold">{{ number_format($keysToday) }}</span>
+        </p>
+
+        <p class="mb-8 text-lg">
+            Also take a look at more <a class="text-black underline" href="{{ route('ethPages.stats') }}">ethereum page statistics</a>.
         </p>
 
         <p class="mb-8 text-lg leading-normal">

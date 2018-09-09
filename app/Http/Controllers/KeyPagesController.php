@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Events\RandomPageGenerated;
 use App\Keys\PageKeys;
 use App\Keys\PageNumbers\PageNumber;
+use App\Models\BiggestRandomPage;
 use App\Models\CoinStats;
+use App\Models\SmallestRandomPage;
 use Illuminate\Routing\Controller as BaseController;
 
 abstract class KeyPagesController extends BaseController
@@ -22,6 +24,33 @@ abstract class KeyPagesController extends BaseController
     {
         return view($this->coinType.'-index', [
             'keysToday' => CoinStats::today($this->coinType)->keys_generated,
+        ]);
+    }
+
+    public function stats()
+    {
+        $allTime = CoinStats::whereCoin($this->coinType)->get();
+
+        $dateCurrentMonth = now()->format('-m-');
+
+        $thisMonth = $allTime->filter(function (CoinStats $coinStats) use ($dateCurrentMonth) {
+            return strpos($coinStats->date, $dateCurrentMonth) !== false;
+        });
+
+        $dateLastMonth = now()->startOfMonth()->subDays(1)->format('-m-');
+
+        $lastMonth = $allTime->filter(function (CoinStats $coinStats) use ($dateLastMonth) {
+            return strpos($coinStats->date, $dateLastMonth) !== false;
+        });
+
+        return view($this->coinType.'-stats', [
+            'today'     => $allTime->firstWhere('date', now()->toDateString()) ?? optional(),
+            'thisMonth' => CoinStats::combine($thisMonth),
+            'lastMonth' => CoinStats::combine($lastMonth),
+            'allTime'   => CoinStats::combine($allTime),
+            'smallestPages' => SmallestRandomPage::whereCoin($this->coinType)->orderByDesc('id')->get(),
+            'biggestPages'  => BiggestRandomPage::whereCoin($this->coinType)->orderByDesc('id')->get(),
+            'maxPage' => $this->pageNumber::lastPageNumber(),
         ]);
     }
 
