@@ -41,13 +41,13 @@
 
                 <div class="lg:block flex">
                     <span class="mr-8 lg:mr-4">
-                        <a href="https://blockchain.com/address/{{ $key['pub'] }}" rel="nofollow" target="_blank">
+                        <a href="https://www.blockchain.com/btc/address/{{ $key['pub'] }}" rel="nofollow" target="_blank">
                             <span class="hidden xl:inline-block">{!! str_repeat('&nbsp;', 34 - strlen($key['pub'])) !!}{{ $key['pub'] }}</span>
                             <span class="xl:hidden inline-block">public key</span>
                         </a>
                     </span>
                     <span>
-                        <a href="https://blockchain.com/address/{{ $key['cpub'] }}" rel="nofollow" target="_blank">
+                        <a href="https://www.blockchain.com/btc/address/{{ $key['cpub'] }}" rel="nofollow" target="_blank">
                             <span class="hidden xl:inline-block">{{ $key['cpub'] }}</span>
                             <span class="xl:hidden inline-block">compressed public key</span>
                         </a>
