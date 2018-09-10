@@ -25,8 +25,9 @@ class BiggestRandomPage extends Model
         return static::query()
             ->select('coin', 'page_number', 'created_at')
             ->where('coin', $coinType)
-            ->orderByDesc('page_number')
-            ->get();
+            ->get()
+            ->sortByDesc('page_number')
+            ->values();
     }
 
     public static function listForAllCoins(): Collection

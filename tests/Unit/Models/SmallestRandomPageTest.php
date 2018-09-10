@@ -14,10 +14,11 @@ class SmallestRandomPageTest extends TestCase
     /** @test */
     function it_lists_smallest_random_pages_for_a_specific_coin()
     {
-        $this->createSmallestRandomPage(CoinType::BITCOIN,  '2018-01-01 12:00:00', '2000');
-        $this->createSmallestRandomPage(CoinType::ETHEREUM, '2018-01-01 13:00:00', '1500');
-        $this->createSmallestRandomPage(CoinType::BITCOIN,  '2018-01-01 14:00:00', '1750');
-        $this->createSmallestRandomPage(CoinType::BITCOIN,  '2018-01-01 14:00:00', '1500'); // same timestamp, wrong order
+        $this->createSmallestRandomPage(CoinType::BITCOIN,  '2018-01-01 12:00:00', '129167182412113078264578878358415493192234440125820083044022746837078656714');
+        $this->createSmallestRandomPage(CoinType::ETHEREUM, '2018-01-01 13:00:00', '26604748956824335586991504766000556433843609561099762271114670491157758127');
+        $this->createSmallestRandomPage(CoinType::BITCOIN,  '2018-01-01 14:00:00', '147177945788279615438618196920904662741326648432603055013699237916865605');
+        // same timestamp, wrong order
+        $this->createSmallestRandomPage(CoinType::BITCOIN,  '2018-01-01 14:00:00', '10642809896122618337985045895423291139736629195921279261055765675170133');
 
         $items = SmallestRandomPage::listForCoin(CoinType::BITCOIN)
             ->pluck('created_at', 'page_number')
@@ -27,9 +28,9 @@ class SmallestRandomPageTest extends TestCase
             ->all();
 
         $this->assertSame([
-            '1500' => '2018-01-01 14:00:00',
-            '1750' => '2018-01-01 14:00:00',
-            '2000' => '2018-01-01 12:00:00',
+            '10642809896122618337985045895423291139736629195921279261055765675170133'     => '2018-01-01 14:00:00',
+            '147177945788279615438618196920904662741326648432603055013699237916865605'    => '2018-01-01 14:00:00',
+            '129167182412113078264578878358415493192234440125820083044022746837078656714' => '2018-01-01 12:00:00',
         ], $items);
     }
 

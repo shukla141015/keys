@@ -26,8 +26,9 @@ class SmallestRandomPage extends Model
         return static::query()
             ->select('coin', 'page_number', 'created_at')
             ->where('coin', $coinType)
-            ->orderBy('page_number')
-            ->get();
+            ->get()
+            ->sortBy('page_number')
+            ->values();
     }
 
     public static function listForAllCoins(): Collection

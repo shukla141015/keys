@@ -14,10 +14,11 @@ class BiggestRandomPageTest extends TestCase
     /** @test */
     function it_lists_biggest_random_pages_for_a_specific_coin()
     {
-        $this->createBiggestRandomPage(CoinType::BITCOIN,  '2018-01-01 12:00:00', '1000');
-        $this->createBiggestRandomPage(CoinType::ETHEREUM, '2018-01-01 13:00:00', '1500');
-        $this->createBiggestRandomPage(CoinType::BITCOIN,  '2018-01-01 14:00:00', '2500');
-        $this->createBiggestRandomPage(CoinType::BITCOIN,  '2018-01-01 14:00:00', '2000'); // same timestamp, wrong order
+        $this->createBiggestRandomPage(CoinType::BITCOIN,  '2018-01-01 12:00:00', '99916718241211307826457887835841549319223444012582008304402274683707865671');
+        $this->createBiggestRandomPage(CoinType::ETHEREUM, '2018-01-01 13:00:00', '831819178785726248979627538912021612840582170985345766165857281065308541145');
+        $this->createBiggestRandomPage(CoinType::BITCOIN,  '2018-01-01 14:00:00', '903326393602156668344583461865451751912456495831832219170333135812704246272');
+        // same timestamp, wrong order
+        $this->createBiggestRandomPage(CoinType::BITCOIN,  '2018-01-01 14:00:00', '904573561558801267051898257783183763248483346862751527557005378054800771066');
 
         $items = BiggestRandomPage::listForCoin(CoinType::BITCOIN)
             ->pluck('created_at', 'page_number')
@@ -27,9 +28,9 @@ class BiggestRandomPageTest extends TestCase
             ->all();
 
         $this->assertSame([
-            '2500' => '2018-01-01 14:00:00',
-            '2000' => '2018-01-01 14:00:00',
-            '1000' => '2018-01-01 12:00:00',
+            '904573561558801267051898257783183763248483346862751527557005378054800771066' => '2018-01-01 14:00:00',
+            '903326393602156668344583461865451751912456495831832219170333135812704246272' => '2018-01-01 14:00:00',
+            '99916718241211307826457887835841549319223444012582008304402274683707865671'  => '2018-01-01 12:00:00',
         ], $items);
     }
 
