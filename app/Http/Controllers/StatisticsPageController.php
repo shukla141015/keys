@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Keys\PageNumbers\BitcoinPageNumber;
+use App\Keys\PageNumbers\PageNumber;
 use App\Models\BiggestRandomPage;
 use App\Models\CoinStats;
 use App\Models\SmallestRandomPage;
@@ -33,69 +33,9 @@ class StatisticsPageController extends BaseController
             'thisMonth' => CoinStats::combine($thisMonth),
             'lastMonth' => CoinStats::combine($lastMonth),
             'allTime'   => CoinStats::combine($allTime),
-            'smallestPages' => $this->smallestPages(),
-            'biggestPages'  => $this->biggestPages(),
-            'maxPage' => BitcoinPageNumber::lastPageNumber(),
+            'smallestPages' => SmallestRandomPage::listForAllCoins(),
+            'biggestPages'  => BiggestRandomPage::listForAllCoins(),
+            'maxPage' => PageNumber::lastPageNumber(),
         ]);
-    }
-
-    protected function smallestPages()
-    {
-        $smallestPages = SmallestRandomPage::query()
-            ->select('coin', 'page_number', 'created_at')
-            ->get()
-            ->sort(function ($a, $b) {
-                // sort big to small
-                return $b->page_number <=> $a->page_number;
-            })
-            ->all();
-
-        if (! $smallestPages) {
-            return [];
-        }
-
-        $currentSmallest = BitcoinPageNumber::lastPageNumber();
-
-        $filtered = [];
-
-        foreach ($smallestPages as $smallestPage) {
-            if ($smallestPage->page_number < $currentSmallest) {
-                $filtered[] = $smallestPage;
-
-                $currentSmallest = $smallestPage->page_number;
-            }
-        }
-
-        return array_reverse($filtered);
-    }
-
-    protected function biggestPages()
-    {
-        $biggestPages = BiggestRandomPage::query()
-            ->select('coin', 'page_number', 'created_at')
-            ->get()
-            ->sort(function ($a, $b) {
-                // sort small to big
-                return $a->page_number <=> $b->page_number;
-            })
-            ->all();
-
-        if (! $biggestPages) {
-            return [];
-        }
-
-        $currentBiggest = '0';
-
-        $filtered = [];
-
-        foreach ($biggestPages as $biggestPage) {
-            if ($biggestPage->page_number > $currentBiggest) {
-                $filtered[] = $biggestPage;
-
-                $currentBiggest = $biggestPage->page_number;
-            }
-        }
-
-        return array_reverse($filtered);
     }
 }

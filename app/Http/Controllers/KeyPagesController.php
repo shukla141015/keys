@@ -48,8 +48,8 @@ abstract class KeyPagesController extends BaseController
             'thisMonth' => CoinStats::combine($thisMonth),
             'lastMonth' => CoinStats::combine($lastMonth),
             'allTime'   => CoinStats::combine($allTime),
-            'smallestPages' => SmallestRandomPage::whereCoin($this->coinType)->orderByDesc('id')->get(),
-            'biggestPages'  => BiggestRandomPage::whereCoin($this->coinType)->orderByDesc('id')->get(),
+            'smallestPages' => SmallestRandomPage::listForCoin($this->coinType),
+            'biggestPages'  => BiggestRandomPage::listForCoin($this->coinType),
             'maxPage' => $this->pageNumber::lastPageNumber(),
         ]);
     }

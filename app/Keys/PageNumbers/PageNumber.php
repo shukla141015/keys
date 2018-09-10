@@ -6,7 +6,7 @@ use Illuminate\Http\RedirectResponse;
 
 abstract class PageNumber
 {
-    public static $coin = null;
+    public static $coin = '*';
 
     protected $redirectTo;
 
