@@ -81,7 +81,7 @@ class CoinStats extends Model
         foreach ($stats as $stat) {
             $object->random_pages_generated += $stat->random_pages_generated;
 
-            $object->keys_generated += $stat->keys_generated;
+            $object->pages_viewed += $stat->pages_viewed;
 
             $object->keys_generated = string_add($object->keys_generated, (string) $stat->keys_generated);
         }
