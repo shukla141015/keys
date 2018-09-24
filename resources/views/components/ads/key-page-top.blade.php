@@ -1,7 +1,7 @@
 <div class="mb-4" style="height: 100px;">
     @if(App::environment('production'))
         <ins class="adsbygoogle"
-             style="display:block"
+             style="display:inline-block"
              data-ad-client="ca-pub-8027891891391991"
              data-ad-slot="6714715571"
              data-ad-format="horizontal"
