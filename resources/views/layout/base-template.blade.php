@@ -22,6 +22,8 @@
     <link rel="stylesheet" type="text/css" href="{{ mix('css/main.css') }}" />
 
     @if(App::environment('production'))
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-85344990-4"></script>
         <script>
             window.dataLayer = window.dataLayer || [];

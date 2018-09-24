@@ -27,6 +27,9 @@
     @endif
 
 
+    @include('components.ads.key-page-top')
+
+
     <div class="md:flex justify-center">
         <div>
         @foreach($keys as $key)
@@ -53,6 +56,9 @@
     <div class="mt-8 mb-6">
         @include('components.key-page-pagination', ['routeBase' => 'ethPages', 'includeFirstAndLast' => false])
     </div>
+
+
+    @include('components.ads.key-page-bottom')
 
 
     <div class="mt-8 text-xs text-center">

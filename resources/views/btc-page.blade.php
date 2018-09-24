@@ -27,6 +27,9 @@
     @endif
 
 
+    @include('components.ads.key-page-top')
+
+
     <div class="sm:flex justify-center">
         <div class="mx-auto">
         @foreach($keys as $key)
@@ -63,6 +66,9 @@
     <div class="mt-8 mb-6">
         @include('components.key-page-pagination', ['routeBase' => 'btcPages', 'includeFirstAndLast' => false])
     </div>
+
+
+    @include('components.ads.key-page-bottom')
 
 
     <div class="mt-8 text-xs text-center">
