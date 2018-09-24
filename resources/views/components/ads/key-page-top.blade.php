@@ -1,6 +1,6 @@
 @if(App::environment('production'))
     <ins class="adsbygoogle mb-4"
-         style="display:block"
+         style="display:block; height: 100px;"
          data-ad-client="ca-pub-8027891891391991"
          data-ad-slot="6714715571"
          data-ad-format="horizontal"
