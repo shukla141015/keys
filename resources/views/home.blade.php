@@ -33,9 +33,15 @@
 
         <p class="mb-8 text-xl">
             Try your luck with
-            <a class="text-black underline" rel="nofollow" href="{{ route('btcPages.random') }}">random Bitcoin keys</a>
+            <a class="text-black" rel="nofollow" href="{{ route('btcPages.random') }}">
+                <span class="inline-block w-6">@include('components.svg.random')</span>
+                <span class="underline">random Bitcoin keys</span>
+            </a>
             or
-            <a class="text-black underline" rel="nofollow" href="{{ route('ethPages.random') }}">random Ethereum keys</a>
+            <a class="text-black underline" rel="nofollow" href="{{ route('ethPages.random') }}">
+                <span class="inline-block w-6">@include('components.svg.random')</span>
+                <span class="underline">random Ethereum keys</span>
+            </a>
         </p>
 
     </div>
