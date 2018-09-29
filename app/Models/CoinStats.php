@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
 class CoinStats extends Model
@@ -46,46 +47,12 @@ class CoinStats extends Model
             ]);
     }
 
-    public static function combine($stats)
+    public static function combine(Collection $stats)
     {
-        $object = new class implements \ArrayAccess {
-            public $random_pages_generated = 0;
-            public $pages_viewed = 0;
-            public $keys_generated = '0';
-
-            public function offsetExists($offset)
-            {
-                return in_array($offset, ['random_pages_generated', 'pages_viewed', 'keys_generated']);
-            }
-
-            public function offsetGet($offset)
-            {
-                if (! $this->offsetExists($offset)) {
-                    throw new \RuntimeException();
-                }
-
-                return $this->{$offset};
-            }
-
-            public function offsetSet($offset, $value)
-            {
-                throw new \RuntimeException();
-            }
-
-            public function offsetUnset($offset)
-            {
-                throw new \RuntimeException();
-            }
-        };
-
-        foreach ($stats as $stat) {
-            $object->random_pages_generated += $stat->random_pages_generated;
-
-            $object->pages_viewed += $stat->pages_viewed;
-
-            $object->keys_generated = string_add($object->keys_generated, (string) $stat->keys_generated);
-        }
-
-        return $object;
+        return (object) [
+            'random_pages_generated' => $stats->sum->random_pages_generated,
+            'pages_viewed'           => $stats->sum->pages_viewed,
+            'keys_generated'         => $stats->sum->keys_generated,
+        ];
     }
 }
