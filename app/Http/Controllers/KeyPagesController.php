@@ -8,9 +8,8 @@ use App\Keys\PageNumbers\PageNumber;
 use App\Models\BiggestRandomPage;
 use App\Models\CoinStats;
 use App\Models\SmallestRandomPage;
-use Illuminate\Routing\Controller as BaseController;
 
-abstract class KeyPagesController extends BaseController
+abstract class KeyPagesController
 {
     protected $coinType;
 

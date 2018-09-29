@@ -6,9 +6,8 @@ use App\Keys\PageNumbers\PageNumber;
 use App\Models\BiggestRandomPage;
 use App\Models\CoinStats;
 use App\Models\SmallestRandomPage;
-use Illuminate\Routing\Controller as BaseController;
 
-class StatisticsPageController extends BaseController
+class StatisticsPageController
 {
     public function __invoke()
     {
