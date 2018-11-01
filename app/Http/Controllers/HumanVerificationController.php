@@ -13,9 +13,11 @@ class HumanVerificationController
 
     public function post()
     {
-        Human::create([
-            'session_id' => session()->getId(),
-        ]);
+        $sessionId = session()->getId();
+
+        if (! Human::isReal($sessionId)) {
+            Human::create(['session_id' => $sessionId]);
+        }
 
         $redirectUrl = session()->pull('human-redirect') ?: route('home');
 
