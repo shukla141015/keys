@@ -6,6 +6,9 @@ Route::view('/about', 'about')->name('about');
 
 Route::get('/statistics', 'StatisticsPageController')->name('stats');
 
+Route::get('/are-you-human',  ['uses' => 'HumanVerificationController@index', 'as' => 'humanVerification']);
+Route::post('/are-you-human', ['uses' => 'HumanVerificationController@post',  'as' => 'humanVerification.post']);
+
 Route::get('/bitcoin',                       ['uses' => 'BitcoinPagesController@index',      'as' => 'btcPages.index']);
 Route::get('/bitcoin/random',                ['uses' => 'BitcoinPagesController@randomPage', 'as' => 'btcPages.random']);
 Route::get('/bitcoin/statistics',            ['uses' => 'BitcoinPagesController@stats',      'as' => 'btcPages.stats']);
