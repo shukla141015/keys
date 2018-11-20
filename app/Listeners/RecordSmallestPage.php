@@ -9,6 +9,10 @@ class RecordSmallestPage
 {
     public function handle(RandomPageGenerated $event)
     {
+        if (! $this->shouldCompareWithDatabase($event)) {
+            return;
+        }
+
         $currentSmallest = SmallestRandomPage::smallest($event->coin);
 
         if ($event->pageNumber < $currentSmallest) {
@@ -17,5 +21,14 @@ class RecordSmallestPage
                 'page_number' => $event->pageNumber,
             ]);
         }
+    }
+
+    private function shouldCompareWithDatabase($event)
+    {
+        if (! config('keys.enable_page_number_hardcoded_check')) {
+            return true;
+        }
+
+        return starts_with($event->pageNumber, '000000');
     }
 }

@@ -9,6 +9,10 @@ class RecordBiggestPage
 {
     public function handle(RandomPageGenerated $event)
     {
+        if (! $this->shouldCompareWithDatabase($event)) {
+            return;
+        }
+
         $currentBiggest = BiggestRandomPage::biggest($event->coin);
 
         if ($event->pageNumber > $currentBiggest) {
@@ -17,5 +21,14 @@ class RecordBiggestPage
                 'page_number' => $event->pageNumber,
             ]);
         }
+    }
+
+    private function shouldCompareWithDatabase($event)
+    {
+        if (! config('keys.enable_page_number_hardcoded_check')) {
+            return true;
+        }
+
+        return starts_with($event->pageNumber, '904625');
     }
 }
