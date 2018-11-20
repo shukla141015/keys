@@ -29,6 +29,6 @@ class RecordSmallestPage
             return true;
         }
 
-        return starts_with($event->pageNumber, '000000');
+        return starts_with($event->pageNumber, '00000');
     }
 }
