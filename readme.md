@@ -8,7 +8,7 @@ Cryptocurrency private keys
 Make sure the [keys generator executable](https://github.com/SjorsO/keys-generator) is available from $PATH.
 
 ```bash
-cp .env.examle .env
+cp .env.example .env
 
 composer install
 
