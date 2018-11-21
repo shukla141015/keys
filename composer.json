@@ -12,6 +12,7 @@
         "laravel/tinker": "^1.0",
         "sjorso/configless-laravel-backup": "^0.0.1",
         "sjorso/enum": "^1.0",
+        "sjorso/gobble": "^1.2",
         "spatie/flysystem-dropbox": "^1.0",
         "spatie/laravel-sitemap": "^5.0"
     },

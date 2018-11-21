@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Human;
+use Illuminate\Http\Request;
+use SjorsO\Gobble\Facades\Gobble;
 
 class HumanVerificationController
 {
@@ -11,8 +13,24 @@ class HumanVerificationController
         return view('human-verification');
     }
 
-    public function post()
+    public function post(Request $request)
     {
+        $request->validate([
+            'g-recaptcha-response' => 'required|string',
+        ]);
+
+        $response = Gobble::post('https://www.google.com/recaptcha/api/siteverify', ['query' => [
+            'secret' => config('keys.recaptcha_secret_key'),
+            'response' => $request->get('g-recaptcha-response'),
+            'remoteip' => $request->getClientIp(),
+        ]]);
+
+        $success = strpos($response->getBody()->getContents(), '"success": true') !== false;
+
+        if (! $success) {
+            return back();
+        }
+
         $sessionId = session()->getId();
 
         if (! Human::isReal($sessionId)) {

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "adf28a43cb9cfb2b2e059aa268ed638f",
+    "content-hash": "5a014131e644b4ea91a5614d056eef02",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1993,6 +1993,68 @@
                 "laravel"
             ],
             "time": "2018-07-27T17:52:14+00:00"
+        },
+        {
+            "name": "sjorso/gobble",
+            "version": "1.2.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SjorsO/gobble.git",
+                "reference": "5938efd695024353ab3692f38fbe576a23fea477"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SjorsO/gobble/zipball/5938efd695024353ab3692f38fbe576a23fea477",
+                "reference": "5938efd695024353ab3692f38fbe576a23fea477",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.3",
+                "illuminate/container": "~5.5.0|~5.6.0|~5.7.0",
+                "illuminate/support": "~5.5.0|~5.6.0|~5.7.0",
+                "php": "^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "SjorsO\\Gobble\\Providers\\GobbleProvider"
+                    ],
+                    "aliases": {
+                        "Gobble": "SjorsO\\Gobble\\Facades\\Gobble"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SjorsO\\Gobble\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sjors Ottjes",
+                    "email": "sjorsottjes@gmail.com"
+                }
+            ],
+            "description": "A Laravel specific wrapper around Guzzle that makes it easy to mock responses",
+            "homepage": "https://github.com/SjorsO/gobble",
+            "keywords": [
+                "Guzzle",
+                "facade",
+                "fake",
+                "gobble",
+                "laravel",
+                "mock",
+                "testing"
+            ],
+            "time": "2018-10-31T10:38:29+00:00"
         },
         {
             "name": "spatie/browsershot",

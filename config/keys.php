@@ -18,4 +18,7 @@ return [
 
     'enable_page_number_hardcoded_check' => env('KEYS_ENABLE_PAGE_NUMBER_HARDCODED_CHECK', false),
 
+    'recaptcha_site_key' => env('RECAPTCHA_V2_SITE_KEY'),
+    'recaptcha_secret_key' => env('RECAPTCHA_V2_SECRET_KEY'),
+
 ];

@@ -2,6 +2,10 @@
     'title' => 'Are you human? | Keys.lol',
 ])
 
+@push('head')
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+@endpush
+
 @section('content')
 
     <div class="mt-16 max-w-xs mx-auto text-center">
@@ -18,7 +22,11 @@
         <form method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
 
-            <button class="btn">Yes, i am human</button>
+            <div class="inline-block mx-auto">
+                <div class="g-recaptcha" data-sitekey="{{ config('keys.recaptcha_site_key') }}"></div>
+            </div>
+
+            <button class="btn mt-8">Yes, i am human</button>
         </form>
 
     </div>
