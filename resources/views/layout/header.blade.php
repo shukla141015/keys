@@ -36,3 +36,7 @@
         @include('components.svg.ethereum')
     </span>
 @endif
+
+<div id="adblock-banner" style="display: none;" class="bg-red-light text-white text-center mx-auto max-w-md rounded py-2 px-4 my-2">
+    If the balance of the wallets is not being checked, try disabling your adblocker
+</div>
