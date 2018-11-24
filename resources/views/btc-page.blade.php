@@ -27,6 +27,9 @@
     @endif
 
 
+    @include('components.ads.key-page-top')
+
+
     <div class="sm:flex justify-center">
         <div class="mx-auto">
         @foreach($keys as $key)
