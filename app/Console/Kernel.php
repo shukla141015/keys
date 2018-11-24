@@ -15,6 +15,9 @@ class Kernel extends ConsoleKernel
     {
         foreach (CoinType::all() as $coin) {
             $schedule->call([CoinStats::class, 'today'], [$coin])->twiceDaily();
+            $schedule->call([CoinStats::class, 'today'], [$coin])->at('00:00');
+            $schedule->call([CoinStats::class, 'today'], [$coin])->at('00:01');
+            $schedule->call([CoinStats::class, 'today'], [$coin])->at('00:02');
         }
 
         $schedule->job(GenerateSitemapJob::class)->dailyAt('1:03');

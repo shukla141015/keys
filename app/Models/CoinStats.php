@@ -13,9 +13,9 @@ class CoinStats extends Model
     public $timestamps = false;
 
     protected $casts = [
-        'random_pages_generated' => 'integer',
-        'pages_viewed'           => 'integer',
-        'keys_generated'         => 'integer',
+        'random_pages_generated' => 'int',
+        'pages_viewed' => 'int',
+        'keys_generated' => 'int',
     ];
 
     public static function today($coin)
@@ -25,34 +25,60 @@ class CoinStats extends Model
             'coin' => $coin,
         ], [
             'random_pages_generated' => 0,
-            'pages_viewed'           => 0,
-            'keys_generated'         => 0,
+            'pages_viewed' => 0,
+            'keys_generated' => 0,
         ]);
     }
 
     public static function randomPageGenerated($coin)
     {
-        static::today($coin)->increment('random_pages_generated');
+        if (static::maybeNoModelYet()) {
+            static::today($coin);
+        }
+
+        static::where([
+                'date' => now()->format('Y-m-d'),
+                'coin' => $coin,
+            ])
+            ->increment('random_pages_generated');
     }
 
     public static function coinPageViewed($coin, int $keysGenerated)
     {
-        $today = static::today($coin);
+        if (static::maybeNoModelYet()) {
+            static::today($coin);
+        }
 
         DB::table('coin_stats')
-            ->where('id', $today->id)
+            ->where([
+                'date' => now()->format('Y-m-d'),
+                'coin' => $coin,
+            ])
             ->update([
                 'pages_viewed'   => DB::raw('pages_viewed + 1'),
                 'keys_generated' => DB::raw("keys_generated + $keysGenerated"),
             ]);
     }
 
+    /**
+     * To prevent a database query per request, only create the CoinStats model
+     * in the first few minutes of the day.
+     *
+     * The cron should create the model when a new day starts.
+     *
+     * @return bool
+     */
+    private static function maybeNoModelYet()
+    {
+        return in_array(now()->format('H:i'), ['00:00', '00:01', '00:02']);
+    }
+
     public static function combine(Collection $stats)
     {
         return (object) [
             'random_pages_generated' => $stats->sum->random_pages_generated,
-            'pages_viewed'           => $stats->sum->pages_viewed,
-            'keys_generated'         => $stats->sum->keys_generated,
+            'pages_viewed' => $stats->sum->pages_viewed,
+            'keys_generated' => $stats->sum->keys_generated,
         ];
     }
 }

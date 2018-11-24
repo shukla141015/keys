@@ -3,6 +3,8 @@
 namespace Tests\Unit\Models;
 
 use App\Models\CoinStats;
+use App\Support\Enums\CoinType;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -56,5 +58,38 @@ class CoinStatsTest extends TestCase
         $this->assertSame(0, $combined->random_pages_generated);
         $this->assertSame(0, $combined->pages_viewed);
         $this->assertSame(0, $combined->keys_generated);
+    }
+
+    /** @test */
+    function it_creates_a_model_when_there_might_not_be_one()
+    {
+        Carbon::setTestNow('2018-05-15 00:30');
+
+        $this->assertSame(0, CoinStats::count());
+
+        // It doesn't create a model because there should already be one.
+        CoinStats::randomPageGenerated(CoinType::BITCOIN);
+        $this->assertSame(0, CoinStats::count());
+
+        // There might not be a model, so it creates one
+        Carbon::setTestNow('2018-05-15 00:00');
+        CoinStats::randomPageGenerated(CoinType::BITCOIN);
+        $this->assertSame(1, CoinStats::count());
+
+        CoinStats::query()->delete();
+        $this->assertSame(0, CoinStats::count());
+
+        Carbon::setTestNow('2018-05-15 00:00');
+        CoinStats::coinPageViewed(CoinType::BITCOIN, 128);
+        $this->assertSame(1, CoinStats::count());
+
+        //
+        //
+
+        CoinStats::query()->delete();
+
+        Carbon::setTestNow('2018-05-16 00:01');
+        CoinStats::randomPageGenerated(CoinType::BITCOIN);
+        $this->assertSame(1, CoinStats::count());
     }
 }
