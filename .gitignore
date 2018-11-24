@@ -3,6 +3,7 @@
 /public/storage
 /public/sitemap.xml
 /storage/*.key
+/storage/debugbar
 /vendor
 /.idea
 /.vagrant
