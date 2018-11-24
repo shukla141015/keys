@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Human;
+use App\Support\Facades\Human;
 use Illuminate\Http\Request;
 use SjorsO\Gobble\Facades\Gobble;
 
@@ -31,14 +31,10 @@ class HumanVerificationController
             return back();
         }
 
-        $sessionId = session()->getId();
+        Human::verifyCurrentUser();
 
-        if (! Human::isReal($sessionId)) {
-            Human::create(['session_id' => $sessionId]);
-        }
-
-        $redirectUrl = session()->pull('human-redirect') ?: route('home');
-
-        return redirect($redirectUrl);
+        return redirect(
+            Human::pullRedirectUrl()
+        );
     }
 }

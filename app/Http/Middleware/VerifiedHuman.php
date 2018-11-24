@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Human;
+use App\Support\Facades\Human;
 use Closure;
 
 class VerifiedHuman
@@ -13,7 +13,7 @@ class VerifiedHuman
             return $next($request);
         }
 
-        session()->put('human-redirect', $request->url());
+        Human::putRedirectUrl($request->url());
 
         return redirect()->route('humanVerification');
     }
