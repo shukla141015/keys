@@ -10,6 +10,8 @@ Route::get('/are-you-human',  ['uses' => 'HumanVerificationController@index', 'a
 Route::post('/are-you-human', ['uses' => 'HumanVerificationController@post',  'as' => 'humanVerification.post']);
 
 Route::get('/bitcoin',                       ['uses' => 'BitcoinPagesController@index',      'as' => 'btcPages.index']);
+Route::get('/bitcoin/search',                ['uses' => 'BitcoinPagesController@showSearch', 'as' => 'btcPages.search']);
+Route::post('/bitcoin/search',               ['uses' => 'BitcoinPagesController@search',     'as' => 'btcPages.search']);
 Route::get('/bitcoin/random',                ['uses' => 'BitcoinPagesController@randomPage', 'as' => 'btcPages.random']);
 Route::get('/bitcoin/statistics',            ['uses' => 'BitcoinPagesController@stats',      'as' => 'btcPages.stats']);
 Route::get('/bitcoin/you-have-gone-too-far', ['uses' => 'BitcoinPagesController@pageTooBig', 'as' => 'btcPages.pageTooBig']);

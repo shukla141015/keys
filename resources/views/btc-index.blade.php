@@ -35,6 +35,9 @@
             <a class="text-black underline" rel="nofollow" href="{{ route('btcPages.random') }}">random page</a>
         </p>
 
+
+        <a class="text-black underline" rel="nofollow" href="{{ route('btcPages.search') }}">search</a>
+
     </div>
 
 @endsection

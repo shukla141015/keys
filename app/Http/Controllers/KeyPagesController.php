@@ -32,11 +32,35 @@ abstract class KeyPagesController extends Controller
     /** @var PageKeys */
     protected $pageKeys;
 
+    protected $privateKeyRule;
+
+    protected $coinSearch;
+
     public function index()
     {
         return view($this->coinType.'-index', [
             'keysToday' => CoinStats::today($this->coinType)->keys_generated,
         ]);
+    }
+
+    public function showSearch()
+    {
+        return view($this->coinType.'-search');
+    }
+
+    public function search(Request $request)
+    {
+        $request->validate([
+            'private_key' => ['required', 'string', new $this->privateKeyRule],
+        ]);
+
+        $pk = $request->get('private_key');
+
+        $search = new $this->coinSearch($pk);
+
+        return $search->valid()
+            ? redirect()->route($this->coinType.'Pages', $search->pageNumber())
+            : back()->withInput()->withErrors(['private_key' => 'error']);
     }
 
     public function stats()
