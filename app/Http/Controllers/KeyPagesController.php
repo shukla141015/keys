@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\RandomPageGenerated;
 use App\Keys\PageKeys;
 use App\Keys\PageNumbers\PageNumber;
+use App\Keys\Search\CoinSearch;
 use App\Models\BiggestRandomPage;
 use App\Models\CoinStats;
 use App\Models\SmallestRandomPage;
@@ -56,6 +57,7 @@ abstract class KeyPagesController extends Controller
 
         $pk = $request->get('private_key');
 
+        /** @var CoinSearch $search */
         $search = new $this->coinSearch($pk);
 
         return $search->valid()

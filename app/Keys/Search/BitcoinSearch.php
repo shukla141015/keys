@@ -1,14 +1,11 @@
 <?php
 
-namespace App\Keys;
+namespace App\Keys\Search;
 
 use App\Http\Rules\ValidBitcoinWif;
-use RuntimeException;
 
-class BitcoinSearch
+class BitcoinSearch extends CoinSearch
 {
-    private $pageNumber;
-
     public function __construct(string $wif)
     {
         $validWif = (new ValidBitcoinWif)->passes('wif', $wif);
@@ -22,19 +19,5 @@ class BitcoinSearch
         if (preg_match('/^\d+$/', $output)) {
             $this->pageNumber = $output;
         }
-    }
-
-    public function pageNumber()
-    {
-        if (! $this->valid()) {
-            throw new RuntimeException();
-        }
-
-        return $this->pageNumber;
-    }
-
-    public function valid()
-    {
-        return $this->pageNumber !== null;
     }
 }

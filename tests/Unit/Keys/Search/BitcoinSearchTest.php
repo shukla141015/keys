@@ -1,8 +1,8 @@
 <?php
 
-namespace Tests\Unit\Keys;
+namespace Tests\Unit\Keys\Search;
 
-use App\Keys\BitcoinSearch;
+use App\Keys\Search\BitcoinSearch;
 use RuntimeException;
 use Tests\TestCase;
 

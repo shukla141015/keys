@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Rules\ValidBitcoinWif;
 use App\Keys\BitcoinPageKeys;
-use App\Keys\BitcoinSearch;
+use App\Keys\Search\BitcoinSearch;
 use App\Keys\PageNumbers\BitcoinPageNumber;
 use App\Support\Enums\CoinType;
 

@@ -19,6 +19,8 @@ Route::get('/bitcoin/{pageNumber?}',         ['uses' => 'BitcoinPagesController@
 Route::redirect('/btc', '/bitcoin');
 
 Route::get('/ethereum',                       ['uses' => 'EthereumPagesController@index',      'as' => 'ethPages.index']);
+Route::get('/ethereum/search',                ['uses' => 'EthereumPagesController@showSearch', 'as' => 'ethPages.search']);
+Route::post('/ethereum/search',               ['uses' => 'EthereumPagesController@search',     'as' => 'ethPages.search']);
 Route::get('/ethereum/random',                ['uses' => 'EthereumPagesController@randomPage', 'as' => 'ethPages.random']);
 Route::get('/ethereum/statistics',            ['uses' => 'EthereumPagesController@stats',      'as' => 'ethPages.stats']);
 Route::get('/ethereum/you-have-gone-too-far', ['uses' => 'EthereumPagesController@pageTooBig', 'as' => 'ethPages.pageTooBig']);

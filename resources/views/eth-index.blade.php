@@ -37,6 +37,8 @@
             <a class="text-black underline" rel="nofollow" href="{{ route('ethPages.random') }}">random page</a>
         </p>
 
+        <a class="text-black underline" rel="nofollow" href="{{ route('ethPages.search') }}">search</a>
+
     </div>
 
 @endsection

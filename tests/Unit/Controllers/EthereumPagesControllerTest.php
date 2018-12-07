@@ -30,6 +30,38 @@ class EthereumPagesControllerTest extends TestCase
     }
 
     /** @test */
+    function it_can_show_the_search_page()
+    {
+        $this->get(route('ethPages.search'))
+            ->assertStatus(200);
+    }
+
+    /** @test */
+    function it_can_search_for_a_bitcoin_wif()
+    {
+        $this->postSearch([
+                'private_key' => '52b72b4bfd1c3c531872abe9fc97adb56859f044e383d2efd89c378811e8a087',
+            ])
+            ->assertSessionHasNoErrors()
+            ->assertStatus(302)
+            ->assertRedirect(route('ethPages', '292291292347084573995273021603341148514969637192285667544689430121001767234'));
+    }
+
+    /** @test */
+    function it_wont_search_for_invalid_wifs()
+    {
+        $this->postSearch(['private_key' => 'Hacked!!'])->assertSessionHasErrors('private_key');
+
+        // TODO: search statistics not incremented
+    }
+
+    /** @test */
+    function it_keeps_track_of_search_statistics()
+    {
+        // TODO: see test above
+    }
+
+    /** @test */
     function it_can_show_the_first_page()
     {
         $this->getPage('1')
@@ -160,5 +192,10 @@ class EthereumPagesControllerTest extends TestCase
     private function getRandomPage()
     {
         return $this->get(route('ethPages.random'));
+    }
+
+    private function postSearch($data)
+    {
+        return $this->post(route('ethPages.search'), $data);
     }
 }
