@@ -2,7 +2,7 @@
 Cryptocurrency private keys
 
 ## Laravel version
-[compare to laravel master](https://github.com/laravel/laravel/compare/9838f79d2c07c6196afec0363dbabe369e95cc75...master)
+[Compare to laravel master](https://github.com/laravel/laravel/compare/bc435e7fdd8308d133a404b1daa811dd30d95fe5...master)
 
 ## Installation
 Make sure the [keys generator executable](https://github.com/SjorsO/keys-generator) is available from $PATH.
@@ -14,7 +14,7 @@ composer install
 
 php artisan key:generate
 
-artisan migrate:fresh
+artisan migrate:fresh --seed
  
 npm install && npm run dev
 ```
