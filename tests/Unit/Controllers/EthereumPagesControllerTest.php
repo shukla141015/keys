@@ -39,26 +39,31 @@ class EthereumPagesControllerTest extends TestCase
     /** @test */
     function it_can_search_for_a_bitcoin_wif()
     {
+        $statsToday = CoinStats::today(CoinType::ETHEREUM);
+
+        $this->assertSame(0, $statsToday->times_searched);
+
         $this->postSearch([
                 'private_key' => '52b72b4bfd1c3c531872abe9fc97adb56859f044e383d2efd89c378811e8a087',
             ])
             ->assertSessionHasNoErrors()
             ->assertStatus(302)
             ->assertRedirect(route('ethPages', '292291292347084573995273021603341148514969637192285667544689430121001767234'));
+
+        $this->assertSame(1, $statsToday->refresh()->times_searched);
     }
 
     /** @test */
     function it_wont_search_for_invalid_wifs()
     {
+        $statsToday = CoinStats::today(CoinType::ETHEREUM);
+
+        $this->assertSame(0, $statsToday->times_searched);
+
         $this->postSearch(['private_key' => 'Hacked!!'])->assertSessionHasErrors('private_key');
 
-        // TODO: search statistics not incremented
-    }
-
-    /** @test */
-    function it_keeps_track_of_search_statistics()
-    {
-        // TODO: see test above
+        // shouldn't increment when the search fails
+        $this->assertSame(0, $statsToday->refresh()->times_searched);
     }
 
     /** @test */

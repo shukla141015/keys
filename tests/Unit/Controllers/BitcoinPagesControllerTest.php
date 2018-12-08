@@ -39,26 +39,31 @@ class BitcoinPagesControllerTest extends TestCase
     /** @test */
     function it_can_search_for_a_bitcoin_wif()
     {
+        $statsToday = CoinStats::today(CoinType::BITCOIN);
+
+        $this->assertSame(0, $statsToday->times_searched);
+
         $this->post(route('btcPages.search'), [
                 'private_key' => '5KAmCM5bmAW4zxLJtGMAQPGswXcpErraYvTcTRokC3DyCFRWwWV',
             ])
             ->assertSessionHasNoErrors()
             ->assertStatus(302)
             ->assertRedirect(route('btcPages', '629667647944995883434832701814245589852462714096679821861984176598252146907'));
+
+        $this->assertSame(1, $statsToday->refresh()->times_searched);
     }
 
     /** @test */
     function it_wont_search_for_invalid_wifs()
     {
+        $statsToday = CoinStats::today(CoinType::BITCOIN);
+
+        $this->assertSame(0, $statsToday->times_searched);
+
         $this->postSearch(['private_key' => 'Hacked!!'])->assertSessionHasErrors('private_key');
 
-        // TODO: search statistics not incremented
-    }
-
-    /** @test */
-    function it_keeps_track_of_search_statistics()
-    {
-        // TODO: see test above
+        // shouldn't increment when the search fails
+        $this->assertSame(0, $statsToday->refresh()->times_searched);
     }
 
     /** @test */

@@ -53,14 +53,18 @@ abstract class KeyPagesController extends Controller
             'private_key' => ['required', 'string', new $this->privateKeyRule],
         ]);
 
-        $pk = $request->get('private_key');
-
         /** @var CoinSearch $search */
-        $search = new $this->coinSearch($pk);
+        $search = new $this->coinSearch(
+            $request->get('private_key')
+        );
 
-        return $search->valid()
-            ? redirect()->route($this->coinType.'Pages', $search->pageNumber())
-            : back()->withInput()->withErrors(['private_key' => 'error']);
+        if (! $search->valid()) {
+            return back()->withInput()->withErrors(['private_key' => 'error']);
+        }
+
+        CoinStats::privateKeySearched($this->coinType);
+
+        return redirect()->route($this->coinType.'Pages', $search->pageNumber());
     }
 
     public function stats()

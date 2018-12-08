@@ -16,6 +16,7 @@ class CoinStats extends Model
         'random_pages_generated' => 'int',
         'pages_viewed' => 'int',
         'keys_generated' => 'int',
+        'times_searched' => 'int',
     ];
 
     public static function today($coin)
@@ -27,6 +28,7 @@ class CoinStats extends Model
             'random_pages_generated' => 0,
             'pages_viewed' => 0,
             'keys_generated' => 0,
+            'times_searched' => 0,
         ]);
     }
 
@@ -60,11 +62,24 @@ class CoinStats extends Model
             ]);
     }
 
+    public static function privateKeySearched($coin)
+    {
+        if (static::maybeNoModelYet()) {
+            static::today($coin);
+        }
+
+        static::where([
+                'date' => now()->format('Y-m-d'),
+                'coin' => $coin,
+            ])
+            ->increment('times_searched');
+    }
+
     /**
      * To prevent a database query per request, only create the CoinStats model
      * in the first few minutes of the day.
      *
-     * The cron should create the model when a new day starts.
+     * The cron should also create the model when a new day starts.
      *
      * @return bool
      */
@@ -79,6 +94,7 @@ class CoinStats extends Model
             'random_pages_generated' => $stats->sum->random_pages_generated,
             'pages_viewed' => $stats->sum->pages_viewed,
             'keys_generated' => $stats->sum->keys_generated,
+            'times_searched' => $stats->sum->times_searched,
         ];
     }
 }
