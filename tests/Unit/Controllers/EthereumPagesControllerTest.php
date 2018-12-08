@@ -37,6 +37,27 @@ class EthereumPagesControllerTest extends TestCase
     }
 
     /** @test */
+    function it_can_show_the_first_page()
+    {
+        $this->getPage('1')
+            ->assertStatus(200)
+            ->assertDontSee('noindex'); // first page should be indexed by robots.
+    }
+
+    /** @test */
+    function some_pages_allow_robots()
+    {
+        $this->getPage('2')->assertStatus(200)->assertDontSee('noindex');
+        $this->getPage('3')->assertStatus(200)->assertDontSee('noindex');
+        $this->getPage('4')->assertStatus(200)->assertSee('noindex');
+
+        $this->getPage('904625697166532776746648320380374280100293470930272690489102837043110636672')->assertStatus(200)->assertSee('noindex');
+        $this->getPage('904625697166532776746648320380374280100293470930272690489102837043110636673')->assertStatus(200)->assertDontSee('noindex');
+        $this->getPage('904625697166532776746648320380374280100293470930272690489102837043110636674')->assertStatus(200)->assertDontSee('noindex');
+        $this->getPage('904625697166532776746648320380374280100293470930272690489102837043110636675')->assertStatus(200)->assertDontSee('noindex');
+    }
+
+    /** @test */
     function it_can_search_for_a_bitcoin_wif()
     {
         $statsToday = CoinStats::today(CoinType::ETHEREUM);
@@ -64,14 +85,6 @@ class EthereumPagesControllerTest extends TestCase
 
         // shouldn't increment when the search fails
         $this->assertSame(0, $statsToday->refresh()->times_searched);
-    }
-
-    /** @test */
-    function it_can_show_the_first_page()
-    {
-        $this->getPage('1')
-            ->assertStatus(200)
-            ->assertDontSee('noindex'); // first page should be indexed by robots.
     }
 
     /** @test */

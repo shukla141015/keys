@@ -4,7 +4,7 @@
     'keywords'    => __('seo.keywords.eth-page'),
 ])
 
-@if(! $isOnFirstPage && ! $isOnLastPage)
+@if(! \App\Keys\PageNumbers\EthereumPageNumber::allowRobots($pageNumber))
     @include('helpers.robots-noindex')
 @endif
 

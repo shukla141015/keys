@@ -4,7 +4,7 @@
     'keywords'    => __('seo.keywords.btc-page'),
 ])
 
-@if(! $isOnFirstPage && ! $isOnLastPage)
+@if(! \App\Keys\PageNumbers\BitcoinPageNumber::allowRobots($pageNumber))
     @include('helpers.robots-noindex')
 @endif
 

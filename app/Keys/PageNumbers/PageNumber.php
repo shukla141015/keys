@@ -8,6 +8,8 @@ abstract class PageNumber
 {
     public static $coin = '*';
 
+    protected static $robotAllowedPages = [];
+
     protected $redirectTo;
 
     protected $pageNumber;
@@ -97,5 +99,10 @@ abstract class PageNumber
         } while (! $pageNumber->isValid());
 
         return $pageNumber;
+    }
+
+    public static function allowRobots($page)
+    {
+        return in_array($page, static::$robotAllowedPages, true);
     }
 }

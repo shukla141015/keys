@@ -14,17 +14,6 @@ use Illuminate\Routing\Controller;
 
 abstract class KeyPagesController extends Controller
 {
-    public function __construct(Request $request)
-    {
-        $page = $request->segment(2);
-
-        if (! $page || $page === '1' || $page === $this->pageNumber::lastPageNumber()) {
-            return;
-        }
-
-        $this->middleware('only-for-humans');
-    }
-
     protected $coinType;
 
     /** @var PageNumber */

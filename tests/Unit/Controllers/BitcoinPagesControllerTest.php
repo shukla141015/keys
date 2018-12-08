@@ -75,6 +75,23 @@ class BitcoinPagesControllerTest extends TestCase
     }
 
     /** @test */
+    function some_pages_allow_robots()
+    {
+        $this->getPage('2')->assertStatus(200)->assertDontSee('noindex');
+        $this->getPage('3')->assertStatus(200)->assertDontSee('noindex');
+        $this->getPage('4')->assertStatus(200)->assertSee('noindex');
+
+        $this->getPage('856083576414584832184365027012002209974486074049742179003044245104477177635')->assertStatus(200)->assertDontSee('noindex');
+        $this->getPage('510237430825191857507550834203449025283598621334783813450916609258406994299')->assertStatus(200)->assertDontSee('noindex');
+        $this->getPage('114229580830911906838372329972449433969860788497685910473052341467827083606')->assertStatus(200)->assertDontSee('noindex');
+
+        $this->getPage('904625697166532776746648320380374280100293470930272690489102837043110636672')->assertStatus(200)->assertSee('noindex');
+        $this->getPage('904625697166532776746648320380374280100293470930272690489102837043110636673')->assertStatus(200)->assertDontSee('noindex');
+        $this->getPage('904625697166532776746648320380374280100293470930272690489102837043110636674')->assertStatus(200)->assertDontSee('noindex');
+        $this->getPage('904625697166532776746648320380374280100293470930272690489102837043110636675')->assertStatus(200)->assertDontSee('noindex');
+    }
+
+    /** @test */
     function it_can_show_the_last_page()
     {
         $this->getPage(BitcoinPageNumber::lastPageNumber())

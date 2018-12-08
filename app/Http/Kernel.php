@@ -6,7 +6,7 @@ use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\EncryptCookies;
 use App\Http\Middleware\TrimStrings;
 use App\Http\Middleware\TrustProxies;
-use App\Http\Middleware\VerifiedHuman;
+use App\Http\Middleware\KeyPageHumanVerification;
 use App\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -55,7 +55,7 @@ class Kernel extends HttpKernel
         'throttle'      => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified'      => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
 
-        'only-for-humans' => VerifiedHuman::class,
+        'only-for-humans' => KeyPageHumanVerification::class,
     ];
 
     /**
