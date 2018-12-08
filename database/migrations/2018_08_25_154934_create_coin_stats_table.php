@@ -15,6 +15,7 @@ class CreateCoinStatsTable extends Migration
             $table->unsignedInteger('random_pages_generated')->default(0);
             $table->unsignedInteger('pages_viewed')->default(0);
             $table->unsignedInteger('keys_generated')->default(0);
+            $table->unsignedInteger('times_searched')->default(0);
 
             $table->unique(['date', 'coin']);
         });
