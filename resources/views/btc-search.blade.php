@@ -40,7 +40,7 @@
 
         @include('components.ads.key-page-bottom')
 
-        <h2>Vanity pages</h2>
+        <h2 class="mb-2">Vanity pages</h2>
         <p class="text-lg leading-normal mb-4">
             You can use this page to look up any wallet you know the private key of.
             Because private keys are basically base58 strings, you can also look up wallets with words in their private key.
@@ -50,6 +50,5 @@
         <a class="block" href="{{ route('btcPages', '856083576414584832184365027012002209974486074049742179003044245104477177635') }}">Ominous message in the private keys</a>
         <a class="block" href="{{ route('btcPages', '510237430825191857507550834203449025283598621334783813450916609258406994299') }}">Less ominous message</a>
         <a class="block" href="{{ route('btcPages', '114229580830911906838372329972449433969860788497685910473052341467827083606') }}">1Boat - vanity gen example wallet</a>
-
     </div>
 @endsection

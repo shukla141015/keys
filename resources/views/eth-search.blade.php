@@ -9,15 +9,14 @@
         <h1 class="my-4">Ethereum private key search</h1>
 
         <p class="text-lg leading-normal mb-4">
-            This search page will show you the page a specific private key is on.
+            Reverse search to find out which page an Ethereum wallet is on.
             <br>
             <br>
-            That means if you're curious which page your wallet is on, you can look it up.
-            But typing in your own private key on a random website isn't a very good idea.
+            You could look up your own wallet, but do you trust a random website that much?
             <br>
             <br>
-            You can only search for wallets that you know the private key of, so you won't have any luck recovering a lost wallet.
-            It is impossible to search by public key.
+            If you lost your private key this search won't do you any good.
+            Searching for a public key is not possible.
         </p>
 
         <form enctype="multipart/form-data" method="post" class="flex mb-4">

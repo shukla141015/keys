@@ -122,3 +122,27 @@ function string_number_format($string)
 
     return strrev($string);
 }
+
+function print_biggest_page_number($pageNumber, $maxPageNumber)
+{
+    $pageNumber = str_pad($pageNumber, $length = strlen($maxPageNumber), '0', STR_PAD_LEFT);
+
+    for ($i = 0; $i < $length; $i++) {
+        if ($pageNumber[$i] !== $maxPageNumber[$i]) {
+            break;
+        }
+    }
+
+    return $i === 0
+        ? $pageNumber
+        : '<strong>'.substr_replace($pageNumber, '</strong>', $i, 0);
+}
+
+function print_smallest_page_number($pageNumber, $maxPageNumber)
+{
+    $leadingZeroesCount = strlen($maxPageNumber) - strlen($pageNumber);
+
+    return $leadingZeroesCount === 0
+        ? $pageNumber
+        : '<strong>'.str_repeat('0', $leadingZeroesCount).'</strong>'.$pageNumber;
+}

@@ -9,7 +9,7 @@
             <br><br>
         @endif
 
-        {{ $biggestPage->created_at->format('Y-m-d H:i') }} {!! $hideCoin ? '&nbsp;&nbsp;&nbsp;' : $biggestPage->coin !!} {{ str_pad($biggestPage->page_number, strlen($maxPage), '0', STR_PAD_LEFT) }}
+        {{ $biggestPage->created_at->format('Y-m-d H:i') }} {!! $hideCoin ? '&nbsp;&nbsp;&nbsp;' : $biggestPage->coin !!} {!! print_biggest_page_number($biggestPage->page_number, $maxPage) !!}
         <br>
     @endforeach
 </div>

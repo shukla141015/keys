@@ -39,9 +39,7 @@ abstract class KeyPagesController extends Controller
 
     public function index()
     {
-        return view($this->coinType.'-index', [
-            'keysToday' => CoinStats::today($this->coinType)->keys_generated,
-        ]);
+        return view($this->coinType.'-index');
     }
 
     public function showSearch()
