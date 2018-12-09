@@ -15,7 +15,7 @@
         <p class="mb-8 leading-normal">
             There aren't THAT many ethereum pages
             <br><br>
-            <a class="text-black underline" href="{{ route('ethPages.random') }}">Try a random page instead</a>
+            <a class="text-black underline" rel="nofollow" href="{{ route('ethPages.random') }}">Try a random page instead</a>
         </p>
 
     </div>

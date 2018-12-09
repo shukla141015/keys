@@ -4,7 +4,7 @@
     'keywords'    => __('seo.keywords.eth-page'),
 ])
 
-@if(! \App\Keys\PageNumbers\EthereumPageNumber::allowRobots($pageNumber))
+@if(! allow_robots('eth', $pageNumber))
     @include('helpers.robots-noindex')
 @endif
 

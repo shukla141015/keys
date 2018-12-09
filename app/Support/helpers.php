@@ -1,5 +1,9 @@
 <?php
 
+use App\Keys\PageNumbers\BitcoinPageNumber;
+use App\Keys\PageNumbers\EthereumPageNumber;
+use App\Support\Enums\CoinType;
+
 function increment_string(string $number)
 {
     if (! preg_match('/^\d+$/', $number)) {
@@ -145,4 +149,16 @@ function print_smallest_page_number($pageNumber, $maxPageNumber)
     return $leadingZeroesCount === 0
         ? $pageNumber
         : '<strong>'.str_repeat('0', $leadingZeroesCount).'</strong>'.$pageNumber;
+}
+
+function allow_robots($coinType, $pageNumber)
+{
+    switch ($coinType) {
+        case CoinType::BITCOIN:
+            return BitcoinPageNumber::allowRobots($pageNumber);
+        case CoinType::ETHEREUM:
+            return EthereumPageNumber::allowRobots($pageNumber);
+    }
+
+    throw new RuntimeException('Invalid coin type: '. $coinType);
 }

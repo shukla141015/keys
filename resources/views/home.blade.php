@@ -17,14 +17,14 @@
 
         <div class="flex items-center justify-between sm:justify-start my-8">
             <div class="flex flex-col items-center mr-0 sm:mr-32" title="Open a random page of Bitcoin wallets">
-                <a href="{{ route('btcPages.random') }}">
+                <a rel="nofollow" href="{{ route('btcPages.random') }}">
                     <div class="h-16 w-16">@include('components.svg.bitcoin')</div>
                 </a>
                 <a href="{{ route('btcPages.random') }}" rel="nofollow" class="btn block mt-4">Random page</a>
             </div>
 
             <div class="flex flex-col items-center" title="Open a random page of Ethereum wallets">
-                <a href="{{ route('ethPages.random') }}">
+                <a rel="nofollow" href="{{ route('ethPages.random') }}">
                     <div class="h-12 w-12 -mt-4">@include('components.svg.ethereum')</div>
                 </a>
                 <a href="{{ route('ethPages.random') }}" rel="nofollow" class="btn block mt-12">Random page</a>

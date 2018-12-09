@@ -1,3 +1,7 @@
+@php
+    $coinType = str_before($routeBase, 'Pages');
+@endphp
+
 <div class="flex justify-between items-center max-w-sm mx-auto">
     @if($includeFirstAndLast ?? true)
         <a title="{{ $isOnFirstPage ? 'You are on the first page' : 'First page' }}" class="text-black {{ $isOnFirstPage ? 'cursor-not-allowed' : '' }}" href="{{ $isOnFirstPage ? 'javascript:' : route($routeBase, 1) }}">
@@ -6,7 +10,11 @@
     @endif
 
 
-    <a title="{{ $isOnFirstPage ? 'You are on the first page' : 'Previous page' }}" class="text-black {{ $isOnFirstPage ? 'cursor-not-allowed' : '' }}" rel="nofollow" href="{{ $isOnFirstPage ? 'javascript:' : route($routeBase, $previousPage) }}">
+    <a title="{{ $isOnFirstPage ? 'You are on the first page' : 'Previous page' }}"
+       class="text-black {{ $isOnFirstPage ? 'cursor-not-allowed' : '' }}"
+       {!! ! $isOnFirstPage && allow_robots($coinType, $previousPage) ? '' : 'rel="nofollow"' !!}
+       href="{{ $isOnFirstPage ? 'javascript:' : route($routeBase, $previousPage) }}"
+    >
         <span class="inline-block w-4 rotate-180">@include('components.svg.angle-right')</span>
     </a>
 
@@ -16,7 +24,11 @@
     </a>
 
 
-    <a title="{{ $isOnLastPage ? 'You are on the last page' : 'Next page' }}" class="text-black {{ $isOnLastPage ? 'cursor-not-allowed' : '' }}" rel="nofollow" href="{{ $isOnLastPage ? 'javascript:' : route($routeBase, $nextPage) }}">
+    <a title="{{ $isOnLastPage ? 'You are on the last page' : 'Next page' }}"
+       class="text-black {{ $isOnLastPage ? 'cursor-not-allowed' : '' }}"
+       {!! ! $isOnLastPage && allow_robots($coinType, $nextPage) ? '' : 'rel="nofollow"' !!}
+       href="{{ $isOnLastPage ? 'javascript:' : route($routeBase, $nextPage) }}"
+    >
         <span class="inline-block w-4">@include('components.svg.angle-right')</span>
     </a>
 
