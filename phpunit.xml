@@ -21,6 +21,7 @@
     <php>
         <env name="APP_ENV" value="testing"/>
         <env name="APP_KEY" value="base64:ZJG+W0NsaCq/T27PpstfKXW4cyY6l4IxoqqnsWyqHbo="/>
+        <env name="APP_URL" value="http://keys.pk"/>
         <env name="BCRYPT_ROUNDS" value="4"/>
         <env name="CACHE_DRIVER" value="array"/>
         <env name="SESSION_DRIVER" value="array"/>
