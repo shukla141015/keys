@@ -23,7 +23,11 @@ class SendAdminAlertJob extends BaseJob implements ShouldQueue
         }
 
         Mail::raw(implode("\r\n", $lines), function (Message $message) {
-            $message->to(['sjorsottjes@gmail.com' => 'Sjors'])->subject('Admin Alert ('.now()->format('Y-m-d').') | Keys.lol');
+            $email = config('keys.admin_email');
+
+            $date = now()->format('Y-m-d');
+
+            $message->to([$email => 'Admin'])->subject("Admin Alert ($date) | Keys.lol");
         });
     }
 
