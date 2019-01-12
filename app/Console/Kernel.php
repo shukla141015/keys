@@ -26,4 +26,11 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('backup:run-configless --disable-notifications --only-db --set-destination-disks=dropbox')->weeklyOn(2, '2:11');
     }
+
+    protected function commands()
+    {
+        $this->load([
+            __DIR__.'/Commands',
+        ]);
+    }
 }

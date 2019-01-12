@@ -2,9 +2,10 @@
 
 namespace App\Jobs;
 
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Spatie\Sitemap\SitemapGenerator;
 
-class GenerateSitemapJob extends BaseJob
+class GenerateSitemapJob extends BaseJob implements ShouldQueue
 {
     public function handle()
     {
@@ -12,12 +13,10 @@ class GenerateSitemapJob extends BaseJob
 
         $sitemapFilePath = public_path('sitemap.xml');
 
-        $sitemapGenerator = SitemapGenerator::create($applicationUrl);
-
         // Setting the maximum pages crawled will prevent some damage if we
         // ever make a mistake with "robots: noindex".
-        $sitemapGenerator->setMaximumCrawlCount(50);
-
-        $sitemapGenerator->writeToFile($sitemapFilePath);
+        SitemapGenerator::create($applicationUrl)
+            ->setMaximumCrawlCount(50)
+            ->writeToFile($sitemapFilePath);
     }
 }
