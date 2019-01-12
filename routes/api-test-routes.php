@@ -21,8 +21,8 @@ Route::get('mock-balance', function () {
         $hasBalance = $usedBefore && random_int(0, 100) > 80;
 
         return [
-            'final_balance'  => $finalBalance = ($hasBalance ? random_int(1, 1204568646) : 0),
-            'n_tx'           => $usedBefore ? random_int(5, 150) : 0,
+            'final_balance' => $finalBalance = ($hasBalance ? random_int(1, 1204568646) : 0),
+            'n_tx' => $usedBefore ? random_int(5, 150) : 0,
             'total_received' => $usedBefore ? random_int($finalBalance, 2204568646) : 0,
         ];
     }, $keys);

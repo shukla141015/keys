@@ -1,5 +1,5 @@
 const mix = require('laravel-mix');
-let tailwindcss = require('tailwindcss');
+const tailwindcss = require('tailwindcss');
 require('laravel-mix-purgecss');
 
 mix.disableNotifications();

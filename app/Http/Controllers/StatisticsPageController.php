@@ -28,12 +28,12 @@ class StatisticsPageController
         });
 
         return view('stats', [
-            'today'     => CoinStats::combine($allTime->where('date', now()->toDateString())),
+            'today' => CoinStats::combine($allTime->where('date', now()->toDateString())),
             'thisMonth' => CoinStats::combine($thisMonth),
             'lastMonth' => CoinStats::combine($lastMonth),
-            'allTime'   => CoinStats::combine($allTime),
+            'allTime' => CoinStats::combine($allTime),
             'smallestPages' => SmallestRandomPage::listForAllCoins(),
-            'biggestPages'  => BiggestRandomPage::listForAllCoins(),
+            'biggestPages' => BiggestRandomPage::listForAllCoins(),
             'maxPage' => PageNumber::lastPageNumber(),
         ]);
     }

@@ -57,7 +57,7 @@ class CoinStats extends Model
                 'coin' => $coin,
             ])
             ->update([
-                'pages_viewed'   => DB::raw('pages_viewed + 1'),
+                'pages_viewed' => DB::raw('pages_viewed + 1'),
                 'keys_generated' => DB::raw("keys_generated + $keysGenerated"),
             ]);
     }

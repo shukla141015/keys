@@ -1,7 +1,7 @@
 {
     "name": "sjorso/keys",
-    "description": "description",
-    "keywords": ["key", "words"],
+    "description": "Keys.lol",
+    "keywords": ["keys"],
     "license": "MIT",
     "type": "project",
     "require": {

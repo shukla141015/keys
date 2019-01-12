@@ -73,12 +73,12 @@ abstract class KeyPagesController extends Controller
         });
 
         return view($this->coinType.'-stats', [
-            'today'     => $allTime->firstWhere('date', now()->toDateString()) ?? optional(),
+            'today' => $allTime->firstWhere('date', now()->toDateString()) ?? optional(),
             'thisMonth' => CoinStats::combine($thisMonth),
             'lastMonth' => CoinStats::combine($lastMonth),
-            'allTime'   => CoinStats::combine($allTime),
+            'allTime' => CoinStats::combine($allTime),
             'smallestPages' => SmallestRandomPage::listForCoin($this->coinType),
-            'biggestPages'  => BiggestRandomPage::listForCoin($this->coinType),
+            'biggestPages' => BiggestRandomPage::listForCoin($this->coinType),
             'maxPage' => $this->pageNumber::lastPageNumber(),
         ]);
     }
@@ -97,13 +97,13 @@ abstract class KeyPagesController extends Controller
         CoinStats::coinPageViewed($this->coinType, count($keys));
 
         return view($this->coinType.'-page', [
-            'pageNumber'    => $pageNumber,
-            'nextPage'      => increment_string($pageNumber),
-            'previousPage'  => decrement_string($pageNumber),
-            'lastPage'      => $this->pageNumber::lastPageNumber(),
+            'pageNumber' => $pageNumber,
+            'nextPage' => increment_string($pageNumber),
+            'previousPage' => decrement_string($pageNumber),
+            'lastPage' => $this->pageNumber::lastPageNumber(),
             'isOnFirstPage' => $pageNumber === '1',
-            'isOnLastPage'  => $pageNumber === $this->pageNumber::lastPageNumber(),
-            'keys'          => $keys,
+            'isOnLastPage' => $pageNumber === $this->pageNumber::lastPageNumber(),
+            'keys' => $keys,
         ]);
     }
 

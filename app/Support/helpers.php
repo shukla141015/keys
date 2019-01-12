@@ -160,5 +160,5 @@ function allow_robots($coinType, $pageNumber)
             return EthereumPageNumber::allowRobots($pageNumber);
     }
 
-    throw new RuntimeException('Invalid coin type: '. $coinType);
+    throw new RuntimeException('Invalid coin type: '.$coinType);
 }

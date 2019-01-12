@@ -26,9 +26,9 @@ class CoinStatsSeeder extends Seeder
             CoinStats::create([
                 'coin' => $coinType,
                 'date' => $date->toDateString(),
-                'pages_viewed'           => $pagesViewed = random_int(0, 100000),
+                'pages_viewed' => $pagesViewed = random_int(0, 100000),
                 'random_pages_generated' => random_int(0, $pagesViewed),
-                'keys_generated'         => $pagesViewed * 128,
+                'keys_generated' => $pagesViewed * 128,
             ]);
         });
     }

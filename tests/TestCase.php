@@ -12,7 +12,7 @@ abstract class TestCase extends BaseTestCase
 
     protected function getSnapshotDirectory(): string
     {
-        return base_path('tests/Files/_snapshots_');
+        return base_path('tests/_snapshots_');
     }
 
     public function createApplication()

@@ -41,8 +41,8 @@ class BitcoinPageKeys extends PageKeys
             [$wif, $cpub, $pub] = explode(' ', trim($line, '{}'));
 
             return [
-                'wif'  => $wif,
-                'pub'  => $pub,
+                'wif' => $wif,
+                'pub' => $pub,
                 'cpub' => $cpub,
             ];
         }, $lines);

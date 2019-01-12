@@ -11,24 +11,17 @@ class RouteServiceProvider extends ServiceProvider
 
     public function map()
     {
-        $this->mapApiRoutes();
-
-        $this->mapWebRoutes();
-    }
-
-    protected function mapWebRoutes()
-    {
         Route::middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/web-routes.php'));
+
+        if (app()->environment('local')) {
+            $this->registerTestApiRoutes();
+        }
     }
 
-    protected function mapApiRoutes()
+    private function registerTestApiRoutes()
     {
-        if (! app()->environment('local')) {
-            return;
-        }
-
         Route::middleware('api')
             ->prefix('api/v1')
             ->group(base_path('routes/api-test-routes.php'));

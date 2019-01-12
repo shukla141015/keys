@@ -12,7 +12,7 @@
             Yes, your private key is on this website too, but don't worry, nobody will ever find it.
             <br>
             <br>
-            If you want to try finding your wallet, click one of the buttons below.
+            If you want to try searching for your wallet, click one of the buttons below.
         </p>
 
         <div class="flex items-center justify-between sm:justify-start my-8">
