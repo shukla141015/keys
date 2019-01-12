@@ -13,11 +13,13 @@
         </p>
 
         <h2>2^256</h2>
-        <p class="mb-8 leading-normal">
-            If you want to try to wrap your head around how many bitcoin private keys there actually are, I can recommended watching <a class="underline text-black" rel="nofollow" target="_blank" href="https://www.youtube.com/watch?v=S9JGmA5_unY">this video.</a>
+        <p class="mb-4 leading-normal">
+            If you want to try to wrap your head around how many bitcoin private keys there actually are, I can recommended watching this video:
         </p>
 
-        <h2>Generating private keys</h2>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/S9JGmA5_unY?rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+        <h2 class="mt-8">Generating private keys</h2>
         <p class="mb-8 leading-normal">
             Keys.lol contains all private keys of multiple cryptocurrencies.
             These keys aren't stored on the server, that would take an impossible amount of disk space.
