@@ -1,12 +1,10 @@
 @extends('layout.base-template', [
-    'title'       => 'About | Keys.lol',
+    'title' => 'About | Keys.lol',
     'description' => 'More information about Keys.lol.',
 ])
 
 @section('content')
-
     <div class="max-w-md mx-auto">
-
         <h1 class="mt-4">About</h1>
         <p class="mb-8 leading-normal">
             Keys.lol was inspired by the now defunct directory.io.
@@ -16,7 +14,7 @@
 
         <h2>2^256</h2>
         <p class="mb-8 leading-normal">
-            If you want to try to wrap your head around how many bitcoin private keys there actually are, i can recommended watching <a class="underline text-black" rel="nofollow" target="_blank" href="https://www.youtube.com/watch?v=S9JGmA5_unY">this video.</a>
+            If you want to try to wrap your head around how many bitcoin private keys there actually are, I can recommended watching <a class="underline text-black" rel="nofollow" target="_blank" href="https://www.youtube.com/watch?v=S9JGmA5_unY">this video.</a>
         </p>
 
         <h2>Generating private keys</h2>
@@ -32,7 +30,5 @@
             <code class="block my-2">(10 - 1) * 128 + 127 = 1279</code>
             This simple formula is repeated for each page, until the maximum seed of 2^256 is reached.
         </p>
-
     </div>
-
 @endsection
