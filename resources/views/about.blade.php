@@ -17,7 +17,9 @@
             If you want to try to wrap your head around how many bitcoin private keys there actually are, I can recommended watching this video:
         </p>
 
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/S9JGmA5_unY?rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+        <iframe class="w-full" height="315" src="https://www.youtube.com/embed/S9JGmA5_unY?rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 
         <h2 class="mt-8">Generating private keys</h2>
         <p class="mb-8 leading-normal">
