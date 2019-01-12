@@ -1,4 +1,4 @@
-const apiBaseUrl = 'https://api.etherscan.io/api?module=account&action=balancemulti&apikey=F92Z14GE2DTF6PBBYY1YPHPJ438PT3P2VI&address=';
+const apiBaseUrl = `https://api.etherscan.io/api?module=account&action=balancemulti&apikey=${process.env.MIX_ETHERSCAN_API_KEY}&address=`;
 // const apiBaseUrl = 'http://keys.pk/api/v1/eth/balance-empty?address=';
 const apiCallDelayMs = 750;
 
