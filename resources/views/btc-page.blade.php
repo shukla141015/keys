@@ -27,7 +27,9 @@
     @endif
 
 
+    <div class="hidden sm:block">
     @include('components.ads.key-page-top')
+    </div>
 
 
     <div class="sm:flex justify-center">
