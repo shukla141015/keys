@@ -3,41 +3,23 @@ const apiBaseUrl = `https://api.etherscan.io/api?module=account&action=balancemu
 const apiCallDelayMs = 750;
 
 
+const addresses = keys.map(w => w.publicKey);
 
-function adBlockDetected()
-{
-    document.getElementById('adblock-banner').style.display = '';
-}
+// The Etherscan api will only do 20 addresses at once.
+const chunkSize = 20;
 
-function adBlockNotDetected()
-{
-    const addresses = keys.map(w => w.publicKey);
+let apiCallsMade = 1;
 
-    // The Etherscan api will only do 20 addresses at once.
-    const chunkSize = 20;
+for (let i = 0, j = addresses.length; i < j; i += chunkSize) {
+    let keysChunk = addresses.slice(i, i + chunkSize);
 
-    let apiCallsMade = 1;
+    // The Etherscan api allows 5 calls per second, if you
+    // exceed that you receive a 403 error.
+    sleepExactly(apiCallDelayMs * apiCallsMade).then(() => {
+        loadBalanceForKeys(keysChunk);
+    });
 
-    for (let i = 0, j = addresses.length; i < j; i += chunkSize) {
-        let keysChunk = addresses.slice(i, i + chunkSize);
-
-        // The Etherscan api allows 5 calls per second, if you
-        // exceed that you receive a 403 error.
-        sleepExactly(apiCallDelayMs * apiCallsMade).then(() => {
-            loadBalanceForKeys(keysChunk);
-        });
-
-        apiCallsMade++;
-    }
-}
-
-
-if(typeof blockAdBlock === 'undefined')
-{
-    adBlockDetected();
-} else {
-    blockAdBlock.onDetected(adBlockDetected);
-    blockAdBlock.onNotDetected(adBlockNotDetected);
+    apiCallsMade++;
 }
 
 

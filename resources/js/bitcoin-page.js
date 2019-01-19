@@ -4,88 +4,72 @@ const apiBaseUrl = 'https://blockchain.info/balance?cors=true&active=';
 const showResultDelay = 3000;
 
 
-function adBlockDetected()
-{
-    document.getElementById('adblock-banner').style.display = '';
+let addresses = keys.map(w => w.pub).join('|');
+
+// Checking the balance of some wallets on blockchain.com returns an error.
+// first page
+if (addresses.indexOf('1EHNa6Q4Jz2uvNExL497mE43ikXhwF6kZm|') !== -1) {
+    addresses = addresses.replace('1EHNa6Q4Jz2uvNExL497mE43ikXhwF6kZm|', '');
+    addValuesToWallet('5HpHagT65TZzG1PH3CSu63k8DbpvD8s5ip4nEB3kEsreAnchuDf', 0, 1213);
 }
 
-function adBlockNotDetected()
-{
-    let addresses = keys.map(w => w.pub).join('|');
-
-    // Checking the balance of some wallets on blockchain.com returns an error.
-    // first page
-    if (addresses.indexOf('1EHNa6Q4Jz2uvNExL497mE43ikXhwF6kZm|') !== -1) {
-        addresses = addresses.replace('1EHNa6Q4Jz2uvNExL497mE43ikXhwF6kZm|', '');
-        addValuesToWallet('5HpHagT65TZzG1PH3CSu63k8DbpvD8s5ip4nEB3kEsreAnchuDf', 0, 1213);
-    }
-
-    // last page
-    if (addresses.indexOf('1JPbzbsAx1HyaDQoLMapWGoqf9pD5uha5m') !== -1) {
-        addresses = addresses.replace('1JPbzbsAx1HyaDQoLMapWGoqf9pD5uha5m', '');
-        addValuesToWallet('5Km2kuu7vtFDPpxywn4u3NLpbr5jKpTB3jsuDU2KYEqetqj84qw', 0, 19);
-    }
-
-    // page 694260142966555606892331775748698180356633071060141805117247038861673171840
-    if (addresses.indexOf('1BFhrfTTZP3Nw4BNy4eX4KFLsn9ZeijcMm|') !== -1) {
-        addresses = addresses.replace('1BFhrfTTZP3Nw4BNy4eX4KFLsn9ZeijcMm|', '');
-        addValuesToWallet('5KJp7KEffR7HHFWSFYjiCUAntRSTY69LAQEX1AUzaSBHHFdKEpQ', 0, 165);
-    }
-
-    axios.get(apiBaseUrl + addresses).then(response => {
-        keys.forEach(key => {
-            sleepRandom(showResultDelay).then(() => {
-                let data = response.data[key.pub];
-
-                if (data === undefined) {
-                    return;
-                }
-
-                addValuesToWallet(
-                    key.wif,
-                    data.final_balance / 100000000,
-                    data.n_tx
-                );
-            });
-        });
-    });
-
-
-    if (isOnFirstPage) {
-        addresses = keys.slice(1).map(w => w.cpub).join('|');
-
-        addValuesToWallet('5HpHagT65TZzG1PH3CSu63k8DbpvD8s5ip4nEB3kEsreAnchuDf', 0, 24);
-    } else {
-        addresses = keys.map(w => w.cpub).join('|');
-    }
-
-
-    axios.get(apiBaseUrl + addresses).then(response => {
-        keys.forEach(key => {
-            sleepRandom(showResultDelay).then(() => {
-                let data = response.data[key.cpub];
-
-                if (data === undefined) {
-                    return;
-                }
-
-                addValuesToWallet(
-                    key.wif,
-                    data.final_balance / 100000000,
-                    data.n_tx
-                );
-            });
-        });
-    });
+// last page
+if (addresses.indexOf('1JPbzbsAx1HyaDQoLMapWGoqf9pD5uha5m') !== -1) {
+    addresses = addresses.replace('1JPbzbsAx1HyaDQoLMapWGoqf9pD5uha5m', '');
+    addValuesToWallet('5Km2kuu7vtFDPpxywn4u3NLpbr5jKpTB3jsuDU2KYEqetqj84qw', 0, 19);
 }
 
+// page 694260142966555606892331775748698180356633071060141805117247038861673171840
+if (addresses.indexOf('1BFhrfTTZP3Nw4BNy4eX4KFLsn9ZeijcMm|') !== -1) {
+    addresses = addresses.replace('1BFhrfTTZP3Nw4BNy4eX4KFLsn9ZeijcMm|', '');
+    addValuesToWallet('5KJp7KEffR7HHFWSFYjiCUAntRSTY69LAQEX1AUzaSBHHFdKEpQ', 0, 165);
+}
 
-if(typeof blockAdBlock === 'undefined') {
-    adBlockDetected();
+axios.get(apiBaseUrl + addresses).then(response => {
+    keys.forEach(key => {
+        sleepRandom(showResultDelay).then(() => {
+            let data = response.data[key.pub];
+
+            if (data === undefined) {
+                return;
+            }
+
+            addValuesToWallet(
+                key.wif,
+                data.final_balance / 100000000,
+                data.n_tx
+            );
+        });
+    });
+});
+
+
+if (isOnFirstPage) {
+    addresses = keys.slice(1).map(w => w.cpub).join('|');
+
+    addValuesToWallet('5HpHagT65TZzG1PH3CSu63k8DbpvD8s5ip4nEB3kEsreAnchuDf', 0, 24);
 } else {
-    blockAdBlock.onDetected(adBlockDetected);
-    blockAdBlock.onNotDetected(adBlockNotDetected);
+    addresses = keys.map(w => w.cpub).join('|');
 }
+
+
+axios.get(apiBaseUrl + addresses).then(response => {
+    keys.forEach(key => {
+        sleepRandom(showResultDelay).then(() => {
+            let data = response.data[key.cpub];
+
+            if (data === undefined) {
+                return;
+            }
+
+            addValuesToWallet(
+                key.wif,
+                data.final_balance / 100000000,
+                data.n_tx
+            );
+        });
+    });
+});
 
 
 
